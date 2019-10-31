@@ -435,8 +435,8 @@ public class ProductDAOImpl implements ProductDAO {
                             boxesTotal -= unit.getBoxes();
                             unitsTotal -= unit.getUnits();
                         } else if (!comesInBoxes && comesInOthers && comesInUnits) {
-                            othersTotal = unit.getOthers();
-                            unitsTotal = unit.getUnits();
+                            othersTotal -= unit.getOthers();
+                            unitsTotal -= unit.getUnits();
                         }
 
                         // All types
