@@ -6,6 +6,7 @@ import view.InstallationView;
 import view.MainView;
 
 import javax.swing.*;
+import threads.UnitsThread;
 
 public class Main {
 
@@ -27,10 +28,13 @@ public class Main {
         ViewThread view = new ViewThread("View", new MainView());
         view.start();
 
-        /*StockThread stock = new StockThread("Stock");
+        StockThread stock = new StockThread("Stock");
         stock.start();
 
         ExpirationThread expiration = new ExpirationThread("Expiration");
-        expiration.start();*/
+        expiration.start();
+        
+        UnitsThread units = new UnitsThread("Units");
+        units.start();
     }
 }

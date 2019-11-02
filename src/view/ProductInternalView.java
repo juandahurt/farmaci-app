@@ -477,17 +477,17 @@ class ProductInternalView extends AbstractInternalView {
                 }
                 // Update total labels
                 int totalBoxes = Product.getTotalBoxes(product.getId());
-                if (totalBoxes < 0) {
+                if (relation[0] == -1) {
                     totalBoxes = 0;
                     lblTotalBoxes.setEnabled(false);
                 }
                 int totalOthers = Product.getTotalOthers(product.getId());
-                if (totalOthers < 0) {
+                if (relation[1] == -1) {
                     totalOthers = 0;
                     lblTotalOthers.setEnabled(false);
                 }
                 int totalUnits = Product.getTotalUnits(product.getId());
-                if (totalUnits < 0) {
+                if (relation[2] == -1) {
                     totalUnits = 0;
                     lblTotalUnits.setEnabled(false);
                 }

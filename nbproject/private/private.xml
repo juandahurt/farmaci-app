@@ -3,16 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/juandavidhurtado/Desktop/seraqueahorasi/src/dataAccess/XMLHandler.java</file>
-            <file>file:/Users/juandavidhurtado/Desktop/seraqueahorasi/src/dataAccess/daoImpl/SettingsDAOImpl.java</file>
-            <file>file:/Users/juandavidhurtado/Desktop/seraqueahorasi/src/dataAccess/daoImpl/BillDAOImpl.java</file>
-            <file>file:/Users/juandavidhurtado/Desktop/seraqueahorasi/src/config/settings.xml</file>
-            <file>file:/Users/juandavidhurtado/Desktop/seraqueahorasi/src/dataAccess/JSONHandler.java</file>
-            <file>file:/Users/juandavidhurtado/Desktop/seraqueahorasi/src/dataAccess/daoImpl/ProductDAOImpl.java</file>
-            <file>file:/Users/juandavidhurtado/Desktop/seraqueahorasi/src/logic/Product.java</file>
-            <file>file:/Users/juandavidhurtado/Desktop/seraqueahorasi/src/Main.java</file>
-            <file>file:/Users/juandavidhurtado/Desktop/seraqueahorasi/src/view/ProductInternalView.java</file>
-            <file>file:/Users/juandavidhurtado/Desktop/seraqueahorasi/src/view/UnitsInternalView.java</file>
+            <file>file:/Users/juandavidhurtado/dev/farmaci_app/src/Main.java</file>
+            <file>file:/Users/juandavidhurtado/dev/farmaci_app/src/threads/UnitsThread.java</file>
+            <file>file:/Users/juandavidhurtado/dev/farmaci_app/src/config/settings.xml</file>
+            <file>file:/Users/juandavidhurtado/dev/farmaci_app/src/threads/StockThread.java</file>
+            <file>file:/Users/juandavidhurtado/dev/farmaci_app/src/dataAccess/dao/ProductDAO.java</file>
+            <file>file:/Users/juandavidhurtado/dev/farmaci_app/src/dataAccess/daoImpl/ProductDAOImpl.java</file>
+            <file>file:/Users/juandavidhurtado/dev/farmaci_app/src/view/StatsInternalView.java</file>
         </group>
     </open-files>
 </project-private>
