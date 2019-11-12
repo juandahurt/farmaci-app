@@ -41,7 +41,6 @@ public class UnitsThread extends Thread {
     private void fixTotals(JSONObject productObj) {
         JSONArray unitsArr = (JSONArray) productObj.get("units");
         int boxesTotalSum = 0, othersTotalSum = 0, unitsTotalSum = 0;
-        System.out.println("id: " + productObj.get("id"));
         ProductDAO productDAO = new ProductDAOImpl();
         int relation[] = productDAO.getRelation((String) productObj.get("id"));
         boolean comesInBoxes = relation[0] != -1;
@@ -60,21 +59,33 @@ public class UnitsThread extends Thread {
                 unitsTotalSum += Math.toIntExact((Long) unitObj.get("units"));
             }
         }
+        int boxesTotal, othersTotal, unitsTotal;
         
-        int boxesTotal = Math.toIntExact((Long) productObj.get("boxes-total"));
-        int othersTotal = Math.toIntExact((Long) productObj.get("others-total"));
-        int unitsTotal = Math.toIntExact((Long) productObj.get("units-total"));
+        if (productObj.get("boxes-total") instanceof Integer) {
+            boxesTotal = (int) productObj.get("boxes-total");
+        } else {
+            boxesTotal = Math.toIntExact((Long) productObj.get("boxes-total"));
+        }
+        
+        if (productObj.get("others-total") instanceof Integer) {
+            othersTotal = (int) productObj.get("others-total");
+        } else {
+            othersTotal = Math.toIntExact((Long) productObj.get("others-total"));
+        }
+        
+        if (productObj.get("units-total") instanceof Integer) {
+            unitsTotal = (int) productObj.get("units-total");
+        } else {
+            unitsTotal = Math.toIntExact((Long) productObj.get("units-total"));
+        }
         
         if (comesInBoxes && (boxesTotal != boxesTotalSum)) {
-            System.out.println("incongruencia encontrada en cajas");
             productObj.put("boxes-total", boxesTotalSum);
         }
         if (comesInOthers && (othersTotal != othersTotalSum)) {
-            System.out.println("incongruencia encontrada en sobres");
             productObj.put("others-total", othersTotalSum);
         }
         if (comesInUnits && (unitsTotal != unitsTotalSum)) {
-            System.out.println("incongruencia encontrada en unidades");
             productObj.put("units-total", unitsTotalSum);
         }
     }

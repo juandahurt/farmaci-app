@@ -21,6 +21,7 @@ import java.io.OutputStream;
 import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import threads.UnitsThread;
 
 public class BillDAOImpl implements BillDAO {
     @Override
@@ -70,6 +71,9 @@ public class BillDAOImpl implements BillDAO {
         updateStats(bill);
 
         JSONHandler.writeJSONFile(billPath, billObject);
+        
+        UnitsThread units = new UnitsThread("Units");
+        units.start();
         
         return copyFile();
     }

@@ -13,9 +13,17 @@ public class JSONHandler {
     public static JSONObject getJSONObject(String path) {
         JSONParser parser = new JSONParser();
         Object obj;
+        FileReader fr;
         try {
-            obj = parser.parse(new FileReader(path));
+            fr = new FileReader(path);
+            obj = parser.parse(fr);
         } catch (IOException | ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+        try {
+            fr.close();
+        } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
@@ -26,6 +34,7 @@ public class JSONHandler {
         try (FileWriter file = new FileWriter(path)) {
             file.write(jsonObject.toJSONString());
             file.flush();
+            file.close();
         } catch (IOException e) {
             e.printStackTrace();
             return false;
