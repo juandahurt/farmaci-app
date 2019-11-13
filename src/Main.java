@@ -2,7 +2,6 @@ import config.Config;
 import threads.ExpirationThread;
 import threads.StockThread;
 import threads.ViewThread;
-import view.InstallationView;
 import view.MainView;
 
 import javax.swing.*;
@@ -11,8 +10,6 @@ import threads.UnitsThread;
 public class Main {
 
     public static void main(String[] args) {
-        //InstallationView installationView = new InstallationView();
-        //installationView.show();
         try {
             UIManager.setLookAndFeel(UIManager.getInstalledLookAndFeels()[1].getClassName());
         } catch (

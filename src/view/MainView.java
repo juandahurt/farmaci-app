@@ -4,6 +4,7 @@ import view.abstracts.AbstractView;
 import view.helpers.BackgroundHelper;
 
 import javax.swing.*;
+import view.msg.Message;
 
 public class MainView extends AbstractView {
 
@@ -119,33 +120,41 @@ public class MainView extends AbstractView {
     }
 
     private void cartOnClick() {
-        if (cartInternalView != null) {
-            if (!cartInternalView.isVisible()) {
-                cartInternalView = null;
+        if (stockInternalView != null && stockInternalView.isVisible()) {
+            new Message().showMessage("Cierre la ventana 'Bodega' para poder ingresar a una nueva venta");
+        } else {
+            if (cartInternalView != null) {
+                if (!cartInternalView.isVisible()) {
+                    cartInternalView = null;
+                    cartInternalView = new CartInternalView(this);
+                    background.add(cartInternalView);
+                    cartInternalView.setVisible(true);
+                }
+            } else {
                 cartInternalView = new CartInternalView(this);
                 background.add(cartInternalView);
                 cartInternalView.setVisible(true);
             }
-        } else {
-            cartInternalView = new CartInternalView(this);
-            background.add(cartInternalView);
-            cartInternalView.setVisible(true);
         }
     }
 
     private void stockOnClick() {
-        if (stockInternalView != null) {
-            if (!stockInternalView.isVisible()){
-                stockInternalView = null;
+        if (cartInternalView != null && cartInternalView.isVisible()) {
+            new Message().showMessage("Cierre la ventana 'Nueva Venta' para poder ingresar a la bodega");
+        } else {
+            if (stockInternalView != null) {
+                if (!stockInternalView.isVisible()){
+                    stockInternalView = null;
+                    stockInternalView = new StockInternalView(this);
+                    background.add(stockInternalView);
+                    stockInternalView.setVisible(true);
+                }
+            } else {
                 stockInternalView = new StockInternalView(this);
                 background.add(stockInternalView);
                 stockInternalView.setVisible(true);
             }
-        } else {
-            stockInternalView = new StockInternalView(this);
-            background.add(stockInternalView);
-            stockInternalView.setVisible(true);
-        }
+        }   
     }
 
     private void exitOnClick() {
