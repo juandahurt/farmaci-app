@@ -1,5 +1,6 @@
 package dataAccess;
 
+import java.io.File;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -11,23 +12,15 @@ import java.io.IOException;
 public class JSONHandler {
 
     public static JSONObject getJSONObject(String path) {
-        JSONParser parser = new JSONParser();
-        Object obj;
-        FileReader fr;
         try {
-            fr = new FileReader(path);
-            obj = parser.parse(fr);
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
+            JSONParser jsonParser = new JSONParser();
+            File file = new File(path);
+            Object object = jsonParser.parse(new FileReader(file));
+            return (JSONObject) object;
+        } catch (Exception ex) {
+            ex.printStackTrace();
             return null;
         }
-        try {
-            fr.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-        return (JSONObject) obj;
     }
 
     public static boolean writeJSONFile(String path, JSONObject jsonObject) {

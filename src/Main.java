@@ -1,4 +1,6 @@
 import config.Config;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import threads.ExpirationThread;
 import threads.StockThread;
 import threads.ViewThread;
@@ -29,9 +31,17 @@ public class Main {
         stock.start();
 
         ExpirationThread expiration = new ExpirationThread("Expiration");
-        expiration.start();
+        try {
+            expiration.join();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         UnitsThread units = new UnitsThread("Units");
-        units.start();
+        try {
+            units.join();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
