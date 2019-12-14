@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  public onSubmit(): void {
+  public loginOnClick(): void {
     // TODO: Verificar los datos ingresados
     this.router.navigateByUrl("dashboard");
   }
