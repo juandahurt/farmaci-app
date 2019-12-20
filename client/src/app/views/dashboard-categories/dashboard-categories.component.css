@@ -1,0 +1,18 @@
+.categories {
+    margin-left:18%;
+    width:80%;
+}
+
+.search-button {
+    border-top-right-radius: 15px;
+}
+
+.float {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    font-size: 25px;
+}

@@ -1,0 +1,34 @@
+<div class="row pl-0 col-12">
+    <app-sidebar class="col-2 position-fixed"></app-sidebar>
+
+    <div class="container categories">
+        <!-- Título y buscador -->
+        <div class="row pl-3 pt-4 mb-4 w-100">
+            <h2 class="float-left">Categorías</h2>
+            <div class="ml-auto row pr-0 col-3">
+                <div class="input-group mb-3 shadow-sm">
+                    <input type="text" class="form-control border-0 bg-light" placeholder="Buscar...">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-light border-0">
+                            <fa-icon [icon]="faSearch"></fa-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Categorías -->
+        <div *ngFor="let category of categories" class="container mb-4 p-0">
+            <div>
+                <div class="btn btn-light shadow-sm w-100 p-3" (click)="categoryOnClick(category.id)">
+                    <div class=" mx-auto">
+                        <h4 class="text-secondary">{{category.name}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Registrar Categoría -->
+        <button class="float btn btn-success shadow" (click)="addOnClick()">
+            <fa-icon [icon]="faPlus"></fa-icon>
+        </button>
+    </div>
+</div>

@@ -10,5 +10,5 @@ export abstract class Object {
     /**
      * Convierte el objeto tipo Objecto a un objeto JSON
      */
-    public toJSON():JSON { return JSON.parse(JSON.stringify(this)) };
+    public JSON():JSON { return JSON.parse(JSON.stringify(this)) };
 }
