@@ -3,10 +3,6 @@
     width:80%;
 }
 
-.search-button {
-    border-top-right-radius: 15px;
-}
-
 .float {
     position: fixed;
     bottom: 2rem;

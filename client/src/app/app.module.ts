@@ -11,13 +11,16 @@ import { CategoryService } from 'src/services/category.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DashboardCategoryComponent } from './views/dashboard-category/dashboard-category.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SidebarComponent,
-    DashboardCategoriesComponent
+    DashboardCategoriesComponent,
+    DashboardCategoryComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FontAwesomeModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgbModule
+    NgbModule,
+    FormsModule
   ],
   providers: [
     CategoryService

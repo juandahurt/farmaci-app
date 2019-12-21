@@ -13,4 +13,14 @@ categoryRouter.post('/', categoryController.create);
  */
 categoryRouter.get('/', categoryController.list);
 
+/**
+ * Ruta que permite obtener una categoría
+ */
+categoryRouter.get('/:id', categoryController.get);
+
+/**
+ * Ruta que permite actualizar una categoría
+ */
+categoryRouter.put('/:id', categoryController.update);
+
 module.exports = categoryRouter;

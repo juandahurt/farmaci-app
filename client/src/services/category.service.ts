@@ -25,4 +25,21 @@ export class CategoryService extends HttpService {
     public create(category: Category) {
         return this.http.post(this.apiUrl, category.JSON() ,{ headers: this.headers });
     }
+
+    /**
+     * Obtiene una categoría
+     * @param id Identificador de la categoría
+     */
+    public get(id: string) {
+        return this.http.get(`${this.apiUrl}/${id}`, { headers: this.headers });
+    }
+
+    /**
+     * Actualiza una categoría
+     * @param id Identificador de la categoría
+     * @param category Contiene la nueva información de la categoría
+     */
+    public update(id: string, category: Category) {
+        return this.http.put(`${this.apiUrl}/${id}`, category.JSON(), { headers: this.headers });
+    }
 }
