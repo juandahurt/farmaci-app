@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from 'src/services/category.service';
 import { faArrowLeft, faPen, faTrashAlt, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Notification } from 'src/helpers/notification';
+import { ConfirmForm } from 'src/helpers/confirm-form';
 
 @Component({
   selector: 'app-dashboard-category',
@@ -114,6 +115,32 @@ export class DashboardCategoryComponent implements OnInit {
       }
       notification.showError(err.error.error);
       this.name = this.category.name;
+    }
+  }
+
+  /**
+   * Es invocada al dar click en Eliminar
+   */
+  public async deleteOnClick() {
+    let confirmForm = new ConfirmForm();
+    let res = await confirmForm.show('¿Está seguro?', 'La categoría será eliminada de forma permanente');
+
+    if (res.value) {
+      let notification = new Notification();
+      try {
+        await this.categoryService.delete(this.id).toPromise();
+        
+      } catch(err) {
+        switch(err.status) {
+          case 200:
+            this.router.navigateByUrl("categories");
+            notification.showSuccess('Categoría eliminada exitosamente');
+            break;
+          case 0:
+            notification.showError('No fue posible establecer una conexión con el servidor');
+            break;
+        }
+      }
     }
   }
 }

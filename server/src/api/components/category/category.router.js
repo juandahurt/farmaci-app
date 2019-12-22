@@ -23,4 +23,9 @@ categoryRouter.get('/:id', categoryController.get);
  */
 categoryRouter.put('/:id', categoryController.update);
 
+/**
+ * Ruta que permite eliminar una categoría
+ */
+categoryRouter.delete('/:id', categoryController.delete);
+
 module.exports = categoryRouter;

@@ -42,4 +42,12 @@ export class CategoryService extends HttpService {
     public update(id: string, category: Category) {
         return this.http.put(`${this.apiUrl}/${id}`, category.JSON(), { headers: this.headers });
     }
+
+    /**
+     * Elimina una categoría
+     * @param id Identificador de la categoría
+     */
+    public delete(id: string) {
+        return this.http.delete(`${this.apiUrl}/${id}`, { headers: this.headers });
+    }
 }

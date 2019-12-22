@@ -72,7 +72,6 @@ export class DashboardCategoriesComponent implements OnInit {
    */
   public categoryOnClick(id: Number) {
     this.router.navigateByUrl(`categories/${id}`);
-    // TODO:mostrar categoría 
   }
 
   /**

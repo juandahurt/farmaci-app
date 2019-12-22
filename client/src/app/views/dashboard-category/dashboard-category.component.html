@@ -12,7 +12,7 @@
                 <button *ngIf="!isEditable" class="btn btn-light shadow-sm mt-1" (click)="editOnClick()">
                     <fa-icon [icon]="faPen"></fa-icon>
                 </button>
-                <button *ngIf="!isEditable" class="btn btn-danger ml-3 mt-1">
+                <button *ngIf="!isEditable" class="btn btn-danger ml-3 mt-1" (click)="deleteOnClick()">
                     <fa-icon [icon]="faTrashAlt"></fa-icon>
                 </button>
                 <button *ngIf="isEditable" class="btn btn-light mt-1 mr-3 shadow-sm" (click)="cancelOnClick()">

@@ -83,6 +83,22 @@ const categoryController = {
 
         res.status(200).send(category);
     },
+    /**
+     * Elimina una categoría.
+     * @param {object} req - petición del cliente
+     * @param {object} res - respuesta del servidor
+     */
+    async delete(req, res) {
+        let id = req.params.id;
+
+        await sequelizeDB.sync();
+
+        await Category.destroy({
+            where: {id: id}
+        });
+
+        res.sendStatus(200);
+    }
 }
 
 module.exports = categoryController;
