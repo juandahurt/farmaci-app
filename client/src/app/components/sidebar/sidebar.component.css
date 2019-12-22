@@ -1,0 +1,10 @@
+#sidebar {
+    background: rgb(61, 155, 255);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
+    height: 100vh;
+}
+
+#sidebar button {
+    height: 60px;
+    font-size: 18px;
+}

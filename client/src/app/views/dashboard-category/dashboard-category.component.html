@@ -1,0 +1,29 @@
+<div class="row col-12 pl-0">
+    <app-sidebar class="col-2 position-fixed"></app-sidebar>
+
+    <div class="container category pt-3 pl-5">
+        <div class="row">
+            <button class="btn btn-primary shadow-sm mr-5" (click)="backOnClick()">
+                <fa-icon [icon]="faArrowLeft"></fa-icon>
+            </button>
+            <input [(ngModel)]="name" *ngIf="!isEditable" type="text" class="form-control col-3" value="{{name}}" readonly>
+            <input [(ngModel)]="name" *ngIf="isEditable" type="text" class="form-control col-3" value="{{name}}">
+            <div class="ml-auto">
+                <button *ngIf="!isEditable" class="btn btn-light shadow-sm mt-1" (click)="editOnClick()">
+                    <fa-icon [icon]="faPen"></fa-icon>
+                </button>
+                <button *ngIf="!isEditable" class="btn btn-danger ml-3 mt-1" (click)="deleteOnClick()">
+                    <fa-icon [icon]="faTrashAlt"></fa-icon>
+                </button>
+                <button *ngIf="isEditable" class="btn btn-light mt-1 mr-3 shadow-sm" (click)="cancelOnClick()">
+                    <fa-icon [icon]="faTimes"></fa-icon>
+                </button>
+                <button *ngIf="isEditable" class="btn btn-success mt-1" (click)="updateOnClick()">
+                    <fa-icon [icon]="faCheck"></fa-icon>
+                </button>
+            </div>
+        </div>
+        <hr class="row">
+        <h4>Productos</h4>
+    </div>
+</div>
