@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { faHome, faCubes, faProjectDiagram, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,6 +8,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
+  /**
+   * Icono de Inicio
+   */
+  public faHome = faHome;
+
+  /**
+   * Icono de Productos
+   */
+  public faCubes = faCubes;
+
+  /**
+   * Icono de Categorías
+   */
+  public faProjectDiagram = faProjectDiagram;
+
+  /**
+   * Icono de Carrito
+   */
+  public faShoppingCart = faShoppingCart;
+
   /**
    * url activa
    */

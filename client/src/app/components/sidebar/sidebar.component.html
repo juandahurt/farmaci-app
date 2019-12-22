@@ -1,7 +1,21 @@
-<nav class="nav flex-column text-center bg-primary" id="sidebar">
-    <button class="btn btn-primary text-light mt-3">Inicio</button>
-    <button class="btn btn-primary text-light">Productos</button>
-    <button class="btn btn-primary text-light">Categorías</button>
-    <button class="btn btn-primary text-light">Carrito</button>
-    <button class="btn btn-primary text-light">Estadísticas</button>
+<nav class="nav flex-column bg-primary" id="sidebar">
+    <div class="container bg-light text-center py-4">
+        <h4 class="text-muted">Menú</h4>
+    </div>
+    <button class="btn btn-primary text-light">
+        <fa-icon [icon]="faHome" class="mr-2"></fa-icon>
+        Inicio
+    </button>
+    <button class="btn btn-primary text-light">
+        <fa-icon [icon]="faCubes" class="mr-2"></fa-icon>
+        Productos
+    </button>
+    <button class="btn btn-primary text-light">
+        <fa-icon [icon]="faProjectDiagram" class="mr-2"></fa-icon>
+        Categorías
+    </button>
+    <button class="btn btn-primary text-light">
+        <fa-icon [icon]="faShoppingCart" class="mr-2"></fa-icon>
+        Carrito
+    </button>
 </nav>
