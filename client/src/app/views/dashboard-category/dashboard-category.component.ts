@@ -3,8 +3,9 @@ import { Category } from 'src/models/category';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from 'src/services/category.service';
 import { faArrowLeft, faPen, faTrashAlt, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { Notification } from 'src/helpers/notification';
-import { ConfirmForm } from 'src/helpers/confirm-form';
+import { Notification } from 'src/helpers/notification.helper';
+import { ConfirmForm } from 'src/helpers/confirm-form.helper';
+import { ErrorHandler } from 'src/helpers/error.helper';
 
 @Component({
   selector: 'app-dashboard-category',
@@ -109,11 +110,7 @@ export class DashboardCategoryComponent implements OnInit {
       await this.categoryService.update(this.id, cat).toPromise();
       notification.showSuccess('Categoría actualizada exitosamente');
     } catch(err) {
-      if (err.status == 0) {
-        notification.showError('No fue posible establecer una conexión con el servidor');
-        return;
-      }
-      notification.showError(err.error.error);
+      ErrorHandler.showError(err);
       this.name = this.category.name;
     }
   }
@@ -126,20 +123,12 @@ export class DashboardCategoryComponent implements OnInit {
     let res = await confirmForm.show('¿Está seguro?', 'La categoría será eliminada de forma permanente');
 
     if (res.value) {
-      let notification = new Notification();
       try {
         await this.categoryService.delete(this.id).toPromise();
         
       } catch(err) {
-        switch(err.status) {
-          case 200:
-            this.router.navigateByUrl("categories");
-            notification.showSuccess('Categoría eliminada exitosamente');
-            break;
-          case 0:
-            notification.showError('No fue posible establecer una conexión con el servidor');
-            break;
-        }
+        ErrorHandler.handleError(err, 'Categoría eliminada exitosamente');
+        if (err.status == 200) { this.router.navigateByUrl("categories"); }
       }
     }
   }

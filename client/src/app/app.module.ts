@@ -12,7 +12,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardCategoryComponent } from './views/dashboard-category/dashboard-category.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DashboardProductsComponent } from './views/dashboard-products/dashboard-products.component';
+import { NgbdSortableHeader } from './views/dashboard-products/dashboard-products.component';
+import { ProductService } from 'src/services/product.service';
+import { AddProductFormComponent } from './components/add-product-form/add-product-form.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,10 @@ import { FormsModule } from '@angular/forms';
     LoginComponent,
     SidebarComponent,
     DashboardCategoriesComponent,
-    DashboardCategoryComponent
+    DashboardCategoryComponent,
+    DashboardProductsComponent,
+    NgbdSortableHeader,
+    AddProductFormComponent
   ],
   imports: [
     BrowserModule,
@@ -29,10 +36,12 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     BrowserAnimationsModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
-    CategoryService
+    CategoryService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })

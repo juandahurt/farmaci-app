@@ -1,5 +1,6 @@
 import { Object } from './object';
 import { Unit } from './unit';
+import { Category } from './category';
 
 export class Product extends Object {
     /**
@@ -11,6 +12,11 @@ export class Product extends Object {
      * Descripción del producto
      */
     private _description: string;
+
+    /**
+     * Categoría del producto
+     */
+    private _category: Category;
 
     /**
      * Cantidad de unidades tipo caja en stock
@@ -57,6 +63,7 @@ export class Product extends Object {
     public initValues() {
         this._id = '';
         this._description = '';
+        this._category = null;
         this._boxQuantity = 0;
         this._unitQuantity = 0;
         this._otherQuantity = 0;
@@ -67,11 +74,22 @@ export class Product extends Object {
         this._units = new Array<Unit>();
     }
     
+    fromJSON(json: any): Product {
+        let p = new Product();
+
+        
+
+        return p;
+    }
+
     set id(value: string) { this._id = value; }
     get id(): string { return this._id; }
 
     set description(value: string) { this._description = value; }
     get description(): string { return this._description; }
+
+    set category(value: Category) { this._category = value; }
+    get category() { return this._category; }
 
     set boxQuantity(value: Number) { this._boxQuantity = value; }
     get boxQuantity(): Number { return this._boxQuantity; }
