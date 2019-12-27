@@ -6,11 +6,19 @@
         <fa-icon [icon]="faHome" class="mr-2"></fa-icon>
         Inicio
     </button>
-    <button class="btn btn-primary text-light">
+    <button *ngIf="!userInProducts" class="btn btn-primary text-light" (click)="productsOnClick()">
         <fa-icon [icon]="faCubes" class="mr-2"></fa-icon>
         Productos
     </button>
-    <button class="btn btn-primary text-light">
+    <button *ngIf="userInProducts" class="btn btn-primary text-light active" (click)="productsOnClick()">
+        <fa-icon [icon]="faCubes" class="mr-2"></fa-icon>
+        Productos
+    </button>
+    <button *ngIf="!userInCategories" class="btn btn-primary text-light" (click)="categoriesOnClick()">
+        <fa-icon [icon]="faProjectDiagram" class="mr-2"></fa-icon>
+        Categorías
+    </button>
+    <button *ngIf="userInCategories" class="btn btn-primary text-light active" (click)="categoriesOnClick()">
         <fa-icon [icon]="faProjectDiagram" class="mr-2"></fa-icon>
         Categorías
     </button>

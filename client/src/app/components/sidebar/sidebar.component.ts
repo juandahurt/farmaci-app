@@ -33,11 +33,43 @@ export class SidebarComponent implements OnInit {
    */
   public url: string;
 
+  /**
+   * ¿El usuario se encuentra dentro de las categorías?
+   */
+  public userInCategories: boolean;
+
+  /**
+   * ¿El usuario se encuentra dentro de los productos?
+   */
+  public userInProducts: boolean;
+
   constructor(private router: Router) { 
     this.url = router.url;
+    
+    switch (this.url) {
+      case "/categories":
+        this.userInCategories = true;
+        break;
+      case "/products":
+        this.userInProducts = true;
+        break;
+    }
   } 
 
   ngOnInit() {
   }
 
+  /**
+   * Es invocada al dar click en Productos
+   */
+  public productsOnClick() {
+    this.router.navigateByUrl("products");
+  }
+
+  /**
+   * Es invocada al dar click en Categorías
+   */
+  public categoriesOnClick() {
+    this.router.navigateByUrl("categories");
+  }
 }
