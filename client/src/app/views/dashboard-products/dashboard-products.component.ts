@@ -85,7 +85,14 @@ export class DashboardProductsComponent implements OnInit {
       let p = new Product();
       p.id = product.id;
       p.description = product.description;
-      p.category = new Category().fromJSON(product.category);
+      if (!product.category) {
+        // El producto no tiene categoría
+        let cat = new Category();
+        cat.name = "";
+        p.category = cat;
+      } else {
+        p.category = new Category().fromJSON(product.category);
+      }
 
       this.PRODUCTS.push(p);
     });
