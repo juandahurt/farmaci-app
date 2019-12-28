@@ -14,6 +14,21 @@ export class Product extends Object {
     private _description: string;
 
     /**
+     * ¿Viene por cajas?
+     */
+    private _comesInBoxes: boolean;
+
+    /**
+     * ¿Viene por unidades?
+     */
+    private _comesInUnits: boolean;
+
+    /**
+     * ¿Viene por otro tipo de unidad?
+     */
+    private _comesInOthers: boolean;
+
+    /**
      * Categoría del producto
      */
     private _category: Category;
@@ -63,14 +78,10 @@ export class Product extends Object {
     public initValues() {
         this._id = '';
         this._description = '';
-        this._category = null;
-        this._boxQuantity = 0;
-        this._unitQuantity = 0;
-        this._otherQuantity = 0;
-        this._boxPrice = 0;
-        this._unitPrice = 0;
-        this._otherPrice = 0;
-        this._basePrice = 0;
+        this._comesInBoxes = false;
+        this._comesInUnits = false;
+        this._comesInOthers = false;
+        this._category = new Category();
         this._units = new Array<Unit>();
     }
     
@@ -87,6 +98,15 @@ export class Product extends Object {
 
     set description(value: string) { this._description = value; }
     get description(): string { return this._description; }
+
+    set comesInBoxes(value: boolean) { this._comesInBoxes = value; }
+    get comesInBoxes() { return this._comesInBoxes; }
+
+    set comesInUnits(value: boolean) { this._comesInUnits = value; }
+    get comesInUnits() { return this._comesInUnits; }
+
+    set comesInOthers(value: boolean) { this._comesInOthers = value; }
+    get comesInOthers() { return this._comesInOthers; }
 
     set category(value: Category) { this._category = value; }
     get category() { return this._category; }

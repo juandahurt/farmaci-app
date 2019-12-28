@@ -14,7 +14,7 @@ export class Category extends Object {
     constructor() { super(); }
 
     public initValues(): void {
-        this._id = -1;
+        this._id = null;
         this._name = '';
     }
 

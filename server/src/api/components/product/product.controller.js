@@ -29,19 +29,32 @@ const productController = {
             res.status(422).send({error: ERRORS.INVALID_DESC});
             return;
         }
-
+        if (!base_price) {
+            res.status(422).send({error: ERRORS.INVALID_BASE_PRICE});
+            return;
+        }
+        if (comes_in_boxes && !box_price) {
+            res.status(422).send({error: ERRORS.INVALID_BOX_PRICE});
+            return;
+        }
+        if (comes_in_units && !unit_price) {
+            res.status(422).send({error: ERRORS.INVALID_UNIT_PRICE});
+            return;
+        }
+        if (comes_in_others && !other_price) {
+            res.status(422).send({error: ERRORS.INVALID_OTHER_PRICE});
+            return;
+        }
 
         await sequelizeDB.sync();
 
         let product = await Product.findOne({ where: { description: description } });
-        
         if (product) {
             res.status(422).send({ error: ERRORS.DESC_ALREADY_USED});
             return;
         }
 
         product = await Product.findOne({ where: { id: id } });
-
         if (product) {
             res.status(422).send({ error: ERRORS.ID_ALREADY_USED});
             return;
@@ -62,7 +75,7 @@ const productController = {
             });
             res.status(200).send(created);
         } catch(err) {
-            res.sendStatus(500);
+            res.status(500).send({error: err.message});
         }
     },
     /**
