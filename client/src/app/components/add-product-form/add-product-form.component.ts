@@ -65,6 +65,10 @@ export class AddProductFormComponent implements OnInit {
     this.modalService.open(content, { centered: true });
   }
 
+  private close() {
+    this.modalService.dismissAll(null);
+  }
+
   /**
    * Obtiene y setea las categorías
    */
@@ -113,8 +117,10 @@ export class AddProductFormComponent implements OnInit {
    */
   private async addOnClick() {
     try {
-      let product: any = await this.productService.create(this.product).toPromise();
-      this.router.navigateByUrl(`product/${product.id}`);
+      let res = await this.productService.create(this.product).toPromise();
+      let product = new Product().fromJSON(res);
+      this.router.navigateByUrl(`products/${product.id}`);
+      this.close();
     } catch (err) {
       ErrorHandler.showError(err);
     }

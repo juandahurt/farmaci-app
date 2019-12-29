@@ -88,7 +88,14 @@ export class Product extends Object {
     fromJSON(json: any): Product {
         let p = new Product();
 
-        
+        p.id = json.id;
+        p.description = json.description;
+        p.comesInBoxes = json.comes_in_boxes;
+        p.comesInUnits = json.comes_in_units;
+        p.comesInOthers = json.comes_in_others;
+        p.boxQuantity = json.box_quantity;
+        p.unitQuantity = json.unit_quantity;
+        p.otherQuantity = json.other_quantity;
 
         return p;
     }
