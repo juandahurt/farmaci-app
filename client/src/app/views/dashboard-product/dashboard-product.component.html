@@ -1,0 +1,108 @@
+<div class="row col-12 pl-0">
+    <app-sidebar class="col-2 position-fixed"></app-sidebar>
+
+    <div class="container product pt-3 pl-5">
+        <!-- Cabecera con Título y Acciones -->
+        <div class="row">
+            <button class="btn btn-primary shadow-sm mr-5" (click)="backOnClick()">
+                <fa-icon [icon]="faArrowLeft"></fa-icon>
+            </button>
+            <h3>{{product.description}}</h3>
+            <div class="ml-auto">
+                <button *ngIf="!isEditable" class="btn btn-light shadow-sm mt-1" (click)="editOnClick()">
+                    <fa-icon [icon]="faPen"></fa-icon>
+                </button>
+                <button *ngIf="!isEditable" class="btn btn-danger ml-3 mt-1" (click)="deleteOnClick()">
+                    <fa-icon [icon]="faTrashAlt"></fa-icon>
+                </button>
+                <button *ngIf="isEditable" class="btn btn-light mt-1 mr-3 shadow-sm" (click)="cancelOnClick()">
+                    <fa-icon [icon]="faTimes"></fa-icon>
+                </button>
+                <button *ngIf="isEditable" class="btn btn-success mt-1" (click)="updateOnClick()">
+                    <fa-icon [icon]="faCheck"></fa-icon>
+                </button>
+            </div>
+        </div>
+        <hr class="row">
+        <!-- Formulario -->
+        <form>
+            <!-- Información del Producto -->
+            <div class="mx-0 container shadow mb-4 pt-3">
+                <h4 class="text-center mb-3">Información del Producto</h4>
+                <div class="row">
+                    <!-- Identificador -->
+                    <div class="form-group col-6">
+                        <label class="pt-2">Identificador</label>
+                        <input *ngIf="isEditable" type="text" class="form-control border-0 shadow-sm bg-light" [(ngModel)]="product.id" name="id">
+                        <input *ngIf="!isEditable" type="text" class="form-control border-0 shadow-sm" [(ngModel)]="product.id" name="id" readonly>
+                    </div>      
+                    <!-- Descripción -->
+                    <div class="form-group col-6">
+                        <label class="pt-2">Descripción</label>
+                        <input *ngIf="isEditable" type="text" class="form-control border-0 shadow-sm bg-light" [(ngModel)]="product.description" name="description">
+                        <input *ngIf="!isEditable" type="text" class="form-control border-0 shadow-sm" [(ngModel)]="product.description" name="description" readonly>
+                    </div> 
+                </div>     
+                <div class="row">
+                    <!-- Categoría -->
+                    <div class="form-group col-6">
+                        <label class="pt-2">Categoría</label>
+                        <select [(ngModel)]="product.category.id" name="category" *ngIf="isEditable" class="mr-3 custom-select bg-light border-0 shadow-sm">
+                            <option [ngValue]="null">Sin Categoría</option>
+                            <option *ngFor="let c of categories" [ngValue]="c.id">{{c.name}}</option>
+                        </select>
+                        <select *ngIf="!isEditable" disabled class="mr-3 custom-select border-0 shadow-sm">
+                            <option *ngIf="product.category.id">{{product.category.name}}</option>
+                            <option *ngIf="!product.category.id">Sin Categoría</option>
+                        </select>
+                    </div>
+                    <!-- Precio de Compra -->
+                    <div class="form-group col-6">
+                        <label class="pt-2">Precio de Compra</label>
+                        <input *ngIf="isEditable" class="form-control border-0 bg-light shadow-sm" [(ngModel)]="product.basePrice" name="basePrice">
+                        <input *ngIf="!isEditable" class="form-control border-0 shadow-sm" [(ngModel)]="product.basePrice" name="basePrice" readonly>
+                    </div>
+                </div>    
+            </div>
+            <!-- Unidades tipo Caja -->
+            <div *ngIf="product.comesInBoxes" class="row container mx-auto shadow mb-4">
+                <div class="form-group col-6">
+                    <label class="pt-2">Cajas</label>
+                    <input class="form-control border-0 shadow-sm" [(ngModel)]="product.boxQuantity" name="boxQuantity" readonly>
+                </div>
+                <div class="form-group col-6">
+                    <label class="pt-2">Precio por caja</label>
+                <input *ngIf="isEditable" type="text" class="form-control border-0 bg-light shadow-sm" [(ngModel)]="product.boxPrice" name="boxPrice">
+                <input *ngIf="!isEditable" type="text" class="form-control border-0 shadow-sm" [(ngModel)]="product.boxPrice" name="boxPrice" readonly>
+                </div>
+            </div>
+            <!-- Unidades tipo Sobre -->
+            <div *ngIf="product.comesInOthers" class="row container mx-auto shadow mb-4">
+                <div class="form-group col-6">
+                    <label class="pt-2 mr-4">Sobres</label>
+                    <input type="text" class="form-control border-0 shadow-sm" [(ngModel)]="product.otherQuantity" name="otherQuantity" readonly> 
+                </div>
+                <div class="form-group col-6">
+                    <label class="pt-2 mr-0">Precio por sobre</label>
+                <input *ngIf="isEditable" type="text" class="form-control border-0 bg-light shadow-sm" [(ngModel)]="product.otherPrice" name="otherPrice">
+                <input *ngIf="!isEditable" type="text" class="form-control border-0 shadow-sm" [(ngModel)]="product.otherPrice" name="otherPrice" readonly>
+                </div>
+            </div>
+            <!-- Unidades tipo unidad -->
+            <div *ngIf="product.comesInUnits" class="row container mx-auto shadow mb-4">
+                <div class="form-group col-6">
+                    <label class="pt-2">Unidades</label>
+                    <input type="text" class="form-control border-0 shadow-sm" [(ngModel)]="product.unitQuantity" name="unitQuantity" readonly>
+                </div>
+                <div class="form-group col-6">
+                    <label class="pt-2 mr-0">Precio por unidad</label>
+                    <input *ngIf="isEditable" type="text" class="form-control border-0 bg-light shadow-sm" [(ngModel)]="product.unitPrice" name="unitPrice">
+                    <input *ngIf="!isEditable" type="text" class="form-control border-0 shadow-sm" [(ngModel)]="product.unitPrice" name="unitPrice" readonly>
+                </div>
+            </div>
+        </form>
+        <div class="container mt-2">
+            <h4>Unidades</h4>
+        </div>
+    </div>
+</div>

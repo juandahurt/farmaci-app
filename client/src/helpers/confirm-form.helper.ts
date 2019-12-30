@@ -1,5 +1,4 @@
 import Swal from 'sweetalert2';
-import { Title } from '@angular/platform-browser';
 
 export class ConfirmForm {
     /**

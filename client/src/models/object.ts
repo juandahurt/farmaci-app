@@ -1,6 +1,6 @@
 export abstract class Object {
 
-    constructor() {}
+    constructor() { this.initValues(); }
 
     /**
      * Inicializa los atributos de la clase

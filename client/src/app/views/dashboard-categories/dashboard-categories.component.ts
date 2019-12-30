@@ -4,7 +4,8 @@ import { CategoryService } from 'src/services/category.service';
 import { faSearch, faPlus, faPen, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { Notification } from 'src/helpers/notification';
+import { Notification } from 'src/helpers/notification.helper';
+import { ErrorHandler } from 'src/helpers/error.helper';
 
 @Component({
   selector: 'app-dashboard-categories',
@@ -62,7 +63,7 @@ export class DashboardCategoriesComponent implements OnInit {
         this.categories.push(cat);
       });
     } catch(err) {
-      // Manejar el error
+      ErrorHandler.showError(err);
     }
   }
 
@@ -78,7 +79,7 @@ export class DashboardCategoriesComponent implements OnInit {
    * Es invocada al dar click el botón de registrar categoría
    */
   public async addOnClick() {
-    const { value: formValues } = await Swal.fire({
+    const { value: formValue } = await Swal.fire({
       customClass: {
         confirmButton: 'btn btn-success',
         title: 'text-dark mb-3'
@@ -90,32 +91,20 @@ export class DashboardCategoriesComponent implements OnInit {
       buttonsStyling: false,
       confirmButtonText: 'Agregar',
       preConfirm: () => {
-        return [
-          document.getElementById('name').value,
-        ]
+       return document.getElementsByTagName('input')[1].value;
       }
     });
 
-    let notification = new Notification();
     try {
       // Crea la nueva categoría
       let category = new Category();
-      category.name = formValues[0];
+      category.name = formValue;
 
       await this.categoryService.create(category).toPromise();
     } catch(err) {
-      switch(err.status) {
-        case 0:
-          notification.showError('No se pudo extablecer una conexión con el servidor');
-          break;
-        case 200:
-          notification.showSuccess('Categoría agregada exitosamente');
-          this.setCategories();
-          break;
-        default:
-          notification.showError(err.error.error); 
-          break;
-      }
+      ErrorHandler.handleError(err, 'Categoría agregada exitosamente');
+    } finally {
+      this.setCategories();
     }
   }
 
