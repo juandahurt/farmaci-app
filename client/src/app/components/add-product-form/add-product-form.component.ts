@@ -7,6 +7,7 @@ import { ErrorHandler } from 'src/helpers/error.helper';
 import { Product } from 'src/models/product';
 import { ProductService } from 'src/services/product.service';
 import { Router } from '@angular/router';
+import { Notification } from 'src/helpers/notification.helper';
 
 @Component({
   selector: 'app-add-product-form',
@@ -121,6 +122,8 @@ export class AddProductFormComponent implements OnInit {
       let product = new Product().fromJSON(res);
       this.router.navigateByUrl(`products/${product.id}`);
       this.close();
+      let notification = new Notification();
+      notification.showSuccess('Producto agregado exitosamente');
     } catch (err) {
       ErrorHandler.showError(err);
     }
