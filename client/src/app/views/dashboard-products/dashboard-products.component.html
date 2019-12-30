@@ -27,7 +27,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let product of products">
+                <tr *ngFor="let product of products" (click)="productOnClick(product.id)">
                     <td>{{ product.id }}</td>
                     <td>{{ product.description }}</td>
                     <td>{{ product.category.name }}</td>

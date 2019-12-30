@@ -13,4 +13,19 @@ categoryRouter.post('/', productController.create);
  */
 categoryRouter.get('/', productController.list);
 
+/**
+ * Ruta que permite obtener un producto
+ */
+categoryRouter.get('/:id', productController.get);
+
+/**
+ * Ruta que permite eliminar un producto
+ */
+categoryRouter.delete('/:id', productController.delete);
+
+/**
+ * Ruta que permite eliminar un producto
+ */
+categoryRouter.put('/:id', productController.update);
+
 module.exports = categoryRouter;

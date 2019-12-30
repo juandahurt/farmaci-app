@@ -96,6 +96,17 @@ export class Product extends Object {
         p.boxQuantity = json.box_quantity;
         p.unitQuantity = json.unit_quantity;
         p.otherQuantity = json.other_quantity;
+        p.boxPrice = json.box_price;
+        p.otherPrice = json.other_price;
+        p.unitPrice = json.unit_price;
+        p.basePrice = json.base_price;
+
+        if (json.category) {
+            var cat = new Category();
+            cat.id = json.category.id;
+            cat.name = json.category.name;
+            p.category = cat;
+        }
 
         return p;
     }

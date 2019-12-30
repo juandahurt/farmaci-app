@@ -6,7 +6,7 @@ const ERRORS = {
     INVALID_UNIT_PRICE: 'Debes ingresar el precio de unidad',
     INVALID_OTHER_PRICE: 'Debes ingresar el precio de sobre',
     INVALID_BASE_PRICE: 'Debes ingresar el precio de compra',
-    DESC_ALREADY_USED: 'Esa descripción ya está siendo utilizado',
+    DESC_ALREADY_USED: 'Esa descripción ya está siendo utilizada',
     ID_ALREADY_USED: 'Ese identificador ya está siendo utilizado'
 }
 

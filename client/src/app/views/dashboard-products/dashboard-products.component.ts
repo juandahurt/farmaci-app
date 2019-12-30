@@ -4,6 +4,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { ProductService } from 'src/services/product.service';
 import { Product } from 'src/models/product';
 import { Category } from 'src/models/category';
+import { Router } from '@angular/router';
 
 export type SortDirection = 'asc' | 'desc' | '';
 const rotate: {[key: string]: SortDirection} = { 'asc': 'desc', 'desc': '', '': 'asc' };
@@ -61,7 +62,11 @@ export class DashboardProductsComponent implements OnInit {
   private PRODUCTS: Array<Product>;
 
 
-  constructor(private formBuilder: FormBuilder, private productService: ProductService) {
+  constructor(
+    private formBuilder: FormBuilder, 
+    private productService: ProductService,
+    private router: Router
+    ) {
     this.searchForm = this.formBuilder.group({
       id: ['', Validators.required]
     });
@@ -107,7 +112,7 @@ export class DashboardProductsComponent implements OnInit {
    * Invocada al dar click en un producto
    */
   public productOnClick(id: string) {
-    // TODO: Redirigir a vista del producto
+    this.router.navigateByUrl(`products/${id}`);
   }
 
   /**

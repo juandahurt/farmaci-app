@@ -26,4 +26,29 @@ export class ProductService extends HttpService {
     public create(product: Product) {
         return this.http.post(this.apiUrl, product.JSON(), { headers: this.headers });
     }
+
+    /**
+     * Obtiene un producto desde el servidor
+     * @param id identificador del producto
+     */
+    public get(id: string) {
+        return this.http.get(`${this.apiUrl}/${id}`, { headers: this.headers });
+    }
+
+    /**
+     * Elimina un producto
+     * @param id identificador del producto
+     */
+    public delete(id: string) {
+        return this.http.delete(`${this.apiUrl}/${id}`, { headers: this.headers });
+    }
+
+    /**
+     * Actualiza un producto
+     * @param id identificador del producto
+     * @param product contiene la información actualizda del producto
+     */
+    public update(id: string, product: Product) {
+        return this.http.put(`${this.apiUrl}/${id}`, product.JSON(),{ headers: this.headers });
+    }
 }

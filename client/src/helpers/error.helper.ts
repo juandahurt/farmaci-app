@@ -22,7 +22,6 @@ export class ErrorHandler {
      */
     public static showError(err: any) {
         let notification = new Notification();
-
         switch (err.status) {
             case 0:
                 notification.showError('No fue posible establecer una conexión con el servidor');
