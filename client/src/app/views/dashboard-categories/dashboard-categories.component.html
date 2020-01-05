@@ -5,15 +5,17 @@
         <!-- Título y buscador -->
         <div class="row pl-3 pt-4 w-100 mb-2">
             <h2 class="float-left">Categorías</h2>
-            <div class="ml-auto row pr-0">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control border-0 rounded-pill bg-light shadow-sm" placeholder="Buscar...">
-                    <div class="input-group-prepend">
-                        <button class="btn btn-primary rounded-circle ml-2 shadow">
-                            <fa-icon [icon]="faSearch"></fa-icon>
-                        </button>
+            <div class="ml-auto">
+                <form class="row" [formGroup]="searchForm" (ngSubmit)="searchCategory()">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <input formControlName="name" type="text" class="rounded-pill shadow-sm form-control border-0 bg-light" placeholder="Buscar...">
+                            <button class="btn btn-primary shadow-sm rounded-circle ml-2 shadow-sm">
+                                <fa-icon [icon]="faSearch"></fa-icon>
+                            </button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
         <!-- Categorías -->
