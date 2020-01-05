@@ -1,4 +1,4 @@
-<div class="row col-12 pl-0">
+<div class="row col-12 pl-0 pr-0">
     <app-sidebar class="col-2 position-fixed"></app-sidebar>
 
     <div class="container selling-cart pt-4">
@@ -7,18 +7,78 @@
         <form>
             <div class="row pt-3 col-12">
                 <div class="mx-auto form-group col-6">
-                    <div class="input-group-prepend shadow-sm ml-auto">
-                        <input type="text" class="form-control bg-light border-0" placeholder="Buscar...">
-                        <button class="btn btn-light">
+                    <div class="input-group-prepend ml-auto">
+                        <input type="text" class="form-control shadow-sm rounded-pill bg-light border-0" placeholder="Buscar...">
+                        <button class="btn btn-primary shadow-sm ml-2 rounded-circle">
                             <fa-icon [icon]="faSearch"></fa-icon>
                         </button>
                     </div>
                 </div>
             </div>
         </form>
-        <!-- Formulario del producto -->
-        <form>
-            
-        </form>
+        <!-- Formulario de producto -->
+        <div class="rounded-container container shadow-sm">
+            <form>
+                <div class="row">
+                    <!-- Descripción -->
+                    <div class="form-group col-8">
+                        <label>Descripción</label>
+                        <input type="text" class="form-control rounded-pill border-0" readonly>
+                    </div>
+                    <!-- Tipo de Unidad -->
+                    <div class="form-group col-4">
+                        <label>Unidad</label>
+                        <select class="custom-select rounded-pill bg-light shadow-sm border-0" id=""></select>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- Precio Unitario -->
+                    <div class="form-group col-4">
+                        <label>Precio Unitario</label>
+                        <input type="text" class="form-control rounded-pill border-0" readonly>
+                    </div>
+                    <!-- Cantidad -->
+                    <div class="form-group col-3">
+                        <label>Cantidad</label>
+                        <input type="number" min="1" class="form-control rounded-pill bg-light shadow-sm border-0">
+                    </div>
+                    <!-- Subtotal -->
+                    <div class="form-group col-4">
+                        <label>Subtotal</label>
+                        <input type="text" class="form-control rounded-pill border-0" readonly>
+                    </div>
+                    <div class="col-1 form-group text-center pt-2">
+                        <button class="shadow-sm btn btn-secondary rounded-circle mt-4">
+                            <fa-icon [icon]="faArrowDown"></fa-icon>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- Tabla de Productos -->
+        <table class="rounded-container mt-4 table shadow-sm table-borderless table-hover">
+            <thead class="text-muted">
+                <tr class="bg-light">
+                    <th scope="col">Identificador</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Valor Unitario</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-muted">asd</td>
+                    <td class="text-muted">fa</td>
+                    <td class="text-muted">asd</td>
+                    <td class="text-muted">12</td>
+                    <td class="text-muted">432200</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+    <!-- Registrar Venta -->
+    <button class="float btn btn-success shadow">
+        <fa-icon [icon]="faMoneyBill"></fa-icon>
+    </button>
 </div>

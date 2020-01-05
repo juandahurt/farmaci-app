@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faArrowDown, faMoneyBill } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-dashboard-selling-cart',
@@ -11,6 +11,16 @@ export class DashboardSellingCartComponent implements OnInit {
    * Icono de Buscar
    */
   public faSearch = faSearch;
+
+  /**
+   * Icono de Agregar Producto
+   */
+  public faArrowDown = faArrowDown;
+
+  /**
+   * Icono de Registrar Venta
+   */
+  public faMoneyBill = faMoneyBill;
 
   constructor() { }
 
