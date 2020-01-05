@@ -5,6 +5,7 @@ import { ProductService } from 'src/services/product.service';
 import { Product } from 'src/models/product';
 import { Category } from 'src/models/category';
 import { Router } from '@angular/router';
+import { Notification } from 'src/helpers/notification.helper';
 
 export type SortDirection = 'asc' | 'desc' | '';
 const rotate: {[key: string]: SortDirection} = { 'asc': 'desc', 'desc': '', '': 'asc' };
@@ -118,8 +119,27 @@ export class DashboardProductsComponent implements OnInit {
   /**
    * Invocada al hacer Submit en el formulario de búsqueda 
    */
-  public searchOnClick() {
-    // TODO: Buscar y regidigir a vista del producto
+  public searchProduct() {
+    let id = this.f.id.value.toLowerCase();
+    let notifier = new Notification();
+
+    if (!id) {
+      notifier.showError('Debes ingresar un identificador');
+      return;
+    }
+
+    var found = false;
+    for(var i = 0; i < this.PRODUCTS.length; i++) {
+      if (this.PRODUCTS[i].id.toLowerCase() === id) {
+        found = true;
+        this.router.navigateByUrl(`products/${this.PRODUCTS[i].id}`);
+        break;
+      }
+    }
+
+    if (!found) {
+      notifier.showError('Producto no encontrado');
+    }
   }
 
 

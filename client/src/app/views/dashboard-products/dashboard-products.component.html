@@ -5,11 +5,11 @@
         <div class="row pl-3 pt-4 w-100 mb-2">
             <h2 class="float-left">Productos</h2>
             <div class="ml-auto">
-                <form class="row" [formGroup]="searchForm" (ngSubmit)="searchOnClick()">
+                <form class="row" [formGroup]="searchForm" (ngSubmit)="searchProduct()">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <input formControlName="id" type="text" class="rounded-pill shadow-sm form-control border-0 bg-light" placeholder="Buscar...">
-                            <button class="btn btn-primary shadow-sm rounded-circle ml-2 shadow">
+                            <button class="btn btn-primary shadow-sm rounded-circle ml-2">
                                 <fa-icon [icon]="faSearch"></fa-icon>
                             </button>
                         </div>
@@ -19,7 +19,7 @@
         </div>
         <!-- Tabla de Productos -->
         <table class="table shadow-sm table-borderless table-striped table-hover">
-            <thead class="">
+            <thead class="text-muted">
                 <tr>
                     <th scope="col" sortable="id" (sort)="onSort($event)">Identificador</th>
                     <th scope="col" sortable="description" (sort)="onSort($event)">Descripción</th>
