@@ -129,6 +129,8 @@ export class Product extends Object {
     set category(value: Category) { this._category = value; }
     get category() { return this._category; }
 
+    get categoryName() { return this.category.name; }
+
     set boxQuantity(value: Number) { this._boxQuantity = value; }
     get boxQuantity(): Number { return this._boxQuantity; }
 

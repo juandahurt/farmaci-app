@@ -1,9 +1,9 @@
 #sidebar {
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
     height: 100vh;
 }
 
 #sidebar button {
     height: 60px;
-    font-size: 20px;
+    font-size: 18px;
 }
