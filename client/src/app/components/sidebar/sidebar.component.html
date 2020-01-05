@@ -22,7 +22,11 @@
         <fa-icon [icon]="faProjectDiagram" class="mr-2"></fa-icon>
         Categorías
     </button>
-    <button class="btn btn-primary text-light">
+    <button *ngIf="!userInSellingCart" class="btn btn-primary text-light" (click)="sellingCartOnClick()">
+        <fa-icon [icon]="faShoppingCart" class="mr-2"></fa-icon>
+        Carrito
+    </button>
+    <button *ngIf="userInSellingCart" class="btn btn-primary text-light active" (click)="sellingCartOnClick()">
         <fa-icon [icon]="faShoppingCart" class="mr-2"></fa-icon>
         Carrito
     </button>

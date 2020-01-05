@@ -5,6 +5,7 @@ import { DashboardCategoriesComponent } from './views/dashboard-categories/dashb
 import { DashboardCategoryComponent } from './views/dashboard-category/dashboard-category.component';
 import { DashboardProductsComponent } from './views/dashboard-products/dashboard-products.component';
 import { DashboardProductComponent } from './views/dashboard-product/dashboard-product.component';
+import { DashboardSellingCartComponent } from './views/dashboard-selling-cart/dashboard-selling-cart.component';
 
 
 const routes: Routes = [
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'categories', component: DashboardCategoriesComponent },
   { path: 'categories/:id', component: DashboardCategoryComponent },
   { path: 'products', component: DashboardProductsComponent },
-  { path: 'products/:id', component: DashboardProductComponent }
+  { path: 'products/:id', component: DashboardProductComponent },
+  { path: 'selling-cart', component: DashboardSellingCartComponent }
 ];
 
 @NgModule({

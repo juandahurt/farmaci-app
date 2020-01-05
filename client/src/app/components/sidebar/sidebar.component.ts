@@ -43,6 +43,11 @@ export class SidebarComponent implements OnInit {
    */
   public userInProducts: boolean;
 
+  /**
+   * ¿El usuario se encuentra dentro del carrito de ventas?
+   */
+  public userInSellingCart: boolean;
+
   constructor(private router: Router) { 
     this.url = router.url;
     
@@ -52,6 +57,9 @@ export class SidebarComponent implements OnInit {
         break;
       case "/products":
         this.userInProducts = true;
+        break;
+      case "/selling-cart":
+        this.userInSellingCart = true;
         break;
     }
   } 
@@ -71,5 +79,12 @@ export class SidebarComponent implements OnInit {
    */
   public categoriesOnClick() {
     this.router.navigateByUrl("categories");
+  }
+
+  /**
+   * Es invocada al dar click en Carrito
+   */
+  public sellingCartOnClick() {
+    this.router.navigateByUrl("selling-cart");
   }
 }
