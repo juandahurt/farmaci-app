@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Notification } from 'src/helpers/notification.helper';
 import { ErrorHandler } from 'src/helpers/error.helper';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard-categories',
@@ -37,9 +38,20 @@ export class DashboardCategoriesComponent implements OnInit {
    * Icono de eliminar categoría
    */
   public faTrashAlt = faTrashAlt;
+
+  /**
+   * Formulario de búsqueda
+   */
+  private searchForm: FormGroup;
   
-  constructor(private categoryService: CategoryService, private router: Router) {
+  constructor(
+    private categoryService: CategoryService, 
+    private router: Router,
+    private formBuilder: FormBuilder) {
     this.setCategories();
+    this.searchForm = this.formBuilder.group({
+      name: ['', Validators.required]
+    });
   }
 
   ngOnInit() {
@@ -108,4 +120,27 @@ export class DashboardCategoriesComponent implements OnInit {
     }
   }
 
+  /**
+   * 
+   */
+  public async searchCategory() {
+    let name = this.searchForm.controls.name.value.toLowerCase();
+    let notifier = new Notification();
+
+    if (!name) {
+      notifier.showError('Debes ingresar un nombre');
+      return;
+    }
+
+    var found = false;
+    for(var i = 0; i < this.categories.length; i++) {
+      if (this.categories[i].name.toLowerCase() === name) {
+        found = true;
+        this.router.navigateByUrl(`categories/${this.categories[i].id}`);
+        break;
+      }
+    }
+
+    if (!found) { notifier.showError('Categoría no encontrada'); }
+  }
 }

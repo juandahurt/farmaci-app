@@ -3,26 +3,27 @@
 
     <div class="container categories">
         <!-- Título y buscador -->
-        <div class="row pl-3 pt-4 w-100">
+        <div class="row pl-3 pt-4 w-100 mb-2">
             <h2 class="float-left">Categorías</h2>
-            <div class="ml-auto row pr-0 col-3">
-                <div class="input-group mb-3 shadow-sm">
-                    <input type="text" class="form-control border-0 bg-light" placeholder="Buscar...">
-                    <div class="input-group-prepend">
-                        <button class="btn btn-light border-0">
-                            <fa-icon [icon]="faSearch"></fa-icon>
-                        </button>
+            <div class="ml-auto">
+                <form class="row" [formGroup]="searchForm" (ngSubmit)="searchCategory()">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <input formControlName="name" type="text" class="rounded-pill shadow-sm form-control border-0 bg-light" placeholder="Buscar...">
+                            <button class="btn btn-primary shadow-sm rounded-circle ml-2 shadow-sm">
+                                <fa-icon [icon]="faSearch"></fa-icon>
+                            </button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
-        <hr>
         <!-- Categorías -->
         <div *ngFor="let category of categories" class="container mb-4 p-0">
             <div>
-                <div class="btn btn-light shadow-sm w-100 p-3" (click)="categoryOnClick(category.id)">
-                    <div class=" mx-auto">
-                        <h4 class="text-secondary">{{category.name}}</h4>
+                <div class="cat-container btn btn-light shadow-sm w-100 pt-2 pb-1" (click)="categoryOnClick(category.id)">
+                    <div class="pt-1">
+                        <p class="category-name text-muted">{{category.name}}</p>
                     </div>
                 </div>
             </div>

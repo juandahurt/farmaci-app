@@ -18,6 +18,7 @@ import { NgbdSortableHeader } from './views/dashboard-products/dashboard-product
 import { ProductService } from 'src/services/product.service';
 import { AddProductFormComponent } from './components/add-product-form/add-product-form.component';
 import { DashboardProductComponent } from './views/dashboard-product/dashboard-product.component';
+import { DashboardSellingCartComponent } from './views/dashboard-selling-cart/dashboard-selling-cart.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { DashboardProductComponent } from './views/dashboard-product/dashboard-p
     DashboardProductsComponent,
     NgbdSortableHeader,
     AddProductFormComponent,
-    DashboardProductComponent
+    DashboardProductComponent,
+    DashboardSellingCartComponent
   ],
   imports: [
     BrowserModule,

@@ -2,14 +2,14 @@
     <app-sidebar class="col-2 position-fixed"></app-sidebar>
     <div class="container products">
         <!-- Título y buscador -->
-        <div class="row pl-3 pt-4 w-100 mb-4">
+        <div class="row pl-3 pt-4 w-100 mb-2">
             <h2 class="float-left">Productos</h2>
             <div class="ml-auto">
-                <form class="row" [formGroup]="searchForm" (ngSubmit)="searchOnClick()">
+                <form class="row" [formGroup]="searchForm" (ngSubmit)="searchProduct()">
                     <div class="input-group mb-3">
-                        <div class="input-group-prepend shadow-sm">
-                            <input formControlName="id" type="text" class="form-control border-0 bg-light" placeholder="Buscar...">
-                            <button class="btn btn-light">
+                        <div class="input-group-prepend">
+                            <input formControlName="id" type="text" class="rounded-pill shadow-sm form-control border-0 bg-light" placeholder="Buscar...">
+                            <button class="btn btn-primary shadow-sm rounded-circle ml-2">
                                 <fa-icon [icon]="faSearch"></fa-icon>
                             </button>
                         </div>
@@ -18,19 +18,19 @@
             </div>
         </div>
         <!-- Tabla de Productos -->
-        <table class="table table-borderless shadow-sm table-hover">
-            <thead class="thead-light">
+        <table class="table shadow-sm table-borderless table-striped table-hover">
+            <thead class="text-muted">
                 <tr>
                     <th scope="col" sortable="id" (sort)="onSort($event)">Identificador</th>
                     <th scope="col" sortable="description" (sort)="onSort($event)">Descripción</th>
-                    <th scope="col" sortable="category.name" (sort)="onSort($event)">Categoría</th>
+                    <th scope="col" sortable="categoryName" (sort)="onSort($event)">Categoría</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let product of products" (click)="productOnClick(product.id)">
-                    <td>{{ product.id }}</td>
-                    <td>{{ product.description }}</td>
-                    <td>{{ product.category.name }}</td>
+                    <td class="text-muted">{{ product.id }}</td>
+                    <td class="text-muted">{{ product.description }}</td>
+                    <td class="text-muted">{{ product.category.name }}</td>
                 </tr>
             </tbody>
         </table>
