@@ -1,5 +1,6 @@
 const ERRORS = require('./category.errors');
 const Category = require('./category.model');
+const Product = require('../product/product.model');
 const sequelizeDB = require('../../../sequelize');
 
 const categoryController = {
@@ -45,7 +46,7 @@ const categoryController = {
         res.status(200).send(categories);
     },
     /**
-     * Obtiene una categoría.
+     * Obtiene una categoría y los productos que esta contiene.
      * @param {object} req - petición del cliente
      * @param {object} res - respuesta del servidor
      */
@@ -56,7 +57,16 @@ const categoryController = {
 
         let category = await Category.findByPk(id);
 
-        res.status(200).send(category);
+        let products = await Product.findAll({ 
+            where: {
+                category_id: id
+            } 
+        });
+
+        res.status(200).send({
+            category: category,
+            products: products
+        });
     },
     /**
      * Actualiza una categoría.
