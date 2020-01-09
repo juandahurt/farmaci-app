@@ -51,22 +51,22 @@ export class Product extends Object {
     /**
      * Precio de venta de unidad tipo caja
      */
-    private _boxPrice: Number;
+    private _boxPrice: number;
 
     /**
      * Precio de venta de unidad tipo unidad
      */
-    private _unitPrice: Number;
+    private _unitPrice: number;
 
     /**
      * Precio de venta de otro tipo de unidad
      */
-    private _otherPrice: Number;
+    private _otherPrice: number;
 
     /**
      * Precio de compra
      */
-    private _basePrice: Number;
+    private _basePrice: number;
 
     /**
      * Unidades del producto en stock
@@ -140,17 +140,17 @@ export class Product extends Object {
     set otherQuantity(value: Number) { this._otherQuantity = value; }
     get otherQuantity(): Number { return this._otherQuantity; }
 
-    set boxPrice(value: Number) { this._boxPrice = value; }
-    get boxPrice(): Number { return this._boxPrice; }
+    set boxPrice(value: number) { this._boxPrice = value; }
+    get boxPrice(): number { return this._boxPrice; }
 
-    set unitPrice(value: Number) { this._unitPrice = value; }
-    get unitPrice(): Number { return this._unitPrice; }
+    set unitPrice(value: number) { this._unitPrice = value; }
+    get unitPrice(): number { return this._unitPrice; }
 
-    set otherPrice(value: Number) { this._otherPrice = value; }
-    get otherPrice(): Number { return this._otherPrice; }
+    set otherPrice(value: number) { this._otherPrice = value; }
+    get otherPrice(): number { return this._otherPrice; }
 
-    set basePrice(value: Number) { this._basePrice = value; }
-    get basePrice(): Number { return this._basePrice; }
+    set basePrice(value: number) { this._basePrice = value; }
+    get basePrice(): number { return this._basePrice; }
 
     set units(value: Array<Unit>) { this._units = value; }
     get units(): Array<Unit> { return this._units; }

@@ -4,12 +4,12 @@
     <div class="container selling-cart pt-4">
         <h2>Carrito de Ventas</h2>
         <!-- Formulario de búsqueda -->
-        <form>
+        <form [formGroup]="searchForm" (ngSubmit)="searchProduct()">
             <div class="row pt-3 col-12">
                 <div class="mx-auto form-group col-6">
                     <div class="input-group-prepend ml-auto">
-                        <input type="text" class="form-control shadow-sm rounded-pill bg-light border-0" placeholder="Buscar...">
-                        <button class="btn btn-primary shadow-sm ml-2 rounded-circle">
+                        <input formControlName="id" type="text" class="form-control shadow-sm rounded-pill bg-light border-0" placeholder="Buscar...">
+                        <button type="submit" class="btn btn-primary shadow-sm ml-2 rounded-circle">
                             <fa-icon [icon]="faSearch"></fa-icon>
                         </button>
                     </div>
@@ -17,38 +17,49 @@
             </div>
         </form>
         <!-- Formulario de producto -->
-        <div class="rounded-container container shadow-sm">
+        <div class="pt-2 rounded-container container shadow-sm">
             <form>
                 <div class="row">
                     <!-- Descripción -->
                     <div class="form-group col-8">
                         <label>Descripción</label>
-                        <input type="text" class="form-control rounded-pill border-0" readonly>
+                        <input [(ngModel)]="productToFind.product.description" name="desc" type="text" class="form-control rounded-pill border-0" readonly>
                     </div>
                     <!-- Tipo de Unidad -->
                     <div class="form-group col-4">
                         <label>Unidad</label>
-                        <select class="custom-select rounded-pill bg-light shadow-sm border-0" id=""></select>
+                        <select *ngIf="productToFind.product.id != ''" (change)="unitTypeOnChange()" [(ngModel)]="productToFind.unitType" name="unitType" class="custom-select rounded-pill bg-light shadow-sm border-0">
+                            <option *ngIf="productToFind.product.comesInBoxes" [ngValue]="UnitRef.UnitType.BOX">Caja</option>
+                            <option *ngIf="productToFind.product.comesInOthers" [ngValue]="UnitRef.UnitType.OTHER">Sobre</option>
+                            <option *ngIf="productToFind.product.comesInUnits" [ngValue]="UnitRef.UnitType.UNIT">Unidad</option>
+                        </select>
+                        <select *ngIf="productToFind.product.id == ''" disabled class="custom-select rounded-pill border-0"></select>
                     </div>
                 </div>
                 <div class="row">
-                    <!-- Precio Unitario -->
+                    <!-- Valor Unitario -->
                     <div class="form-group col-4">
-                        <label>Precio Unitario</label>
-                        <input type="text" class="form-control rounded-pill border-0" readonly>
-                    </div>
+                        <label>Valor Unitario</label>
+                        <div *ngIf="productToFind.unitType != null">
+                            <input *ngIf="productToFind.unitType == UnitRef.UnitType.BOX" [(ngModel)]="productToFind.product.boxPrice" name="price" type="text" class="form-control rounded-pill border-0" readonly>
+                            <input *ngIf="productToFind.unitType == UnitRef.UnitType.OTHER" [(ngModel)]="productToFind.product.otherPrice" name="price" type="text" class="form-control rounded-pill border-0" readonly>
+                            <input *ngIf="productToFind.unitType == UnitRef.UnitType.UNIT" [(ngModel)]="productToFind.product.unitPrice" name="price" type="text" class="form-control rounded-pill border-0" readonly>
+                        </div>
+                        <input *ngIf="productToFind.unitType == null" type="text" class="form-control rounded-pill border-0" readonly>
+                    </div>  
                     <!-- Cantidad -->
                     <div class="form-group col-3">
                         <label>Cantidad</label>
-                        <input type="number" min="1" class="form-control rounded-pill bg-light shadow-sm border-0">
+                        <input *ngIf="productToFind.unitType == null" type="number" min="1" class="form-control rounded-pill border-0" readonly>
+                        <input *ngIf="productToFind.unitType != null" (change)="quantityOnChange()" [(ngModel)]="productToFind.quantity" name="quantity" type="number" min="1" class="form-control rounded-pill bg-light shadow-sm border-0">
                     </div>
                     <!-- Subtotal -->
                     <div class="form-group col-4">
                         <label>Subtotal</label>
-                        <input type="text" class="form-control rounded-pill border-0" readonly>
+                        <input [(ngModel)]="productToFind.subtotal" name="subtotal" type="text" class="form-control rounded-pill border-0" readonly>
                     </div>
                     <div class="col-1 form-group text-center pt-2">
-                        <button class="shadow-sm btn btn-secondary rounded-circle mt-4">
+                        <button class="shadow-sm btn btn-outline-secondary rounded-circle mt-4" (click)="addProductToCart()">
                             <fa-icon [icon]="faArrowDown"></fa-icon>
                         </button>
                     </div>
@@ -77,8 +88,8 @@
             </tbody>
         </table>
     </div>
-    <!-- Registrar Venta -->
-    <button class="float btn btn-success shadow">
+    <!-- Finalizar Venta -->
+    <button class="float btn btn-success shadow" (click)="checkout()">
         <fa-icon [icon]="faMoneyBill"></fa-icon>
     </button>
 </div>
