@@ -33,13 +33,13 @@
                     <div class="form-group col-6">
                         <label class="pt-2">Identificador</label>
                         <input *ngIf="isEditable" type="text" class="rounded-pill form-control border-0 shadow-sm bg-light" [(ngModel)]="product.id" name="id">
-                        <input *ngIf="!isEditable" type="text" class="rounded-pill form-control border-0 shadow-sm" [(ngModel)]="product.id" name="id" readonly>
+                        <input *ngIf="!isEditable" type="text" class="rounded-pill text-muted form-control border-0" [(ngModel)]="product.id" name="id" readonly>
                     </div>      
                     <!-- Descripción -->
                     <div class="form-group col-6">
                         <label class="pt-2">Descripción</label>
                         <input *ngIf="isEditable" type="text" class="rounded-pill form-control border-0 shadow-sm bg-light" [(ngModel)]="product.description" name="description">
-                        <input *ngIf="!isEditable" type="text" class="rounded-pill form-control border-0 shadow-sm" [(ngModel)]="product.description" name="description" readonly>
+                        <input *ngIf="!isEditable" type="text" class="text-muted rounded-pill form-control border-0" [(ngModel)]="product.description" name="description" readonly>
                     </div> 
                 </div>     
                 <div class="row">
@@ -50,7 +50,7 @@
                             <option [ngValue]="null">Sin Categoría</option>
                             <option *ngFor="let c of categories" [ngValue]="c.id">{{c.name}}</option>
                         </select>
-                        <select *ngIf="!isEditable" disabled class="rounded-pill mr-3 custom-select border-0 shadow-sm">
+                        <select *ngIf="!isEditable" disabled class="rounded-pill mr-3 custom-select border-0">
                             <option *ngIf="product.category.id">{{product.category.name}}</option>
                             <option *ngIf="!product.category.id">Sin Categoría</option>
                         </select>
@@ -59,44 +59,44 @@
                     <div class="form-group col-6">
                         <label class="pt-2">Precio de Compra</label>
                         <input *ngIf="isEditable" class="rounded-pill form-control border-0 bg-light shadow-sm" [(ngModel)]="product.basePrice" name="basePrice">
-                        <input *ngIf="!isEditable" class="rounded-pill form-control border-0 shadow-sm" [(ngModel)]="product.basePrice" name="basePrice" readonly>
+                        <input *ngIf="!isEditable" class="rounded-pill text-muted form-control border-0" [(ngModel)]="product.basePrice" name="basePrice" readonly>
                     </div>
                 </div>    
             </div>
             <!-- Unidades tipo Caja -->
-            <div *ngIf="product.comesInBoxes" class="row container mx-auto shadow-sm mb-4 data-container">
+            <div *ngIf="product.comesInBoxes" class="row mx-auto shadow-sm mb-4 data-container">
                 <div class="form-group col-6">
                     <label class="pt-2">Cajas</label>
-                    <input class="form-control border-0 shadow-sm rounded-pill" [(ngModel)]="product.boxQuantity" name="boxQuantity" readonly>
+                    <input class="text-muted form-control border-0 rounded-pill" [(ngModel)]="product.boxQuantity" name="boxQuantity" readonly>
                 </div>
                 <div class="form-group col-6">
                     <label class="pt-2">Precio por caja</label>
                 <input *ngIf="isEditable" type="text" class="rounded-pill form-control border-0 bg-light shadow-sm" [(ngModel)]="product.boxPrice" name="boxPrice">
-                <input *ngIf="!isEditable" type="text" class="rounded-pill form-control border-0 shadow-sm" [(ngModel)]="product.boxPrice" name="boxPrice" readonly>
+                <input *ngIf="!isEditable" type="text" class="rounded-pill text-muted form-control border-0" [(ngModel)]="product.boxPrice" name="boxPrice" readonly>
                 </div>
             </div>
             <!-- Unidades tipo Sobre -->
-            <div *ngIf="product.comesInOthers" class="row container mx-auto shadow-sm mb-4 data-container">
+            <div *ngIf="product.comesInOthers" class="row mx-auto shadow-sm mb-4 data-container">
                 <div class="form-group col-6">
                     <label class="pt-2 mr-4">Sobres</label>
-                    <input type="text" class="rounded-pill form-control border-0 shadow-sm" [(ngModel)]="product.otherQuantity" name="otherQuantity" readonly> 
+                    <input type="text" class="text-muted rounded-pill form-control border-0" [(ngModel)]="product.otherQuantity" name="otherQuantity" readonly> 
                 </div>
                 <div class="form-group col-6">
                     <label class="pt-2 mr-0">Precio por sobre</label>
                 <input *ngIf="isEditable" type="text" class="rounded-pill form-control border-0 bg-light shadow-sm" [(ngModel)]="product.otherPrice" name="otherPrice">
-                <input *ngIf="!isEditable" type="text" class="rounded-pill form-control border-0 shadow-sm" [(ngModel)]="product.otherPrice" name="otherPrice" readonly>
+                <input *ngIf="!isEditable" type="text" class="rounded-pill text-muted form-control border-0" [(ngModel)]="product.otherPrice" name="otherPrice" readonly>
                 </div>
             </div>
             <!-- Unidades tipo unidad -->
-            <div *ngIf="product.comesInUnits" class="row container mx-auto shadow-sm mb-4 data-container">
+            <div *ngIf="product.comesInUnits" class="row mx-auto shadow-sm mb-4 data-container">
                 <div class="form-group col-6">
                     <label class="pt-2">Unidades</label>
-                    <input type="text" class="rounded-pill form-control border-0 shadow-sm" [(ngModel)]="product.unitQuantity" name="unitQuantity" readonly>
+                    <input type="text" class="text-muted rounded-pill form-control border-0" [(ngModel)]="product.unitQuantity" name="unitQuantity" readonly>
                 </div>
                 <div class="form-group col-6">
                     <label class="pt-2 mr-0">Precio por unidad</label>
                     <input *ngIf="isEditable" type="text" class="rounded-pill form-control border-0 bg-light shadow-sm" [(ngModel)]="product.unitPrice" name="unitPrice">
-                    <input *ngIf="!isEditable" type="text" class="rounded-pill form-control border-0 shadow-sm" [(ngModel)]="product.unitPrice" name="unitPrice" readonly>
+                    <input *ngIf="!isEditable" type="text" class="rounded-pill text-muted form-control border-0" [(ngModel)]="product.unitPrice" name="unitPrice" readonly>
                 </div>
             </div>
         </form>
