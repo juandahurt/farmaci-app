@@ -103,5 +103,37 @@
         <div class="container mt-2">
             <h4>Unidades</h4>
         </div>
+        <div *ngIf="dimensionsHaveBeenSet" class="row">
+
+            <!-- Viene por sobres y cajas -->
+            <div *ngIf="product.comesInBoxes && product.comesInOthers && !product.comesInUnits" class="form-group col-6 row mx-auto">
+                <label>Sobres por Caja</label>
+                <input [(ngModel)]="dimension.others" name="others" class="rounded-pill form-control border-0 mb-3" readonly>
+            </div>
+            <!-- Viene por unidades y cajas -->
+            <div *ngIf="product.comesInBoxes && product.comesInUnits && !product.comesInUnits" class="form-group col-6 row mx-auto">
+                <label>Unidades por Caja</label>
+                <input [(ngModel)]="dimension.units" name="units" class="rounded-pill form-control border-0 mb-3" min="1" readonly>
+            </div>
+            <!-- Viene por unidades y sobres -->
+            <div *ngIf="product.comesInOthers && product.comesInUnits && !product.comesInBoxes" class="form-group col-6 row mx-auto">
+                <label>Unidades por Sobre</label>
+                <input [(ngModel)]="dimension.units" name="units" class="rounded-pill form-control border-0 mb-3" min="1" readonly>
+            </div>
+            <!-- Viene en todos los tipos de unidad -->
+            <div *ngIf="product.comesInOthers && product.comesInUnits && product.comesInBoxes" class="col-6 row mx-auto">
+                <div class="mr-3 form-group">
+                    <label>Sobres por Caja</label>
+                    <input [(ngModel)]="dimension.others" name="others" class="rounded-pill form-control border-0 mb-3" min="1" readonly>
+                </div>
+                <div class="ml-3 form-group">
+                    <label>Unidades por Sobre</label>
+                    <input [(ngModel)]="dimension.units" name="units" class="rounded-pill form-control border-0 mb-3" min="1" readonly>
+                </div>
+            </div>
+        </div>
+        <app-add-dimensions-form *ngIf="!dimensionsHaveBeenSet && ((product.comesInBoxes && product.comesInOthers) || (product.comesInOthers && product.comesInUnits) || (product.comesInBoxes && product.comesInUnits))">
+
+        </app-add-dimensions-form>
     </div>
 </div>

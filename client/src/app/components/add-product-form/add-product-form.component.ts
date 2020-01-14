@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Category } from 'src/models/category';
 import { CategoryService } from 'src/services/category.service';

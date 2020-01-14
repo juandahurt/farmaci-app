@@ -118,7 +118,7 @@ export class DashboardSellingCartComponent implements OnInit {
    * Añade un producto al carro de venta.
    * Es invocada al dar click en el botón `Agregar Producto`
    */
-  public addToCart() {
+  public addProductToCart() {
     let notifier = new Notification();
 
     if (this.productToFind.unitType == null) { 
@@ -127,6 +127,7 @@ export class DashboardSellingCartComponent implements OnInit {
     }
 
     this.productToFind = new ProductSold();
+    this.searchForm.controls.id.setValue('');
   }
 
   /**

@@ -1,0 +1,39 @@
+<ng-template #content let-modal>
+    <div class="container text-center pt-3 mb-2">
+        <p class="text-muted">Para poder agregar por primera vez unidades a un producto, debes ingresar lo siguiente:</p>
+    </div>
+    <div class="modal-body">
+        <form>
+            <!-- Viene por sobres y cajas -->
+            <div *ngIf="product.comesInBoxes && product.comesInOthers && !product.comesInUnits" class="form-group">
+                <label>Cantidad de Sobres por Caja</label>
+                <input [(ngModel)]="dimension.others" name="others" class="form-control bg-light border-0 shadow-sm mb-3" min="1" type="number">
+            </div>
+            <!-- Viene por unidades y cajas -->
+            <div *ngIf="product.comesInBoxes && product.comesInUnits && !product.comesInUnits" class="form-group">
+                <label>Cantidad de Unidades por Caja</label>
+                <input [(ngModel)]="dimension.units" name="units" class="form-control bg-light border-0 shadow-sm mb-3" min="1" type="number">
+            </div>
+            <!-- Viene por unidades y sobres -->
+            <div *ngIf="product.comesInOthers && product.comesInUnits && !product.comesInBoxes" class="form-group">
+                <label>Cantidad de Unidades por Sobre</label>
+                <input [(ngModel)]="dimension.units" name="units" class="form-control bg-light border-0 shadow-sm mb-3" min="1" type="number">
+            </div>
+            <!-- Viene en todos los tipos de unidad -->
+            <div *ngIf="product.comesInOthers && product.comesInUnits && product.comesInBoxes" class="form-group">
+                <label>Cantidad de Sobres por Caja</label>
+                <input [(ngModel)]="dimension.others" name="others" class="form-control bg-light border-0 shadow-sm mb-3" min="1" type="number">
+                <label>Cantidad de Unidades por Sobre</label>
+                <input [(ngModel)]="dimension.units" name="units" class="form-control bg-light border-0 shadow-sm mb-3" min="1" type="number">
+            </div>
+            <div class="text-center mt-2">
+                <button class="btn btn-success shadow-sm" (click)="OKOnclick()">Aceptar</button>
+            </div>
+        </form>
+    </div>
+  </ng-template>
+  
+<button class="btn btn-lg btn-success float shadow" (click)="open(content)">
+    <fa-icon [icon]="faBoxes"></fa-icon>
+</button>
+  
