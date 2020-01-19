@@ -22,6 +22,8 @@ import { DashboardSellingCartComponent } from './views/dashboard-selling-cart/da
 import { DimensionService } from 'src/services/dimension.service';
 import { AddDimensionsFormComponent } from './components/add-dimensions-form/add-dimensions-form.component';
 import { DimensionSharedService } from 'src/services/dimension.shared.service';
+import { AddUnitsFormComponent } from './components/add-units-form/add-units-form.component';
+import { UnitService } from 'src/services/unit.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { DimensionSharedService } from 'src/services/dimension.shared.service';
     AddProductFormComponent,
     DashboardProductComponent,
     DashboardSellingCartComponent,
-    AddDimensionsFormComponent
+    AddDimensionsFormComponent,
+    AddUnitsFormComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,8 @@ import { DimensionSharedService } from 'src/services/dimension.shared.service';
     CategoryService,
     ProductService,
     DimensionService,
-    DimensionSharedService
+    DimensionSharedService,
+    UnitService
   ],
   bootstrap: [AppComponent]
 })

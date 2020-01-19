@@ -1,0 +1,51 @@
+<ng-template #content let-modal>
+    <div class="container text-center pt-3 mb-2">
+        <h3>Ingresar Unidades</h3>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="row">
+                <!-- Si viene por cajas -->
+                <div *ngIf="product.comesInBoxes" class="form-group col-6">
+                    <label>Cajas</label>
+                    <input [(ngModel)]="unit.boxes" name="boxes" min="1" class="form-control bg-light rounded-pill shadow-sm border-0" type="number">
+                </div>
+                <!-- Si viene por sobres y no por cajas -->
+                <div *ngIf="product.comesInOthers && !product.comesInBoxes" class="form-group col-6">
+                    <label>Sobres</label>
+                    <input [(ngModel)]="unit.others" name="others" min="1" class="form-control bg-light rounded-pill shadow-sm border-0" type="number">
+                </div>
+                <!-- Si viene por unidades y no viene por cajas no por sobres -->
+                <div *ngIf="product.comesInUnits && !product.comesInOthers && !product.comesInBoxes" class="form-group col-6">
+                    <label>Unidades</label>
+                    <input [(ngModel)]="unit.units" name="units" min="1" class="form-control bg-light rounded-pill shadow-sm border-0" type="number">
+                </div>
+                <!-- Lote -->
+                <div class="col-6 form-group">
+                    <label>Lote</label>
+                    <input [(ngModel)]="unit.lot" name="lot" class="form-control bg-light rounded-pill shadow-sm border-0" type="text">
+                </div>
+                <!-- Vencimiento -->
+                <div class="form-group col-12">
+                    <label class="">Vencimiento</label >
+                    <div class="input-group">
+                        <input [(ngModel)]="unit.expiresAt" name="expDate" id="date" class="form-control bg-light rounded-pill shadow-sm border-0" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" readonly>
+                        <button class="btn rounded-circle btn-outline-primary shadow-sm ml-3" (click)="d.toggle()" type="button">
+                            <fa-icon [icon]="faCalendarAlt"></fa-icon>
+                        </button>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="text-center mt-2">
+                <button class="btn btn-light shadow-sm mr-5" (click)="close()">Cancelar</button>
+                <button class="btn btn-success shadow-sm" (click)="addOnClick()">Aceptar</button>
+            </div>
+        </form>
+    </div>
+  </ng-template>
+  
+<button class="btn btn-lg btn-success float shadow" (click)="open(content)">
+    <fa-icon [icon]="faTruckLoading"></fa-icon>
+</button>
+  

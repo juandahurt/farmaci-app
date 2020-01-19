@@ -10,6 +10,9 @@ import { ErrorHandler } from 'src/helpers/error.helper';
 import { DimensionService } from 'src/services/dimension.service';
 import { Dimension } from 'src/models/dimension';
 import { DimensionSharedService } from 'src/services/dimension.shared.service';
+import { UnitService } from 'src/services/unit.service';
+import { Unit } from 'src/models/unit';
+import { DateHelper } from 'src/helpers/date.helper';
 
 @Component({
   selector: 'app-dashboard-product',
@@ -72,7 +75,8 @@ export class DashboardProductComponent implements OnInit {
     private categoryService: CategoryService,
     private router: Router,
     private dimensionService: DimensionService,
-    private dimensionSharedService: DimensionSharedService
+    private dimensionSharedService: DimensionSharedService,
+    private unitService: UnitService
     ) { 
     this.id = this.route.snapshot.paramMap.get('id');
     this.setProduct().then(() => { this.setDimension(); });
@@ -91,6 +95,26 @@ export class DashboardProductComponent implements OnInit {
     try {
       let res = await this.productService.get(this.id).toPromise();
       this.product = new Product().fromJSON(res);
+
+      res = await this.unitService.list(this.id).toPromise();
+      let units = res as Array<any>;
+
+      if (units.length > 0) {
+        this.product.units = new Array<Unit>();
+
+        units.forEach(unit => {
+          let u = new Unit();
+  
+          u.id = unit.id;
+          u.boxes = unit.boxes;
+          u.others = unit.others;
+          u.units = unit.units;
+          u.expiresAt = unit.expires_at;
+          u.createdAt = unit.createdAt;
+  
+          this.product.units.push(u);
+        });
+      }
     } catch(err) {
       ErrorHandler.showError(err);
     }
@@ -101,6 +125,18 @@ export class DashboardProductComponent implements OnInit {
    */
   private async setDimension() {
     try {
+      if (this.product.comesInBoxes && !this.product.comesInOthers && !this.product.comesInUnits) {
+        this.dimensionsHaveBeenSet = true;
+        return;
+      }
+      if (!this.product.comesInBoxes && this.product.comesInOthers && !this.product.comesInUnits) {
+        this.dimensionsHaveBeenSet = true;
+        return;
+      }
+      if (!this.product.comesInBoxes && !this.product.comesInOthers && this.product.comesInUnits) {
+        this.dimensionsHaveBeenSet = true;
+        return;
+      }
       let dim = await this.dimensionService.get(this.product.id).toPromise();
       this.dimensionsHaveBeenSet = dim != null;
       
@@ -137,6 +173,10 @@ export class DashboardProductComponent implements OnInit {
    */
   public editOnClick() {
     this.isEditable = !this.isEditable;
+  }
+
+  public dateToString(date: string) {
+    return DateHelper.cleanDate(date);
   }
 
   /**
@@ -187,10 +227,7 @@ export class DashboardProductComponent implements OnInit {
     this.setProduct();
   }
 
-  /**
-   * Invocada al dar click en Agregar Unidades
-   */
-  public async addOnClick() {
-    
+  public deleteUnitOnClick() {
+
   }
 }

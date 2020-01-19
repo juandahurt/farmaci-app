@@ -82,7 +82,7 @@ export class Product extends Object {
         this._comesInUnits = false;
         this._comesInOthers = false;
         this._category = new Category();
-        this._units = new Array<Unit>();
+        this._units = null;
     }
     
     fromJSON(json: any): Product {

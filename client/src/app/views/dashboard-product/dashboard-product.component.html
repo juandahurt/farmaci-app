@@ -100,7 +100,7 @@
                 </div>
             </div>
         </form>
-        <div class="container mt-2">
+        <div class="container mt-5">
             <h4>Unidades</h4>
         </div>
         <div *ngIf="dimensionsHaveBeenSet" class="row">
@@ -108,32 +108,66 @@
             <!-- Viene por sobres y cajas -->
             <div *ngIf="product.comesInBoxes && product.comesInOthers && !product.comesInUnits" class="form-group col-6 row mx-auto">
                 <label>Sobres por Caja</label>
-                <input [(ngModel)]="dimension.others" name="others" class="rounded-pill form-control border-0 mb-3" readonly>
+                <input [(ngModel)]="dimension.others" name="others" class="rounded-pill form-control border-0" readonly>
             </div>
             <!-- Viene por unidades y cajas -->
             <div *ngIf="product.comesInBoxes && product.comesInUnits && !product.comesInUnits" class="form-group col-6 row mx-auto">
                 <label>Unidades por Caja</label>
-                <input [(ngModel)]="dimension.units" name="units" class="rounded-pill form-control border-0 mb-3" min="1" readonly>
+                <input [(ngModel)]="dimension.units" name="units" class="rounded-pill form-control border-0" min="1" readonly>
             </div>
             <!-- Viene por unidades y sobres -->
             <div *ngIf="product.comesInOthers && product.comesInUnits && !product.comesInBoxes" class="form-group col-6 row mx-auto">
                 <label>Unidades por Sobre</label>
-                <input [(ngModel)]="dimension.units" name="units" class="rounded-pill form-control border-0 mb-3" min="1" readonly>
+                <input [(ngModel)]="dimension.units" name="units" class="rounded-pill form-control border-0" min="1" readonly>
             </div>
             <!-- Viene en todos los tipos de unidad -->
             <div *ngIf="product.comesInOthers && product.comesInUnits && product.comesInBoxes" class="col-6 row mx-auto">
                 <div class="mr-3 form-group">
                     <label>Sobres por Caja</label>
-                    <input [(ngModel)]="dimension.others" name="others" class="rounded-pill form-control border-0 mb-3" min="1" readonly>
+                    <input [(ngModel)]="dimension.others" name="others" class="rounded-pill form-control border-0" min="1" readonly>
                 </div>
                 <div class="ml-3 form-group">
                     <label>Unidades por Sobre</label>
-                    <input [(ngModel)]="dimension.units" name="units" class="rounded-pill form-control border-0 mb-3" min="1" readonly>
+                    <input [(ngModel)]="dimension.units" name="units" class="rounded-pill form-control border-0" min="1" readonly>
                 </div>
             </div>
         </div>
+        <hr>
+        <!-- Formulario de las dimensiones -->
         <app-add-dimensions-form *ngIf="!dimensionsHaveBeenSet && ((product.comesInBoxes && product.comesInOthers) || (product.comesInOthers && product.comesInUnits) || (product.comesInBoxes && product.comesInUnits))">
-
         </app-add-dimensions-form>
+
+        <!-- Tabla de Unidades -->
+        <table *ngIf="product.units" class="table shadow-sm table-borderless table-hover">
+            <thead class="text-muted">
+                <tr class="bg-light">
+                    <th scope="col">Registro</th>
+                    <th *ngIf="product.comesInBoxes" scope="col">Cajas</th>
+                    <th *ngIf="product.comesInOthers" scope="col">Sobres</th>
+                    <th *ngIf="product.comesInUnits" scope="col">Unidades</th>
+                    <th scope="col">Vencimiento</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let unit of product.units">
+                    <td>{{dateToString(unit.createdAt)}}</td>
+                    <td *ngIf="product.comesInBoxes">{{unit.boxes}}</td>
+                    <td *ngIf="product.comesInOthers">{{unit.others}}</td>
+                    <td *ngIf="product.comesInUnits">{{unit.units}}</td>
+                    <td>{{dateToString(unit.expiresAt)}}</td>
+                    <td>
+                        <button class="rounded-circle btn btn-light shadow-sm ml-3 mt-1" (click)="deleteUnitOnClick()">
+                            <fa-icon [icon]="faTrashAlt"></fa-icon>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="!product.units" class="container mb-5">
+            <p class="text-muted mt-2">No existen unidades registradas para este producto</p>
+        </div>
+        <!-- Formulario de las unidades -->
+        <app-add-units-form *ngIf="dimensionsHaveBeenSet"></app-add-units-form>
     </div>
 </div>
