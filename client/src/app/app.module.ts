@@ -19,6 +19,11 @@ import { ProductService } from 'src/services/product.service';
 import { AddProductFormComponent } from './components/add-product-form/add-product-form.component';
 import { DashboardProductComponent } from './views/dashboard-product/dashboard-product.component';
 import { DashboardSellingCartComponent } from './views/dashboard-selling-cart/dashboard-selling-cart.component';
+import { DimensionService } from 'src/services/dimension.service';
+import { AddDimensionsFormComponent } from './components/add-dimensions-form/add-dimensions-form.component';
+import { DimensionSharedService } from 'src/services/dimension.shared.service';
+import { AddUnitsFormComponent } from './components/add-units-form/add-units-form.component';
+import { UnitService } from 'src/services/unit.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +36,9 @@ import { DashboardSellingCartComponent } from './views/dashboard-selling-cart/da
     NgbdSortableHeader,
     AddProductFormComponent,
     DashboardProductComponent,
-    DashboardSellingCartComponent
+    DashboardSellingCartComponent,
+    AddDimensionsFormComponent,
+    AddUnitsFormComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +52,10 @@ import { DashboardSellingCartComponent } from './views/dashboard-selling-cart/da
   ],
   providers: [
     CategoryService,
-    ProductService
+    ProductService,
+    DimensionService,
+    DimensionSharedService,
+    UnitService
   ],
   bootstrap: [AppComponent]
 })

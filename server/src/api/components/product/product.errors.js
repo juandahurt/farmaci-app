@@ -7,7 +7,8 @@ const ERRORS = {
     INVALID_OTHER_PRICE: 'Debes ingresar el precio de sobre',
     INVALID_BASE_PRICE: 'Debes ingresar el precio de compra',
     DESC_ALREADY_USED: 'Esa descripción ya está siendo utilizada',
-    ID_ALREADY_USED: 'Ese identificador ya está siendo utilizado'
+    ID_ALREADY_USED: 'Ese identificador ya está siendo utilizado',
+    PRODUCT_NOT_FOUND: 'El producto no se encuentra registrado'
 }
 
 module.exports = ERRORS;

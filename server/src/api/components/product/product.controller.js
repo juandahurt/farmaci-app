@@ -104,6 +104,11 @@ const productController = {
 
         let product = await Product.findOne({where: { id: id }, include: [Category] })
 
+        if (!product) {
+            res.status(422).send({error: ERRORS.PRODUCT_NOT_FOUND});
+            return;
+        }
+
         res.status(200).send(product);
     },
     /**

@@ -7,7 +7,13 @@ import { ConfirmForm } from 'src/helpers/confirm-form.helper';
 import { Category } from 'src/models/category';
 import { CategoryService } from 'src/services/category.service';
 import { ErrorHandler } from 'src/helpers/error.helper';
-import { Notification } from 'src/helpers/notification.helper';
+import { DimensionService } from 'src/services/dimension.service';
+import { Dimension } from 'src/models/dimension';
+import { DimensionSharedService } from 'src/services/dimension.shared.service';
+import { UnitService } from 'src/services/unit.service';
+import { Unit } from 'src/models/unit';
+import { DateHelper } from 'src/helpers/date.helper';
+import { UnitSharedService } from 'src/services/unit.shared.service';
 
 @Component({
   selector: 'app-dashboard-product',
@@ -51,24 +57,39 @@ export class DashboardProductComponent implements OnInit {
   public product: Product;
 
   /**
-   * 
+   * ¿Es el formulario del producto editable?
    */
   public isEditable: boolean;
 
+  /**
+   * Categorías registradas
+   */
   public categories: Array<Category>;
+
+  public dimensionsHaveBeenSet: boolean;
+
+  public dimension: Dimension;
 
   constructor(
     private productService: ProductService, 
     private route: ActivatedRoute,
     private categoryService: CategoryService,
-    private router: Router
+    private router: Router,
+    private dimensionService: DimensionService,
+    private dimensionSharedService: DimensionSharedService,
+    private unitService: UnitService
     ) { 
     this.id = this.route.snapshot.paramMap.get('id');
-    this.setProduct();
+    this.setProduct().then(() => { 
+      this.setDimension(); 
+      this.setUnits();
+    });
     this.setCategories();
   }
 
   ngOnInit() {
+    this.dimensionSharedService.getHaveBeenSet().subscribe(value => this.dimensionsHaveBeenSet = value);
+    this.dimensionSharedService.getDimension().subscribe(value => this.dimension = value);
   }
 
   /**
@@ -79,6 +100,55 @@ export class DashboardProductComponent implements OnInit {
       let res = await this.productService.get(this.id).toPromise();
       this.product = new Product().fromJSON(res);
     } catch(err) {
+      ErrorHandler.showError(err);
+    }
+  }
+
+  /**
+   * Obtiene y setea las unidades del producto
+   */
+  private async setUnits() {
+    try {
+      let res = await this.unitService.list(this.id).toPromise();
+      let units = res as Array<any>;
+
+      if (units.length > 0) {
+        this.product.units = new Array<Unit>();
+
+        units.forEach(unit => {
+          let u = new Unit().fromJSON(unit);
+          this.product.units.push(u);
+        });
+      } else {
+        this.product.units = null;
+      }
+    } catch(err) {
+      ErrorHandler.showError(err);
+    }
+  }
+
+  /**
+   * Obtiene y setea las dimensiones del producto
+   */
+  private async setDimension() {
+    try {
+      if (this.product.comesInBoxes && !this.product.comesInOthers && !this.product.comesInUnits) {
+        this.dimensionsHaveBeenSet = true;
+        return;
+      }
+      if (!this.product.comesInBoxes && this.product.comesInOthers && !this.product.comesInUnits) {
+        this.dimensionsHaveBeenSet = true;
+        return;
+      }
+      if (!this.product.comesInBoxes && !this.product.comesInOthers && this.product.comesInUnits) {
+        this.dimensionsHaveBeenSet = true;
+        return;
+      }
+      let dim = await this.dimensionService.get(this.product.id).toPromise();
+      this.dimensionsHaveBeenSet = dim != null;
+      
+      this.dimension = new Dimension().fromJSON(dim);
+    } catch (err) {
       ErrorHandler.showError(err);
     }
   }
@@ -110,6 +180,10 @@ export class DashboardProductComponent implements OnInit {
    */
   public editOnClick() {
     this.isEditable = !this.isEditable;
+  }
+
+  public dateToString(date: string) {
+    return DateHelper.cleanDate(date);
   }
 
   /**
@@ -158,5 +232,18 @@ export class DashboardProductComponent implements OnInit {
   public cancelOnClick() {
     this.isEditable = false;
     this.setProduct();
+  }
+
+  /**
+   * Invocada al dar click en el Icono de Eliminar Unidad
+   */
+  public async deleteUnitOnClick(unitId: number) {
+    try {
+      let res = await new ConfirmForm().show('¿Estás seguro?', 'La unidad será eliminada permanentemente');
+      if (res.value) { await this.unitService.delete(this.id, unitId).toPromise(); }
+    } catch(err) {
+      ErrorHandler.handleError(err, 'Unidad eliminada exitosamente');
+      this.setUnits();
+    }
   }
 }

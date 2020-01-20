@@ -6,6 +6,7 @@ import { faArrowLeft, faPen, faTrashAlt, faCheck, faTimes } from '@fortawesome/f
 import { Notification } from 'src/helpers/notification.helper';
 import { ConfirmForm } from 'src/helpers/confirm-form.helper';
 import { ErrorHandler } from 'src/helpers/error.helper';
+import { Product } from 'src/models/product';
 
 @Component({
   selector: 'app-dashboard-category',
@@ -54,6 +55,11 @@ export class DashboardCategoryComponent implements OnInit {
   public category: Category;
 
   /**
+   * Productos pertenecientes a la categoría
+   */
+  public products: Array<Product>
+
+  /**
    * Para saber si se puede editar la categoría
    */
   public isEditable: Boolean;
@@ -72,8 +78,19 @@ export class DashboardCategoryComponent implements OnInit {
    * Obtiene y setea la categoría
    */
   private async setCategory() {
-    let res = await this.categoryService.get(this.id).toPromise();
-    this.category = new Category().fromJSON(res);
+    let res: any = await this.categoryService.get(this.id).toPromise();
+    this.category = new Category().fromJSON(res.category);
+    let products = res.products as Array<any>;
+    if (products.length > 0) {
+      this.products = new Array<Product>();
+
+      products.forEach(product => {
+        let p = new Product();
+        p.id = product.id;
+        p.description = product.description;
+        this.products.push(p);
+      });
+    }
   }
  
   /**
@@ -109,6 +126,7 @@ export class DashboardCategoryComponent implements OnInit {
       
       await this.categoryService.update(this.id, cat).toPromise();
       notification.showSuccess('Categoría actualizada exitosamente');
+      this.setCategory();
     } catch(err) {
       ErrorHandler.showError(err);
       this.name = this.category.name;

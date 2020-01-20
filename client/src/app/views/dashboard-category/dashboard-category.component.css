@@ -2,3 +2,26 @@
     margin-left:18%;
     width:80%;
 }
+
+table {
+    border-radius: 15px;
+}
+
+table thead tr{
+    display: block;
+}
+
+table th, table td{
+    width: 0.3%; 
+}
+
+
+table  tbody{
+  display: block;
+  height: 65vh;
+  overflow: auto;
+}
+
+p {
+    font-size: 18px;
+}

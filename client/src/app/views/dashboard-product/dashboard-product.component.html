@@ -33,13 +33,13 @@
                     <div class="form-group col-6">
                         <label class="pt-2">Identificador</label>
                         <input *ngIf="isEditable" type="text" class="rounded-pill form-control border-0 shadow-sm bg-light" [(ngModel)]="product.id" name="id">
-                        <input *ngIf="!isEditable" type="text" class="rounded-pill form-control border-0 shadow-sm" [(ngModel)]="product.id" name="id" readonly>
+                        <input *ngIf="!isEditable" type="text" class="rounded-pill text-muted form-control border-0" [(ngModel)]="product.id" name="id" readonly>
                     </div>      
                     <!-- Descripción -->
                     <div class="form-group col-6">
                         <label class="pt-2">Descripción</label>
                         <input *ngIf="isEditable" type="text" class="rounded-pill form-control border-0 shadow-sm bg-light" [(ngModel)]="product.description" name="description">
-                        <input *ngIf="!isEditable" type="text" class="rounded-pill form-control border-0 shadow-sm" [(ngModel)]="product.description" name="description" readonly>
+                        <input *ngIf="!isEditable" type="text" class="text-muted rounded-pill form-control border-0" [(ngModel)]="product.description" name="description" readonly>
                     </div> 
                 </div>     
                 <div class="row">
@@ -50,7 +50,7 @@
                             <option [ngValue]="null">Sin Categoría</option>
                             <option *ngFor="let c of categories" [ngValue]="c.id">{{c.name}}</option>
                         </select>
-                        <select *ngIf="!isEditable" disabled class="rounded-pill mr-3 custom-select border-0 shadow-sm">
+                        <select *ngIf="!isEditable" disabled class="rounded-pill mr-3 custom-select border-0">
                             <option *ngIf="product.category.id">{{product.category.name}}</option>
                             <option *ngIf="!product.category.id">Sin Categoría</option>
                         </select>
@@ -59,49 +59,115 @@
                     <div class="form-group col-6">
                         <label class="pt-2">Precio de Compra</label>
                         <input *ngIf="isEditable" class="rounded-pill form-control border-0 bg-light shadow-sm" [(ngModel)]="product.basePrice" name="basePrice">
-                        <input *ngIf="!isEditable" class="rounded-pill form-control border-0 shadow-sm" [(ngModel)]="product.basePrice" name="basePrice" readonly>
+                        <input *ngIf="!isEditable" class="rounded-pill text-muted form-control border-0" [(ngModel)]="product.basePrice" name="basePrice" readonly>
                     </div>
                 </div>    
             </div>
             <!-- Unidades tipo Caja -->
-            <div *ngIf="product.comesInBoxes" class="row container mx-auto shadow-sm mb-4 data-container">
+            <div *ngIf="product.comesInBoxes" class="row mx-auto shadow-sm mb-4 data-container">
                 <div class="form-group col-6">
                     <label class="pt-2">Cajas</label>
-                    <input class="form-control border-0 shadow-sm rounded-pill" [(ngModel)]="product.boxQuantity" name="boxQuantity" readonly>
+                    <input class="text-muted form-control border-0 rounded-pill" [(ngModel)]="product.boxQuantity" name="boxQuantity" readonly>
                 </div>
                 <div class="form-group col-6">
                     <label class="pt-2">Precio por caja</label>
                 <input *ngIf="isEditable" type="text" class="rounded-pill form-control border-0 bg-light shadow-sm" [(ngModel)]="product.boxPrice" name="boxPrice">
-                <input *ngIf="!isEditable" type="text" class="rounded-pill form-control border-0 shadow-sm" [(ngModel)]="product.boxPrice" name="boxPrice" readonly>
+                <input *ngIf="!isEditable" type="text" class="rounded-pill text-muted form-control border-0" [(ngModel)]="product.boxPrice" name="boxPrice" readonly>
                 </div>
             </div>
             <!-- Unidades tipo Sobre -->
-            <div *ngIf="product.comesInOthers" class="row container mx-auto shadow-sm mb-4 data-container">
+            <div *ngIf="product.comesInOthers" class="row mx-auto shadow-sm mb-4 data-container">
                 <div class="form-group col-6">
                     <label class="pt-2 mr-4">Sobres</label>
-                    <input type="text" class="rounded-pill form-control border-0 shadow-sm" [(ngModel)]="product.otherQuantity" name="otherQuantity" readonly> 
+                    <input type="text" class="text-muted rounded-pill form-control border-0" [(ngModel)]="product.otherQuantity" name="otherQuantity" readonly> 
                 </div>
                 <div class="form-group col-6">
                     <label class="pt-2 mr-0">Precio por sobre</label>
                 <input *ngIf="isEditable" type="text" class="rounded-pill form-control border-0 bg-light shadow-sm" [(ngModel)]="product.otherPrice" name="otherPrice">
-                <input *ngIf="!isEditable" type="text" class="rounded-pill form-control border-0 shadow-sm" [(ngModel)]="product.otherPrice" name="otherPrice" readonly>
+                <input *ngIf="!isEditable" type="text" class="rounded-pill text-muted form-control border-0" [(ngModel)]="product.otherPrice" name="otherPrice" readonly>
                 </div>
             </div>
             <!-- Unidades tipo unidad -->
-            <div *ngIf="product.comesInUnits" class="row container mx-auto shadow-sm mb-4 data-container">
+            <div *ngIf="product.comesInUnits" class="row mx-auto shadow-sm mb-4 data-container">
                 <div class="form-group col-6">
                     <label class="pt-2">Unidades</label>
-                    <input type="text" class="rounded-pill form-control border-0 shadow-sm" [(ngModel)]="product.unitQuantity" name="unitQuantity" readonly>
+                    <input type="text" class="text-muted rounded-pill form-control border-0" [(ngModel)]="product.unitQuantity" name="unitQuantity" readonly>
                 </div>
                 <div class="form-group col-6">
                     <label class="pt-2 mr-0">Precio por unidad</label>
                     <input *ngIf="isEditable" type="text" class="rounded-pill form-control border-0 bg-light shadow-sm" [(ngModel)]="product.unitPrice" name="unitPrice">
-                    <input *ngIf="!isEditable" type="text" class="rounded-pill form-control border-0 shadow-sm" [(ngModel)]="product.unitPrice" name="unitPrice" readonly>
+                    <input *ngIf="!isEditable" type="text" class="rounded-pill text-muted form-control border-0" [(ngModel)]="product.unitPrice" name="unitPrice" readonly>
                 </div>
             </div>
         </form>
-        <div class="container mt-2">
+        <div class="container mt-5">
             <h4>Unidades</h4>
         </div>
+        <div *ngIf="dimensionsHaveBeenSet" class="row">
+
+            <!-- Viene por sobres y cajas -->
+            <div *ngIf="product.comesInBoxes && product.comesInOthers && !product.comesInUnits" class="form-group col-6 row mx-auto">
+                <label>Sobres por Caja</label>
+                <input [(ngModel)]="dimension.others" name="others" class="rounded-pill form-control border-0" readonly>
+            </div>
+            <!-- Viene por unidades y cajas -->
+            <div *ngIf="product.comesInBoxes && product.comesInUnits && !product.comesInUnits" class="form-group col-6 row mx-auto">
+                <label>Unidades por Caja</label>
+                <input [(ngModel)]="dimension.units" name="units" class="rounded-pill form-control border-0" min="1" readonly>
+            </div>
+            <!-- Viene por unidades y sobres -->
+            <div *ngIf="product.comesInOthers && product.comesInUnits && !product.comesInBoxes" class="form-group col-6 row mx-auto">
+                <label>Unidades por Sobre</label>
+                <input [(ngModel)]="dimension.units" name="units" class="rounded-pill form-control border-0" min="1" readonly>
+            </div>
+            <!-- Viene en todos los tipos de unidad -->
+            <div *ngIf="product.comesInOthers && product.comesInUnits && product.comesInBoxes" class="col-6 row mx-auto">
+                <div class="mr-3 form-group">
+                    <label>Sobres por Caja</label>
+                    <input [(ngModel)]="dimension.others" name="others" class="rounded-pill form-control border-0" min="1" readonly>
+                </div>
+                <div class="ml-3 form-group">
+                    <label>Unidades por Sobre</label>
+                    <input [(ngModel)]="dimension.units" name="units" class="rounded-pill form-control border-0" min="1" readonly>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <!-- Formulario de las dimensiones -->
+        <app-add-dimensions-form *ngIf="!dimensionsHaveBeenSet && ((product.comesInBoxes && product.comesInOthers) || (product.comesInOthers && product.comesInUnits) || (product.comesInBoxes && product.comesInUnits))">
+        </app-add-dimensions-form>
+
+        <!-- Tabla de Unidades -->
+        <table *ngIf="product.units" class="table shadow-sm table-borderless table-hover">
+            <thead class="text-muted">
+                <tr class="bg-light">
+                    <th scope="col">Registro</th>
+                    <th *ngIf="product.comesInBoxes" scope="col">Cajas</th>
+                    <th *ngIf="product.comesInOthers" scope="col">Sobres</th>
+                    <th *ngIf="product.comesInUnits" scope="col">Unidades</th>
+                    <th scope="col">Vencimiento</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let unit of product.units">
+                    <td>{{dateToString(unit.createdAt)}}</td>
+                    <td *ngIf="product.comesInBoxes">{{unit.boxes}}</td>
+                    <td *ngIf="product.comesInOthers">{{unit.others}}</td>
+                    <td *ngIf="product.comesInUnits">{{unit.units}}</td>
+                    <td>{{dateToString(unit.expiresAt)}}</td>
+                    <td>
+                        <button class="rounded-circle btn btn-light shadow-sm ml-3 mt-1" (click)="deleteUnitOnClick(unit.id)">
+                            <fa-icon [icon]="faTrashAlt"></fa-icon>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div *ngIf="!product.units" class="container mb-5">
+            <p class="text-muted mt-2">No existen unidades registradas para este producto</p>
+        </div>
+        <!-- Formulario de las unidades -->
+        <app-add-units-form *ngIf="dimensionsHaveBeenSet"></app-add-units-form>
     </div>
 </div>
