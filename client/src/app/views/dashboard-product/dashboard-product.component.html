@@ -157,7 +157,7 @@
                     <td *ngIf="product.comesInUnits">{{unit.units}}</td>
                     <td>{{dateToString(unit.expiresAt)}}</td>
                     <td>
-                        <button class="rounded-circle btn btn-light shadow-sm ml-3 mt-1" (click)="deleteUnitOnClick()">
+                        <button class="rounded-circle btn btn-light shadow-sm ml-3 mt-1" (click)="deleteUnitOnClick(unit.id)">
                             <fa-icon [icon]="faTrashAlt"></fa-icon>
                         </button>
                     </td>

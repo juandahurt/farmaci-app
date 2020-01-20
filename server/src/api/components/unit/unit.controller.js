@@ -104,6 +104,29 @@ const unitController = {
         let units = await Unit.findAll();
 
         res.status(200).send(units);
+    },
+    /**
+     * Elimina una unidad de un producto.
+     * @param {object} req - petición del cliente
+     * @param {object} res - respuesta del servidor
+     */
+    async delete(req, res) {
+        let unit_id = req.params.unit_id;
+        let product_id = req.params.product_id;
+
+        try {
+            await sequelizeDB.sync();
+            let unit = await Unit.findOne({
+                where: {
+                    id: unit_id,
+                    product_id: product_id
+                }
+            });
+            await unit.destroy();
+            res.sendStatus(200);
+        } catch(err) {
+            res.status(500).send({error: err.message});
+        }
     }
 }
 

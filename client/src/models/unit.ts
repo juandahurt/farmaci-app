@@ -55,8 +55,17 @@ export class Unit extends Object {
         this._expiresAt = null;
     }
 
-    public fromJSON(json: any): Object {
-        throw new Error("Method not implemented.");
+    public fromJSON(json: any): Unit {
+        let u = new Unit();
+  
+        u.id = json.id;
+        u.boxes = json.boxes;
+        u.others = json.others;
+        u.units = json.units;
+        u.expiresAt = json.expires_at;
+        u.createdAt = json.createdAt;
+  
+        return u;
     }
 
     get id() { return this._id; }

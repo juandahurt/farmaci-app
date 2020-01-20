@@ -31,4 +31,12 @@ export class UnitService extends HttpService {
     public list(id: string) {
         return this.http.get(`${this.apiUrl}/${id}`, { headers: this.headers });
     }
+
+    /**
+     * Elimina una unidad de un producto
+     * @param id Identificador del producto
+     */
+    public delete(productId: string, unitId: number) {
+        return this.http.delete(`${this.apiUrl}/${productId}/${unitId}`, { headers: this.headers });
+    }
 }

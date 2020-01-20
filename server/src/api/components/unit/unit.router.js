@@ -13,4 +13,9 @@ unitRouter.post('/:id', unitController.create);
  */
 unitRouter.get('/:id', unitController.list);
 
+/**
+ * Ruta que permite eliminar una unidad de un producto
+ */
+unitRouter.delete('/:product_id/:unit_id', unitController.delete);
+
 module.exports = unitRouter;
