@@ -24,6 +24,7 @@ import { AddDimensionsFormComponent } from './components/add-dimensions-form/add
 import { DimensionSharedService } from 'src/services/dimension.shared.service';
 import { AddUnitsFormComponent } from './components/add-units-form/add-units-form.component';
 import { UnitService } from 'src/services/unit.service';
+import { UnitSharedService } from 'src/services/unit.shared.service';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { UnitService } from 'src/services/unit.service';
     ProductService,
     DimensionService,
     DimensionSharedService,
-    UnitService
+    UnitService,
+    UnitSharedService
   ],
   bootstrap: [AppComponent]
 })

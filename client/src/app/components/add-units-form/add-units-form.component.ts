@@ -8,8 +8,7 @@ import { ErrorHandler } from 'src/helpers/error.helper';
 import { UnitService } from 'src/services/unit.service';
 import { Unit } from 'src/models/unit';
 import { Notification } from 'src/helpers/notification.helper';
-import { Dimension } from 'src/models/dimension';
-import { DimensionService } from 'src/services/dimension.service';
+import { UnitSharedService } from 'src/services/unit.shared.service';
 
 @Component({
   selector: 'app-add-units-form',
@@ -42,11 +41,17 @@ export class AddUnitsFormComponent implements OnInit {
    */
   public unit: Unit;
 
+  /**
+   * Unidades del producto
+   */
+  public units: Array<Unit>;
+
   constructor(
     private modalService: NgbModal,
     private productService: ProductService,
     private route: ActivatedRoute,
-    private unitService: UnitService
+    private unitService: UnitService,
+    private unitSharedSerevice: UnitSharedService
   ) {
     this._id = route.snapshot.paramMap.get('id');
     this.setProduct();
@@ -84,6 +89,24 @@ export class AddUnitsFormComponent implements OnInit {
   }
 
   /**
+   * Obtiene y setea las unidades del producto
+   */
+  private async setUnits() {
+    try {
+      let res = await this.unitService.list(this.product.id).toPromise();
+      let units = res as Array<any>;
+      this.units = new Array<Unit>();
+      
+      units.forEach(unit => {
+        let u = new Unit().fromJSON(unit);
+        this.units.push(u);
+      });
+    } catch(err) {
+      ErrorHandler.showError(err);
+    }
+  }
+
+  /**
    * Invacada al dar click en Agregar
    */
   public async addOnClick() {
@@ -91,6 +114,8 @@ export class AddUnitsFormComponent implements OnInit {
       await this.unitService.create(this._id, this.unit).toPromise();
       new Notification().showSuccess('Unidades registradas exitosamente');
       this.close();
+      await this.setUnits();
+      this.unitSharedSerevice.changeUnits(this.units);
     } catch (err) {
       ErrorHandler.showError(err);
     }
