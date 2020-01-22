@@ -3,7 +3,8 @@ const Sequelize = require('sequelize');
 
 const sequelizeDB = new Sequelize(db.name, db.username, db.password, {
     host: db.host,
-    dialect: 'mysql'
+    dialect: 'mysql',
+    logging: false
 });
 
 module.exports = sequelizeDB;

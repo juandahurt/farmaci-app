@@ -66,8 +66,14 @@ export class DashboardProductComponent implements OnInit {
    */
   public categories: Array<Category>;
 
+  /**
+   * ¿Las dimensiones has sido seteadas?
+   */
   public dimensionsHaveBeenSet: boolean;
 
+  /**
+   * Dimensiones del productos
+   */
   public dimension: Dimension;
 
   constructor(
@@ -77,8 +83,9 @@ export class DashboardProductComponent implements OnInit {
     private router: Router,
     private dimensionService: DimensionService,
     private dimensionSharedService: DimensionSharedService,
-    private unitService: UnitService
-    ) { 
+    private unitService: UnitService,
+    private unitSharedService: UnitSharedService
+    ) {
     this.id = this.route.snapshot.paramMap.get('id');
     this.setProduct().then(() => { 
       this.setDimension(); 
@@ -90,6 +97,7 @@ export class DashboardProductComponent implements OnInit {
   ngOnInit() {
     this.dimensionSharedService.getHaveBeenSet().subscribe(value => this.dimensionsHaveBeenSet = value);
     this.dimensionSharedService.getDimension().subscribe(value => this.dimension = value);
+    this.unitSharedService.getUnits().subscribe(value => this.product.units = value);
   }
 
   /**

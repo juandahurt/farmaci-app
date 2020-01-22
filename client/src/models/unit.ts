@@ -62,6 +62,7 @@ export class Unit extends Object {
         u.boxes = json.boxes;
         u.others = json.others;
         u.units = json.units;
+        u.lot = json.lot;
         u.expiresAt = json.expires_at;
         u.createdAt = json.createdAt;
   

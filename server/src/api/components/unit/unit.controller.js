@@ -123,6 +123,41 @@ const unitController = {
                 }
             });
             await unit.destroy();
+
+            let product = await Product.findOne({
+                where: { id: product_id }
+            });
+
+            if (product.comes_in_boxes) {
+                if (product.comes_in_others && !product.comes_in_units) {
+                    // Viene por cajas y por sobres
+                    product.box_quantity -= unit.boxes;
+                    product.other_quantity -= unit.others;
+                    product.save();
+                }
+                if (product.comes_in_others && product.comes_in_units) {
+                    // Viene por cajas, por sobres y por unidades
+                    product.box_quantity -= unit.boxes;
+                    product.other_quantity -= unit.others;
+                    product.unit_quantity -= unit.units;
+                    product.save();
+                }
+            }
+
+            if (!product.comes_in_boxes && product.comes_in_others) {
+                if (product.comes_in_units) {
+                    // Viene por sobres y unidades
+                    product.other_quantity -= unit.others;
+                    product.unit_quantity -= unit.units;
+                    await product.save();
+                } 
+            }
+
+            if (!product.comes_in_boxes && !product.comes_in_others && product.comes_in_units) {
+                product.unit_quantity -= unit.units;
+                await product.save();
+            }
+
             res.sendStatus(200);
         } catch(err) {
             res.status(500).send({error: err.message});

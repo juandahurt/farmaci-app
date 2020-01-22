@@ -2,6 +2,7 @@ const ERRORS = require('./product.errors');
 const Product = require('./product.model');
 const Category = require('../category/category.model');
 const sequelizeDB = require('../../../sequelize');
+const Unit = require('../unit/unit.model');
 
 const productController = {
     /**
@@ -119,11 +120,21 @@ const productController = {
     async delete(req, res) {
         let id = req.params.id;
 
-        await sequelizeDB.sync();
+        try {
+            await sequelizeDB.sync();
+    
+            // Elimina las unidades del producto
+            let units = await Unit.findAll({ where: { product_id: id } });
+            units.forEach(async unit => {
+                await unit.destroy();
+            });
 
-        await Product.destroy({where: { id: id } })
-
-        res.sendStatus(200);
+            await Product.destroy({where: { id: id } });
+    
+            res.sendStatus(200);
+        } catch(err) {
+            res.status(500).send({error: err.message});
+        }
     },
     /**
      * Actualiza un producto.
