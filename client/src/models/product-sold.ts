@@ -62,6 +62,9 @@ export class ProductSold extends Object {
     get subtotal() { return this._subtotal; }
     set subtotal(value: number) { this._subtotal = value; }
 
+    get unitaryPrice() { return this._unitaryPrice; }
+    set unitaryPrice(value: number) { this._unitaryPrice = value; }
+
     get unitType() { return this._unitType; }
     set unitType(value: string) { this._unitType = value; }
 }

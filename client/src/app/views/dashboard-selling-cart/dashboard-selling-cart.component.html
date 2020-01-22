@@ -17,7 +17,7 @@
             </div>
         </form>
         <!-- Formulario de producto -->
-        <div class="pt-2 rounded-container container shadow-sm">
+        <div class="pt-2 rounded-container container text-muted shadow-sm">
             <form>
                 <div class="row">
                     <!-- Descripción -->
@@ -50,8 +50,8 @@
                     <!-- Cantidad -->
                     <div class="form-group col-3">
                         <label>Cantidad</label>
-                        <input *ngIf="productToFind.unitType == null" type="number" min="1" class="form-control rounded-pill border-0" readonly>
-                        <input *ngIf="productToFind.unitType != null" (change)="quantityOnChange()" [(ngModel)]="productToFind.quantity" name="quantity" type="number" min="1" class="form-control rounded-pill bg-light shadow-sm border-0">
+                        <input *ngIf="productToFind.unitType == null" type="number" class="form-control rounded-pill border-0" readonly>
+                        <input *ngIf="productToFind.unitType != null" [(ngModel)]="productToFind.quantity" name="quantity" type="number" min="1" class="form-control rounded-pill bg-light shadow-sm border-0">
                     </div>
                     <!-- Subtotal -->
                     <div class="form-group col-4">
@@ -59,7 +59,10 @@
                         <input [(ngModel)]="productToFind.subtotal" name="subtotal" type="text" class="form-control rounded-pill border-0" readonly>
                     </div>
                     <div class="col-1 form-group text-center pt-2">
-                        <button class="shadow-sm btn btn-outline-secondary rounded-circle mt-4" (click)="addProductToCart()">
+                        <button *ngIf="productToFind.product.id == ''" class="shadow-sm btn btn-outline-secondary rounded-circle mt-4" disabled>
+                            <fa-icon [icon]="faArrowDown"></fa-icon>
+                        </button>
+                        <button *ngIf="productToFind.product.id != ''" class="shadow-sm btn btn-outline-secondary rounded-circle mt-4" (click)="addProductToCart()">
                             <fa-icon [icon]="faArrowDown"></fa-icon>
                         </button>
                     </div>
@@ -70,23 +73,27 @@
         <table class="rounded-container mt-4 table shadow-sm table-borderless">
             <thead class="text-muted">
                 <tr class="bg-light">
-                    <th scope="col">Identificador</th>
                     <th scope="col">Descripción</th>
                     <th scope="col">Valor Unitario</th>
+                    <th scope="col">Tipo Unidad</th>
                     <th scope="col">Cantidad</th>
                     <th scope="col">Subtotal</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="text-muted">asd</td>
-                    <td class="text-muted">fa</td>
-                    <td class="text-muted">asd</td>
-                    <td class="text-muted">12</td>
-                    <td class="text-muted">432200</td>
+                <tr *ngFor="let productSold of productsSold">
+                    <td class="text-muted">{{productSold.product.description}}</td>
+                    <td class="text-muted">{{productSold.unitaryPrice}}</td>
+                    <td class="text-muted">{{productSold.unitType}}</td>
+                    <td class="text-muted">{{productSold.quantity}}</td>
+                    <td class="text-muted">{{productSold.subtotal}}</td>
                 </tr>
             </tbody>
         </table>
+        <!-- Total -->
+        <div class="row col-9 total">
+            <h3 class="mx-auto text-muted">Total: {{total}}</h3>
+        </div>
     </div>
     <!-- Finalizar Venta -->
     <button class="float btn btn-success shadow" (click)="checkout()">
