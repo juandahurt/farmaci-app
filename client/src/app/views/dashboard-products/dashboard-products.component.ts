@@ -85,23 +85,25 @@ export class DashboardProductsComponent implements OnInit {
   public async setProducts() {
     let res = await this.productService.list().toPromise();
     let products = res as Array<any>;
-    this.PRODUCTS = new Array<Product>();
+    if (products.length > 0) {
+      this.PRODUCTS = new Array<Product>();
 
-    products.forEach(product => {
-      let p = new Product();
-      p.id = product.id;
-      p.description = product.description;
-      if (!product.category) {
-        // El producto no tiene categoría
-        let cat = new Category();
-        cat.name = "";
-        p.category = cat;
-      } else {
-        p.category = new Category().fromJSON(product.category);
-      }
+      products.forEach(product => {
+        let p = new Product();
+        p.id = product.id;
+        p.description = product.description;
+        if (!product.category) {
+          // El producto no tiene categoría
+          let cat = new Category();
+          cat.name = "";
+          p.category = cat;
+        } else {
+          p.category = new Category().fromJSON(product.category);
+        }
 
-      this.PRODUCTS.push(p);
-    });
+        this.PRODUCTS.push(p);
+      }); 
+    }
   }
 
   /**

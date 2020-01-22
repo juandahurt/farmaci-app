@@ -17,24 +17,28 @@
                 </form>
             </div>
         </div>
+        <div *ngIf="!products">
+            <span class="text-muted">No ha registrado ningún producto...</span>
+        </div>
         <!-- Tabla de Productos -->
-        <table class="table shadow-sm table-borderless table-hover">
-            <thead class="text-muted">
-                <tr class="bg-light">
-                    <th scope="col" sortable="id" (sort)="onSort($event)">Identificador</th>
-                    <th scope="col" sortable="description" (sort)="onSort($event)">Descripción</th>
-                    <th scope="col" sortable="categoryName" (sort)="onSort($event)">Categoría</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let product of products" (click)="productOnClick(product.id)">
-                    <td class="text-muted">{{ product.id }}</td>
-                    <td class="text-muted">{{ product.description }}</td>
-                    <td class="text-muted">{{ product.category.name }}</td>
-                </tr>
-            </tbody>
-        </table>
-
+        <div *ngIf="products">
+            <table class="table shadow-sm table-borderless table-hover">
+                <thead class="text-muted">
+                    <tr class="bg-light">
+                        <th scope="col" sortable="id" (sort)="onSort($event)">Identificador</th>
+                        <th scope="col" sortable="description" (sort)="onSort($event)">Descripción</th>
+                        <th scope="col" sortable="categoryName" (sort)="onSort($event)">Categoría</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of products" (click)="productOnClick(product.id)">
+                        <td class="text-muted">{{ product.id }}</td>
+                        <td class="text-muted">{{ product.description }}</td>
+                        <td class="text-muted">{{ product.category.name }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <app-add-product-form></app-add-product-form>
     </div>
 </div>

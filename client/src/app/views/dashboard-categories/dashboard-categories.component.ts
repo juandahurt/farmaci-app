@@ -64,16 +64,18 @@ export class DashboardCategoriesComponent implements OnInit {
     try {
       let res = await this.categoryService.list().toPromise();
       let categories = res as Array<any>;
-      this.categories = new Array<Category>();
+      if (categories.length > 0) {
+        this.categories = new Array<Category>();
 
-      categories.forEach(category => {
-        let cat = new Category();
-
-        cat.id = category.id;
-        cat.name = category.name;
-
-        this.categories.push(cat);
-      });
+        categories.forEach(category => {
+          let cat = new Category();
+  
+          cat.id = category.id;
+          cat.name = category.name;
+  
+          this.categories.push(cat);
+        });
+      }
     } catch(err) {
       ErrorHandler.showError(err);
     }

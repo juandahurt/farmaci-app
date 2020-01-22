@@ -18,6 +18,9 @@
                 </form>
             </div>
         </div>
+        <div *ngIf="!categories">
+            <span class="text-muted">No ha registrado ninguna categoría...</span>
+        </div>
         <!-- Categorías -->
         <div *ngFor="let category of categories" class="container mb-4 p-0">
             <div>
