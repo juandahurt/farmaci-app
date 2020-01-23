@@ -99,11 +99,19 @@ const unitController = {
      * @param {object} res - respuesta del servidor
      */
     async list(req, res) {
-        await sequelizeDB.sync();
+        let id = req.params.id;
 
-        let units = await Unit.findAll();
+        try {
+            await sequelizeDB.sync();
 
-        res.status(200).send(units);
+            let units = await Unit.findAll({ where: {
+                product_id: id
+            }});
+    
+            res.status(200).send(units);
+        } catch (err) {
+            res.status(500).send({error: err.message});
+        }
     },
     /**
      * Elimina una unidad de un producto.

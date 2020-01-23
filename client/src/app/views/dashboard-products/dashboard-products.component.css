@@ -32,6 +32,6 @@ table th, table td{
 
 table  tbody{
   display: block;
-  height: 400px;
+  max-height: 400px;
   overflow: auto;
 }
