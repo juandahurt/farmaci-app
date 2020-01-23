@@ -125,6 +125,9 @@ export class DashboardSellingCartComponent implements OnInit {
     }
   }
 
+  /**
+   * Setea el precio unitario al producto encontrado
+   */
   private setUnitaryPrice() {
     let product = this.productToFind.product;
     switch (this.productToFind.unitType) {
@@ -146,6 +149,36 @@ export class DashboardSellingCartComponent implements OnInit {
   private updateProductSoldSubtotal(product: ProductSold) {
     product.subtotal = product.unitaryPrice * product.quantity;
   } 
+
+  /**
+   * Valida que la cantidad de unidades ingresadas están disponibles
+   */
+  private validateEnoughUnits(unitType: string, quantity: number) {
+    let notifier = new Notification();
+    let product = this.productToFind.product;
+
+    switch (unitType) {
+      case this.UnitRef.UnitType.BOX:
+        if (quantity > product.boxQuantity) {
+          notifier.showError('No hay suficientes cajas en bodega');
+          return false;
+        }
+        break;
+      case this.UnitRef.UnitType.OTHER:
+        if (quantity > product.otherQuantity) {
+          notifier.showError('No hay suficientes sobres en bodega');
+          return false;
+        }
+        break;
+      case this.UnitRef.UnitType.UNIT:
+        if (quantity > product.unitQuantity) {
+          notifier.showError('No hay suficientes unidades en bodega');
+          return false;
+        }
+        break;
+    }
+    return true;
+  }
 
   /**
    * Añade un producto al carro de venta.
@@ -170,27 +203,8 @@ export class DashboardSellingCartComponent implements OnInit {
           found = true;
           // Validar si la cantidad requerida se encuentra disponible
           let quantity = this.productToFind.quantity + this.productsSold[i].quantity;
+          if (!this.validateEnoughUnits(unitType, quantity)) { return; }
 
-          switch (unitType) {
-            case this.UnitRef.UnitType.BOX:
-              if (quantity > this.productToFind.product.boxQuantity) {
-                notifier.showError('No hay suficientes cajas en bodega');
-                return;
-              }
-              break;
-            case this.UnitRef.UnitType.OTHER:
-              if (quantity > this.productToFind.product.otherQuantity) {
-                notifier.showError('No hay suficientes sobres en bodega');
-                return;
-              }
-              break;
-            case this.UnitRef.UnitType.UNIT:
-              if (quantity > this.productToFind.product.unitQuantity) {
-                notifier.showError('No hay suficientes unidades en bodega');
-                return;
-              }
-              break;
-          }
           // Se agrega la cantidad
           this.productsSold[i].quantity = quantity;
           this.updateProductSoldSubtotal(this.productsSold[i]);
@@ -199,7 +213,10 @@ export class DashboardSellingCartComponent implements OnInit {
       }
     }
 
-    if (!found) { this.productsSold.push(this.productToFind); }
+    if (!found) {
+      if (!this.validateEnoughUnits(this.productToFind.unitType, this.productToFind.quantity)) { return; }
+      this.productsSold.push(this.productToFind); 
+    }
     this.updateTotal();
 
     this.productToFind = new ProductSold();
