@@ -51,7 +51,7 @@
                     <div class="form-group col-3">
                         <label>Cantidad</label>
                         <input *ngIf="productToFind.unitType == null" type="number" class="form-control rounded-pill border-0" readonly>
-                        <input *ngIf="productToFind.unitType != null" [(ngModel)]="productToFind.quantity" name="quantity" type="number" min="1" class="form-control rounded-pill bg-light shadow-sm border-0">
+                        <input *ngIf="productToFind.unitType != null" (change)="quantityOnChange()" [(ngModel)]="productToFind.quantity" name="quantity" type="number" min="1" class="form-control rounded-pill bg-light shadow-sm border-0">
                     </div>
                     <!-- Subtotal -->
                     <div class="form-group col-4">
