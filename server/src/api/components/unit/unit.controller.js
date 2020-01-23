@@ -71,11 +71,30 @@ const unitController = {
             }
 
             if (!product.comes_in_boxes && !product.comes_in_others && product.comes_in_units) {
+                // Viene solamente por unidades
                 if (!units) { 
                     res.status(422).send({error: ERRORS.INVALID_UNITS}); 
                     return;
                 }
                 product.unit_quantity += units;
+                await product.save();
+            }
+            if (!product.comes_in_boxes && product.comes_in_others && !product.comes_in_units) {
+                // Viene solamente por sobres
+                if (!others) { 
+                    res.status(422).send({error: ERRORS.INVALID_OTHERS}); 
+                    return;
+                }
+                product.other_quantity += others;
+                await product.save();
+            }
+            if (product.comes_in_boxes && !product.comes_in_others && !product.comes_in_units) {
+                // Viene solamente por cajas
+                if (!boxes) { 
+                    res.status(422).send({error: ERRORS.INVALID_BOXES}); 
+                    return;
+                }
+                product.box_quantity += boxes;
                 await product.save();
             }
 
