@@ -18,7 +18,7 @@ table th, table td{
 
 table  tbody{
   display: block;
-  height: 65vh;
+  max-height: 65vh;
   overflow: auto;
 }
 
