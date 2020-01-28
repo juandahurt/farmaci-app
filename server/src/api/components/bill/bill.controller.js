@@ -2,6 +2,7 @@ const Bill = require('./bill.model');
 const Unit = require('../unit/unit.model');
 const Product = require('../product/product.model');
 const ProductSold = require('../product-sold/product-sold.model');
+const Dimension = require('../dimension/dimension.model');
 
 const billController = {
     /**
@@ -54,6 +55,11 @@ const billController = {
                     // Obtiene la cantidad en bodega del tipo de unidad
                     let stock = unitToExpire[unitType];
 
+                    // Dimensiones del producto
+                    let dimension = Dimension.findOne({ 
+                        where: { product_id: product.id }
+                    });
+
                     switch (numTypes) { 
                         case 1:
                             //
@@ -89,7 +95,103 @@ const billController = {
                             //
                             // El producto viene en dos tipos de unidad
                             //
-                            throw new Error('No se ha implementado dos tipos de unidades');
+                            var big, small, big_quantity, small_quantity, small_sold, small_sold_atr;
+                            // big:            Tipo de unidad que contiene la unidad más pequena. 
+                            // small:          Tipo de unidad más pequeña.
+                            // big_quantity:   Nombre del atribuo de la cantidad total en bodega 
+                            //                 del tipo de unidad más grande.
+                            // small_quantity: Nombre del atribuo de la cantidad total en bodega 
+                            //                 del tipo de unidad más grande.
+                            // small_sold:     Cantidad vendidad del tipo de unidad más pequeña
+                            //                 (dentro de la unidad más próxima a expirar).
+                            // small_sold_atr: Nombre del atributo que contiene la cantidad vendida
+                            //                 del tipo de unidad más pequeña.
+
+                            if (product.comes_in_boxes && product.comes_in_others) {
+                                big = 'boxes';
+                                small = 'others';
+                                big_quantity = 'box_quantity';
+                                small_quantity = 'other_quantity';
+                                small_sold = unitToExpire.others_sold;
+                                small_sold_atr = 'others_sold';
+                            } else if (product.comes_in_boxes && product.comes_in_units) {
+                                big = 'boxes';
+                                small = 'units';
+                                big_quantity = 'box_quantity';
+                                small_quantity = 'unit_quantity';
+                                small_sold = unitToExpire.units_sold;
+                                small_sold_atr = 'units_sold';
+                            } else {
+                                big = 'others';
+                                small = 'units';
+                                big_quantity = 'other_quantity';
+                                small_quantity = 'unit_quantity';
+                                small_sold = unitToExpire.units_sold;
+                                small_sold_atr = 'units_sold';
+                            }
+
+                            othersSold = unitToExpire.others_sold;
+                            if (unitType == big) {
+                                // Se van a restar unidades del tipo de unidad más grande
+                                if (quantity - unitsRemoved < stock) {
+                                    unitToExpire[unitType] = stock - (quantity - unitsRemoved);
+                                    unitToExpire[small] -= (quantity - unitsRemoved) * dimension[small];
+                                    await unitToExpire.save();
+                                    product[small_quantity] -= (quantity - unitsRemoved) * dimension[small];
+                                    product[big_quantity] -= (quantity - unitsRemoved);
+                                    unitsRemoved = quantity;
+                                } else {
+                                    unitsRemoved += stock;
+                                    if (small_sold == 0) {
+                                        await unitToExpire.destroy();
+                                    } else {
+                                        unitToExpire[big] = 0;
+                                        await unitToExpire.save();
+                                    }
+                                    product[small_quantity] -= stock * dimension[small];
+                                    product[big_quantity] -= stock;
+                                }
+                            } else if (unitType == small) {
+                                // Se van a restar unidades del tipo de unidad más pequeña
+                                if (small_sold == 0) {
+                                    product[big_quantity]--;
+                                    unitToExpire[big]--;
+                                    await unitToExpire.save();
+                                }
+                                if (dimension[small] - small_sold < quantity) {
+                                    // Se necesita más de una unidad grande
+                                    unitsRemoved += dimension[small] - small_sold;
+                                    product[small] -= dimension[small] - small_sold;
+                                    if (unitToExpire[big] == 0) {
+                                        await unitToExpire.destroy();
+                                    } else {
+                                        unitToExpire[small] -= dimension[small] - small_sold;
+                                        unitToExpire[small_sold_atr] = 0;
+                                        await unitToExpire.save();
+                                    }
+                                } else if (small_sold + quantity == dimension[small]) {
+                                    unitToExpire[small_sold_atr] = 0;
+                                    product[small_quantity] -= quantity;
+                                    unitsRemoved = quantity;
+                                    unitToExpire[small] -= quantity - unitsRemoved;
+                                    if (unitToExpire[big] == 0) {
+                                        await unitToExpire.destroy();
+                                    } else {
+                                        unitToExpire[big]--;
+                                        product[big_quantity]--;
+                                        await unitToExpire.save();
+                                    }
+                                } else {
+                                    // Esta unidad es suficiente
+                                    unitToExpire[small_sold_atr] += quantity - unitsRemoved;
+                                    unitToExpire[small] -= quantity - unitsRemoved;
+                                    await unitToExpire.save();
+                                    product[small_quantity] -= quantity - unitsRemoved;
+                                    unitsRemoved = quantity;
+                                }
+                            }
+                            await product.save(); // Se actualiza el producto
+                            break;
                         case 3:
                             //
                             // El producto viene en todos los tipos de unidad
