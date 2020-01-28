@@ -45,6 +45,13 @@ const unitController = {
                     product.other_quantity += others;
                     product.save();
                 }
+                if (!product.comes_in_others && product.comes_in_units) {
+                    // Viene por cajas y por unidades
+                    units = (await dimension).get('units') * boxes;
+                    product.box_quantity += boxes;
+                    product.unit_quantity += units;
+                    product.save();
+                }
                 if (product.comes_in_others && product.comes_in_units) {
                     // Viene por cajas, por sobres y por unidades
                     others = (await dimension).get('others') * boxes;
@@ -160,6 +167,12 @@ const unitController = {
                     // Viene por cajas y por sobres
                     product.box_quantity -= unit.boxes;
                     product.other_quantity -= unit.others;
+                    product.save();
+                }
+                if (!product.comes_in_others && product.comes_in_units) {
+                    // Viene por cajas y por unidades
+                    product.box_quantity -= unit.boxes;
+                    product.unit_quantity -= unit.units;
                     product.save();
                 }
                 if (product.comes_in_others && product.comes_in_units) {

@@ -10,7 +10,7 @@
                 <input [(ngModel)]="dimension.others" name="others" class="form-control bg-light border-0 shadow-sm mb-3" min="1" type="number">
             </div>
             <!-- Viene por unidades y cajas -->
-            <div *ngIf="product.comesInBoxes && product.comesInUnits && !product.comesInUnits" class="form-group">
+            <div *ngIf="product.comesInBoxes && product.comesInUnits && !product.comesInOthers" class="form-group">
                 <label>Cantidad de Unidades por Caja</label>
                 <input [(ngModel)]="dimension.units" name="units" class="form-control bg-light border-0 shadow-sm mb-3" min="1" type="number">
             </div>

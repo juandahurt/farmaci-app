@@ -5,14 +5,6 @@ const Bill = require('../bill/bill.model');
 
 class ProductSold extends Sequelize.Model {}
 ProductSold.init({
-    product_id: {
-        type: Sequelize.STRING,
-        primaryKey: true
-    },
-    bill_id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true
-    },
     quantity: {
         type: Sequelize.INTEGER,
         allowNull: false
@@ -22,9 +14,9 @@ ProductSold.init({
         allowNull: false
     }
 }, 
-{ sequelize: sequelizeDB, modelName: 'productSold' });
+{ sequelize: sequelizeDB, modelName: 'productSold', freezeTableName: true });
 
 ProductSold.belongsTo(Product, { foreignKey: 'product_id' });
-ProductSold.belongsTo(Bill, { foreignKey: 'bill_id' });
+ProductSold.belongsTo(Bill, { foreignKey: 'bill_id', primaryKey: 'bill_id' });
 
 module.exports = ProductSold;

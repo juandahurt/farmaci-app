@@ -11,11 +11,11 @@ Unit.init({
     },
     others_sold: {
         type: Sequelize.INTEGER,
-        allowNull: true
+        defaultValue: 0
     },
     units_sold: {
         type: Sequelize.INTEGER,
-        allowNull: true
+        defaultValue: 0
     },
     boxes: {
         type: Sequelize.INTEGER,
