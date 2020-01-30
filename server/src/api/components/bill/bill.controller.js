@@ -56,7 +56,7 @@ const billController = {
                     let stock = unitToExpire[unitType];
 
                     // Dimensiones del producto
-                    let dimension = Dimension.findOne({ 
+                    let dimension = await Dimension.findOne({ 
                         where: { product_id: product.id }
                     });
 
@@ -196,7 +196,33 @@ const billController = {
                             //
                             // El producto viene en todos los tipos de unidad
                             //
-                            throw new Error('No se ha implementado tres tipos de unidades');
+                            let othersSold = unitToExpire.others_sold;
+                            let unitsSold = unitToExpire.units_sold;
+                            
+                            if (unitType == 'boxes') {
+                                if (quantity - unitsRemoved < stock) {
+                                    // Solo se va a utilizar la unidad actual
+                                    unitToExpire.boxes -= quantity - unitsRemoved;
+                                    product.box_quantity -= (quantity - unitsRemoved);
+
+                                    product.other_quantity -= (quantity - unitsRemoved) * dimension.others;
+                                    unitToExpire.others -= (quantity - unitsRemoved) * dimension.others;
+
+                                    product.unit_quantity -= (quantity - unitsRemoved) * dimension.others * dimension.units;
+                                    unitToExpire.units -= (quantity - unitsRemoved) * dimension.others * dimension.units;
+
+                                    unitsRemoved = quantity;
+                                    await unitToExpire.save();
+                                } else {
+                                    unitsRemoved += stock;
+                                    if (unitsSold == 0 && othersSold == 0) { await unitToExpire.destroy(); }
+                                    product.other_quantity -= stock * dimension.others;
+                                    product.unit_quantity -= stock * dimension.others * dimension.units;
+                                    product.box_quantity -= stock;
+                                }
+                            }
+                            await product.save(); // Se actualiza el producto
+                            break;
                         default:
                             // En caso que numTypes = 0. ¡Nunca debería llegar aquí!
                             res.status(500).send({});
