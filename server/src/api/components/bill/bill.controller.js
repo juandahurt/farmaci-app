@@ -255,7 +255,45 @@ const billController = {
                                     unitsRemoved = quantity;
                                     await unitToExpire.save();
                                 }
+                            } else if (unitType == 'units') {
+                                if (unitsSold == 0) {
+                                    if (othersSold == 0 && product.box_quantity > 0) { product.box_quantity--; }
+                                    unitToExpire.others_sold++;
+                                    product.other_quantity--;
+                                    unitToExpire.others--;
+                                    unitToExpire.boxes--;
+                                    await unitToExpire.save();
+                                }
+                                if (dimension.units - unitsSold < quantity) {
+                                    // Necesita más de un sobre
+                                    unitsRemoved += dimension.units - unitsSold;
+                                    product.unit_quantity -= dimension.units - unitsSold;
+                                    unitToExpire.units_sold = 0;
+                                    unitToExpire.units -= dimension.units - unitsSold;
+                                    await unitToExpire.save();
+                                    if (unitToExpire.boxes == 0) { await unitToExpire.destroy(); }
+                                } else if (unitsSold + quantity == dimension.units) {
+                                    // Se elimina el sobre
+                                    unitToExpire.units_sold = 0;
+                                    unitToExpire.others_sold++;
+                                    product.unit_quantity -= quantity;
+                                    unitToExpire.units -= quantity - unitsRemoved;
+                                    unitsRemoved = quantity;
+                                    await unitToExpire.save();
+                                    if (boxes == 0 && unitToExpire.others_sold == dimension.others) {
+                                        unitToExpire.others_sold = 0;
+                                        await unitToExpire.destroy();
+                                    }
+                                } else {
+                                    // El sobre actual es suficiente
+                                    unitToExpire.units_sold += quantity - unitsRemoved;
+                                    unitToExpire.units -= quantity - unitsRemoved;
+                                    product.unit_quantity -= (quantity - unitsRemoved);
+                                    unitsRemoved = quantity;
+                                    unitToExpire.save();
+                                }
                             }
+                            
                             await product.save(); // Se actualiza el producto
                             break;
                         default:
