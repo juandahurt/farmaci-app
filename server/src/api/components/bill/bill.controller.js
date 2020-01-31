@@ -220,6 +220,41 @@ const billController = {
                                     product.unit_quantity -= stock * dimension.others * dimension.units;
                                     product.box_quantity -= stock;
                                 }
+                            } else if (unitType == 'others') {
+                                if (othersSold == 0) {
+                                    if (product.box_quantity > 0) { product.box_quantity--; }
+                                    unitToExpire.boxes--;
+                                    await unitToExpire.save();
+                                }
+                                if (dimension.others - othersSold < quantity) {
+                                    // Se necesitan dos cajas
+                                    unitsRemoved += dimension.others - othersSold;
+                                    product.other_quantity -= dimension.others - othersSold;
+                                    unitToExpire.others -= dimension.others - othersSold;
+                                    product.unit_quantity -= (dimension.others - othersSold) * dimension.units;
+                                    unitToExpire.units -= (dimension.others - othersSold) * dimension.units;
+                                    unitToExpire.units_sold = 0;
+                                    await unitToExpire.save();
+                                    if (unitsSold == 0 && boxes == 0) { await unitToExpire.destroy(); }
+                                } else if (unitsSold + quantity == dimension.others) {
+                                    unitToExpire.others_sold = 0;
+                                    product.other_quantity -= quantity;
+                                    unitToExpire.others -= quantity - unitsRemoved;
+                                    product.unit_quantity -= quantity * dimension.units;
+                                    unitToExpire.units -= (quantity - unitsRemoved) * dimension.units;
+                                    unitsRemoved = quantity;
+                                    await unitToExpire.save();
+                                    if (boxes == 0 && unitsSold == 0) { await unitToExpire.destroy(); }
+                                } else {
+                                    // La caja actual es suficiente
+                                    unitToExpire.others_sold += quantity - unitsRemoved;
+                                    product.other_quantity -= quantity - unitsRemoved;
+                                    unitToExpire.others -= quantity - unitsRemoved;
+                                    product.unit_quantity -= (quantity - unitsRemoved) * dimension.units;
+                                    unitToExpire.units -= (quantity - unitsRemoved) * dimension.units;
+                                    unitsRemoved = quantity;
+                                    await unitToExpire.save();
+                                }
                             }
                             await product.save(); // Se actualiza el producto
                             break;
