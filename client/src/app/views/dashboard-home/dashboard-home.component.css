@@ -1,0 +1,16 @@
+.rounded-container {
+    border-radius: 15px;
+}
+
+.scrollable {
+    overflow-y: auto;
+    height: 200vh;
+}
+
+p {
+    font-size: 20px;
+}
+
+.chart-wrapper {
+    max-height: 20px;
+}

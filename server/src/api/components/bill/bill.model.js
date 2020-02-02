@@ -7,6 +7,9 @@ Bill.init({
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true
+    },
+    total: {
+        type: Sequelize.INTEGER
     }
 }, 
 { sequelize: sequelizeDB, modelName: 'bill' });

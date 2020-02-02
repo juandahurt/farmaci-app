@@ -2,7 +2,11 @@
     <div class="container bg-light text-center py-4">
         <h4 class="text-muted">Menú</h4>
     </div>
-    <button class="btn btn-primary text-light">
+    <button *ngIf="!userInHome" class="btn btn-primary text-light" (click)="homeOnClick()">
+        <fa-icon [icon]="faHome" class="mr-2"></fa-icon>
+        Inicio
+    </button>
+    <button *ngIf="userInHome" class="btn btn-primary text-light active" (click)="homeOnClick()">
         <fa-icon [icon]="faHome" class="mr-2"></fa-icon>
         Inicio
     </button>

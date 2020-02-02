@@ -1,0 +1,73 @@
+<div class="row col-12 p-0">
+    <!-- Sidebar -->
+    <app-sidebar class="col-2"></app-sidebar>
+    <div class="scrollable container pl-3 col-10">
+        <div class="row ml-3 pt-4 mr-3 mb-3">
+            <h2>Inicio</h2>
+            <div class="ml-auto">
+                <select [(ngModel)]="dateNumber" name="date" class="rounded-pill custom-select bg-light shadow-sm border-0" (change)="dateOnChange()">
+                    <option [ngValue]="0">Hoy</option>
+                    <option [ngValue]="1">Últimos siete días</option>
+                    <option [ngValue]="2">Últimos 30 días</option>
+                    <option [ngValue]="3">Último año</option>
+                </select>
+            </div>
+            
+        </div>
+        <div class="container ">
+            <div class="row">
+                <!-- Productos vendidos -->
+                <div class="col-6">
+                    Productos vendidos el día de hoy
+                    <table>
+                        <thead>
+                            <th>hola</th>
+                        </thead>
+                    </table>
+                    <!-- Categorías -->
+                    <div class="pt-4">
+                        <div class="chart-wrapper rounded-container p-2 shadow-sm bg-light">
+                            <canvas baseChart 
+                                [data]="doughnutChartData"
+                                [labels]="categoriesChartLabels"
+                                [chartType]="doughnutChartType">
+                            </canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 scrollable">
+                    <!-- Ingresos -->
+                    <div class="chart-wrapper rounded-container p-2 shadow-sm bg-light">
+                        <canvas baseChart 
+                            [datasets]="profitsDataSet" 
+                            [labels]="profitsLabels" 
+                            [options]="chartOptions"
+                            [legend]="lineChartLegend" 
+                            [chartType]="lineChartType" 
+                            [plugins]="lineChartPlugins">
+                        </canvas>
+                    </div>
+                    <!-- Ventas -->
+                    <div class="pt-4">
+                        <div class="chart-wrapper rounded-container p-2 shadow-sm bg-light">
+                            <canvas baseChart 
+                                [datasets]="sellsDataSet" 
+                                [labels]="sellsLabels"
+                                [options]="chartOptions"
+                                [colors]="sellsChartColors" 
+                                [legend]="lineChartLegend" 
+                                [chartType]="lineChartType" 
+                                [plugins]="lineChartPlugins">
+                            </canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-6">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

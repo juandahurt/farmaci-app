@@ -12,6 +12,10 @@ ProductSold.init({
     unit_type: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    subtotal: {
+        type: Sequelize.INTEGER,
+        allowNull: false
     }
 }, 
 { sequelize: sequelizeDB, modelName: 'productSold', freezeTableName: true });

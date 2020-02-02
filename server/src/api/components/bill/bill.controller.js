@@ -235,7 +235,7 @@ const billController = {
                                     unitToExpire.units -= (dimension.others - othersSold) * dimension.units;
                                     unitToExpire.units_sold = 0;
                                     await unitToExpire.save();
-                                    if (unitsSold == 0 && boxes == 0) { await unitToExpire.destroy(); }
+                                    if (unitsSold == 0 && unitToExpire.boxes == 0) { await unitToExpire.destroy(); }
                                 } else if (unitsSold + quantity == dimension.others) {
                                     unitToExpire.others_sold = 0;
                                     product.other_quantity -= quantity;
@@ -244,7 +244,7 @@ const billController = {
                                     unitToExpire.units -= (quantity - unitsRemoved) * dimension.units;
                                     unitsRemoved = quantity;
                                     await unitToExpire.save();
-                                    if (boxes == 0 && unitsSold == 0) { await unitToExpire.destroy(); }
+                                    if (unitToExpire.boxes == 0 && unitsSold == 0) { await unitToExpire.destroy(); }
                                 } else {
                                     // La caja actual es suficiente
                                     unitToExpire.others_sold += quantity - unitsRemoved;
@@ -280,7 +280,7 @@ const billController = {
                                     unitToExpire.units -= quantity - unitsRemoved;
                                     unitsRemoved = quantity;
                                     await unitToExpire.save();
-                                    if (boxes == 0 && unitToExpire.others_sold == dimension.others) {
+                                    if (unitToExpire.boxes == 0 && unitToExpire.others_sold == dimension.others) {
                                         unitToExpire.others_sold = 0;
                                         await unitToExpire.destroy();
                                     }
@@ -305,15 +305,20 @@ const billController = {
 
                 // Se registra cada producto dentro de una nueva factura
                 let bill = await Bill.create();
+                var total = 0;
                 productsSold.forEach(async productSold => {
+                    total += productSold._subtotal;
                     await ProductSold.create({
                         product_id: productSold._product._id,
                         bill_id: bill.id,
                         quantity: productSold._quantity,
-                        unit_type: productSold._unitType
+                        unit_type: productSold._unitType,
+                        subtotal: productSold._subtotal
                     });
                 });
-                
+                bill.total = total;
+                await bill.save();
+
                 res.sendStatus(200);
             } catch (err) {
                 res.status(500).send({error: err.message});

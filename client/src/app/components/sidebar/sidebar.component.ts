@@ -34,6 +34,11 @@ export class SidebarComponent implements OnInit {
   public url: string;
 
   /**
+   * ¿El usuario se encuentra dentro del inicio?
+   */
+  public userInHome: boolean;
+
+  /**
    * ¿El usuario se encuentra dentro de las categorías?
    */
   public userInCategories: boolean;
@@ -52,6 +57,9 @@ export class SidebarComponent implements OnInit {
     this.url = router.url;
     
     switch (this.url) {
+      case "/home":
+        this.userInHome = true;
+        break;
       case "/categories":
         this.userInCategories = true;
         break;
@@ -65,6 +73,13 @@ export class SidebarComponent implements OnInit {
   } 
 
   ngOnInit() {
+  }
+
+  /**
+   * Es invocada al dar click en Productos
+   */
+  public homeOnClick() {
+    this.router.navigateByUrl("home");
   }
 
   /**
