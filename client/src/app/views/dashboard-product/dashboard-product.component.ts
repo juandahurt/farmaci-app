@@ -239,7 +239,11 @@ export class DashboardProductComponent implements OnInit {
    */
   public cancelOnClick() {
     this.isEditable = false;
-    this.setProduct();
+    this.setProduct().then(() => { 
+      this.setDimension(); 
+      this.setUnits();
+    });
+    this.setCategories();
   }
 
   /**
