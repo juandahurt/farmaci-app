@@ -20,18 +20,3 @@ table th:hover {
 table {
     border-radius: 15px;
 }
-
-table thead tr{
-    display: block;
-}
-
-table th, table td{
-    width: 10%; 
-}
-
-
-table  tbody{
-  display: block;
-  max-height: 400px;
-  overflow: auto;
-}
