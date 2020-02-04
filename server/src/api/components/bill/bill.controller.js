@@ -129,8 +129,6 @@ const billController = {
                                 small_sold = unitToExpire.units_sold;
                                 small_sold_atr = 'units_sold';
                             }
-
-                            othersSold = unitToExpire.others_sold;
                             if (unitType == big) {
                                 // Se van a restar unidades del tipo de unidad más grande
                                 if (quantity - unitsRemoved < stock) {
@@ -198,7 +196,7 @@ const billController = {
                             //
                             let othersSold = unitToExpire.others_sold;
                             let unitsSold = unitToExpire.units_sold;
-                            
+
                             if (unitType == 'boxes') {
                                 if (quantity - unitsRemoved < stock) {
                                     // Solo se va a utilizar la unidad actual
