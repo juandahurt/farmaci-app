@@ -2,15 +2,10 @@
     border-radius: 15px;
 }
 
-.scrollable {
-    overflow-y: auto;
-    height: 200vh;
+table {
+    border-radius: 15px;
 }
 
-p {
-    font-size: 20px;
-}
-
-.chart-wrapper {
-    max-height: 20px;
+.chart-wrapper {
+    height: 40vh;
 }
