@@ -1,0 +1,11 @@
+.rounded-container {
+    border-radius: 15px;
+}
+
+table {
+    border-radius: 15px;
+}
+
+.chart-wrapper {
+    height: 40vh;
+}

@@ -25,6 +25,10 @@ import { DimensionSharedService } from 'src/services/dimension.shared.service';
 import { AddUnitsFormComponent } from './components/add-units-form/add-units-form.component';
 import { UnitService } from 'src/services/unit.service';
 import { UnitSharedService } from 'src/services/unit.shared.service';
+import { BillService } from 'src/services/bill.service';
+import { DashboardComponent } from './views/dashboard-home/dashboard-home.component';
+import { ChartsModule } from 'ng2-charts';
+import { StatsService } from 'src/services/stats.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,8 @@ import { UnitSharedService } from 'src/services/unit.shared.service';
     DashboardProductComponent,
     DashboardSellingCartComponent,
     AddDimensionsFormComponent,
-    AddUnitsFormComponent
+    AddUnitsFormComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +54,8 @@ import { UnitSharedService } from 'src/services/unit.shared.service';
     BrowserAnimationsModule,
     NgbModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartsModule
   ],
   providers: [
     CategoryService,
@@ -57,7 +63,9 @@ import { UnitSharedService } from 'src/services/unit.shared.service';
     DimensionService,
     DimensionSharedService,
     UnitService,
-    UnitSharedService
+    UnitSharedService,
+    BillService,
+    StatsService
   ],
   bootstrap: [AppComponent]
 })

@@ -7,6 +7,7 @@ import { ProductService } from 'src/services/product.service';
 import { ErrorHandler } from 'src/helpers/error.helper';
 import { Product } from 'src/models/product';
 import { Unit } from 'src/models/unit';
+import { BillService } from 'src/services/bill.service';
 
 @Component({
   selector: 'app-dashboard-selling-cart',
@@ -53,7 +54,8 @@ export class DashboardSellingCartComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private productService: ProductService
+    private productService: ProductService,
+    private billService: BillService
     ) {
     this.searchForm = this.formBuilder.group({
       id: ['', Validators.required]
@@ -236,7 +238,19 @@ export class DashboardSellingCartComponent implements OnInit {
   /**
    * Invocada al dar click en Finalizar Venta
    */
-  public checkout() {
-    alert(JSON.stringify(this.productsSold));
+  public async checkout() {
+    let notifier = new Notification();
+    if (this.productsSold.length == 0) { 
+      notifier.showError('No ha ingresado ningún producto'); 
+      return;
+    }
+
+    try {
+      await this.billService.create(this.productsSold).toPromise();
+    } catch (err) {
+      ErrorHandler.handleError(err, 'Venta registrada exitosamente');
+      this.productsSold = new Array<ProductSold>();
+      this.updateTotal();
+    }
   }
 }

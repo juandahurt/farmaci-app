@@ -111,7 +111,7 @@
                 <input [(ngModel)]="dimension.others" name="others" class="rounded-pill form-control border-0" readonly>
             </div>
             <!-- Viene por unidades y cajas -->
-            <div *ngIf="product.comesInBoxes && product.comesInUnits && !product.comesInUnits" class="form-group col-6 row mx-auto">
+            <div *ngIf="product.comesInBoxes && product.comesInUnits && !product.comesInOthers" class="form-group col-6 row mx-auto">
                 <label>Unidades por Caja</label>
                 <input [(ngModel)]="dimension.units" name="units" class="rounded-pill form-control border-0" min="1" readonly>
             </div>

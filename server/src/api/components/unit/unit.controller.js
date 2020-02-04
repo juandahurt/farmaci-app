@@ -45,6 +45,13 @@ const unitController = {
                     product.other_quantity += others;
                     product.save();
                 }
+                if (!product.comes_in_others && product.comes_in_units) {
+                    // Viene por cajas y por unidades
+                    units = (await dimension).get('units') * boxes;
+                    product.box_quantity += boxes;
+                    product.unit_quantity += units;
+                    product.save();
+                }
                 if (product.comes_in_others && product.comes_in_units) {
                     // Viene por cajas, por sobres y por unidades
                     others = (await dimension).get('others') * boxes;
@@ -71,11 +78,30 @@ const unitController = {
             }
 
             if (!product.comes_in_boxes && !product.comes_in_others && product.comes_in_units) {
+                // Viene solamente por unidades
                 if (!units) { 
                     res.status(422).send({error: ERRORS.INVALID_UNITS}); 
                     return;
                 }
                 product.unit_quantity += units;
+                await product.save();
+            }
+            if (!product.comes_in_boxes && product.comes_in_others && !product.comes_in_units) {
+                // Viene solamente por sobres
+                if (!others) { 
+                    res.status(422).send({error: ERRORS.INVALID_OTHERS}); 
+                    return;
+                }
+                product.other_quantity += others;
+                await product.save();
+            }
+            if (product.comes_in_boxes && !product.comes_in_others && !product.comes_in_units) {
+                // Viene solamente por cajas
+                if (!boxes) { 
+                    res.status(422).send({error: ERRORS.INVALID_BOXES}); 
+                    return;
+                }
+                product.box_quantity += boxes;
                 await product.save();
             }
 
@@ -141,6 +167,12 @@ const unitController = {
                     // Viene por cajas y por sobres
                     product.box_quantity -= unit.boxes;
                     product.other_quantity -= unit.others;
+                    product.save();
+                }
+                if (!product.comes_in_others && product.comes_in_units) {
+                    // Viene por cajas y por unidades
+                    product.box_quantity -= unit.boxes;
+                    product.unit_quantity -= unit.units;
                     product.save();
                 }
                 if (product.comes_in_others && product.comes_in_units) {

@@ -1,0 +1,71 @@
+<div class="row col-12 p-0">
+    <!-- Sidebar -->
+    <app-sidebar class="col-2"></app-sidebar>
+    <div class="container pl-3 col-10">
+        <div class="row ml-3 pt-4 mr-3 mb-3">
+            <h2>Inicio</h2>
+            <div class="ml-auto">
+                <select [(ngModel)]="dateNumber" name="date" class="rounded-pill custom-select bg-light shadow-sm border-0" (change)="dateOnChange()">
+                    <option [ngValue]="0">Hoy</option>
+                    <option [ngValue]="1">Últimos siete días</option>
+                    <option [ngValue]="2">Últimos 30 días</option>
+                    <option [ngValue]="3">Último año</option>
+                </select>
+            </div>
+            
+        </div>
+        <div class="container ">
+            <div class="row">
+                <!-- Productos vendidos -->
+                <div class="col-6">
+                    <p class="text-muted">Productos vendidos el día de hoy</p>
+                    <table class="table shadow-sm table-borderless">
+                        <thead class="bg-light">
+                            <th scope="col">Producto</th>
+                            <th scope="col">Cajas</th>
+                            <th scope="col">Sobres</th>
+                            <th scope="col">Unidades</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let product of productsSold | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                                <td class="text-muted">{{product.product.description}}</td>
+                                <td class="text-muted">{{product.product.Caja}}</td>
+                                <td class="text-muted">{{product.product.Sobre}}</td>
+                                <td class="text-muted">{{product.product.Unidad}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ngb-pagination class="mr-auto" [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+                    </ngb-pagination>
+                </div>
+                <div class="col-6">
+                    <!-- Ingresos -->
+                    <div class="chart-wrapper rounded-container p-2 shadow-sm bg-light">
+                        <canvas baseChart 
+                            [datasets]="profitsDataSet" 
+                            [labels]="profitsLabels" 
+                            [options]="chartOptions"
+                            [legend]="lineChartLegend" 
+                            [chartType]="lineChartType" 
+                            [plugins]="lineChartPlugins">
+                        </canvas>
+                    </div>
+                    <!-- Ventas -->
+                    <div class="pt-4">
+                        <div class="chart-wrapper rounded-container p-2 shadow-sm bg-light">
+                            <canvas baseChart 
+                                [datasets]="sellsDataSet" 
+                                [labels]="sellsLabels"
+                                [options]="chartOptions"
+                                [colors]="sellsChartColors" 
+                                [legend]="lineChartLegend" 
+                                [chartType]="lineChartType" 
+                                [plugins]="lineChartPlugins">
+                            </canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
