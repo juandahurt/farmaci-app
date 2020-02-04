@@ -27,7 +27,7 @@
                             <th scope="col">Unidades</th>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let product of productsSold">
+                            <tr *ngFor="let product of productsSold | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                                 <td class="text-muted">{{product.product.description}}</td>
                                 <td class="text-muted">{{product.product.Caja}}</td>
                                 <td class="text-muted">{{product.product.Sobre}}</td>
@@ -35,6 +35,8 @@
                             </tr>
                         </tbody>
                     </table>
+                    <ngb-pagination class="mr-auto" [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+                    </ngb-pagination>
                 </div>
                 <div class="col-6">
                     <!-- Ingresos -->
@@ -62,11 +64,6 @@
                             </canvas>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row mb-4">
-                <div class="col-6">
-                    
                 </div>
             </div>
         </div>

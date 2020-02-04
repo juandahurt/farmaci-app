@@ -64,9 +64,29 @@ export class DashboardComponent implements OnInit {
   lineChartLegend = true;
   lineChartPlugins = [];
 
+  /**
+   * Página actual
+   */
+  public page = 1;
+
+  /**
+   * Tamaño de cada página
+   */
+  public pageSize: number;
+
+  /**
+   * Tamaño de la lista
+   */
+  public collectionSize: number;
+
   constructor(private statsService: StatsService) {
     this.dateNumber = 1;
-    this.getStats();
+    this.productsSold = new Array();
+    this.getStats().then(() => {    
+      this.collectionSize = this.productsSold.length;
+      this.page = 1;
+      this.pageSize = 5;
+    });
   }
 
   ngOnInit() {
