@@ -4,6 +4,7 @@ const Sequelize = require('sequelize');
 const dateHelper = require('../../helpers/date.helper');
 const moment = require('moment');
 const Op = Sequelize.Op;
+const Product = require('../product/product.model');
 
 const statsContoller = {
     /**
@@ -15,12 +16,12 @@ const statsContoller = {
         try {
             let date_n = req.body.date;
             var goalDate = null;
-            var n = 0;
+            var n = 0; // Contador que indica la cantidad de valores
             var period = '';
 
             switch (date_n) {
                 case 0:
-                    goalDate = dateHelper.getTodayDate();
+                    goalDate = dateHelper.getYesterdayDate();
                     n = 1;
                     period = 'days';
                     break;
@@ -85,35 +86,64 @@ const statsContoller = {
                 n--;
             }
 
-            /*// Se buscan las facturas registradas en el día de hoy
-            let today_bills = await Bill.findAll({
+            // Se buscan las unidades vendidas en el día
+            let productsSoldToday = await ProductSold.findAll({
                 where: {
                     createdAt: {
                         [Op.gt]: dateHelper.getTodayDate(),
                         [Op.lt]: new Date()
                     }
+                },
+                include: [Product]
+            });
+
+            // Se organizan las unidades vendidas por producto
+            var productsSorted = [];
+            productsSoldToday.forEach(productSold => {
+                // Se busca si el producto ya fue agregado
+                var productFound = null;
+                for(var i = 0; i < productsSorted.length; i++) {
+                    if (productsSorted[i].product.id == productSold.product_id) { 
+                        productFound = productsSorted[i]; 
+                        break;
+                    } 
+                }
+                let unitType = productSold.unit_type.toString();
+                if (!productFound) {
+                    // Se agrega el producto con el tipo de unidad y cantidad vendida.
+                    // product = { 
+                    //  'id': identificador, 
+                    //  'description': descripción de producto, 
+                    //  'tipoUnidad': cantidad vendida (pueden ser los tres tipos de unidad)
+                    //  }
+                    
+                    // Si el producto no ha sido eliminado
+                    if (productSold.product) {
+                        product = {
+                            'id': productSold.product_id,
+                            'description': productSold.product.description
+                        }
+                        product[unitType] = productSold.quantity
+                        productsSorted.push({ product });
+                    }
+                } else {
+                    if (productFound.product[unitType]) {
+                        productFound.product[unitType] += productSold.quantity;
+                    } else {
+                        // Se agrega el nuevo tipo de unidad
+                        productFound.product[unitType] = productSold.quantity;
+                    }
                 }
             });
 
-            // Se obtienen los productos vendidos el día de hoy
-            var productsSold = [];
-            today_bills.forEach(async bill => {
-                let products = await ProductSold.findAll({ 
-                    where: {
-                        bill_id: bill.id
-                    }
-                });
-                products.forEach(product => {
-                    productsSold.push(product);
-                });
-            });*/
-            
             res.status(200).send({
                 profits: profits,
-                sells: sells
+                sells: sells,
+                productsSoldToday: productsSorted
             });
         } catch (err) {
             res.status(500).send({error: err.message});
+            console.log(err.message);
         }
     }
 }

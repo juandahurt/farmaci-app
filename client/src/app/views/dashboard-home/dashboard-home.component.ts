@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChartDataSets } from 'chart.js';
 import { Label, Color, MultiDataSet } from 'ng2-charts';
 import { StatsService } from 'src/services/stats.service';
+import { ProductSold } from 'src/models/product-sold';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,6 +10,14 @@ import { StatsService } from 'src/services/stats.service';
   styleUrls: ['./dashboard-home.component.css']
 })
 export class DashboardComponent implements OnInit {
+  /**
+   * Productos Vendido el día de hoy
+   */
+  public productsSold;
+
+  /**
+   * Para controlar el rango de fecha de las estadísticas
+   */
   public dateNumber: number;
 
   /**
@@ -44,11 +53,6 @@ export class DashboardComponent implements OnInit {
   lineChartType = 'line';
 
   /**
-   * Gráfico en forma de dona
-   */
-  doughnutChartType = 'doughnut';
-
-  /**
    * Colores de la gráfica de ventas
    */
   sellsChartColors: Color[] = [
@@ -57,23 +61,11 @@ export class DashboardComponent implements OnInit {
     }
   ];
 
-  /**
-   * Etiquetas de las categorías
-   */
-  categoriesChartLabels: Label[] = ['Categoría 1', 'Categoría 2', 'Categoría 3'];
-
-  /**
-   * DataSet del gráfico de las categorías
-   */
-  doughnutChartData: MultiDataSet = [
-    [55, 25, 20]
-  ];
-
   lineChartLegend = true;
   lineChartPlugins = [];
 
   constructor(private statsService: StatsService) {
-    this.dateNumber = 0;
+    this.dateNumber = 1;
     this.getStats();
   }
 
@@ -90,6 +82,8 @@ export class DashboardComponent implements OnInit {
     this.sellsLabels = [];
     this.profitsDataSet[0].data = [];
     this.sellsDataSet[0].data = [];
+    this.productsSold = new Array<ProductSold>();
+
     res.profits.forEach(profit => {
       this.profitsLabels.push(profit.label);
       this.profitsDataSet[0].data.push(profit.data);
@@ -98,6 +92,11 @@ export class DashboardComponent implements OnInit {
       this.sellsLabels.push(sell.label);
       this.sellsDataSet[0].data.push(sell.data);
     });
+    res.productsSoldToday.forEach(productSold => {
+      this.productsSold.push(productSold);
+    });
+    console.log(this.productsSold);
+    
   }
 
   /**

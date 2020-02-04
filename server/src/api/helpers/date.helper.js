@@ -1,11 +1,17 @@
 const moment = require('moment');
 
 const dateHelper = {
-    getTodayDate() {
+    getYesterdayDate() {
         var today = new Date();
         today.setHours(0, 0, 0, 0);
         today = moment(today, 'MM-DD-YYYY');
         today.add(-1, 'days');
+        return today;
+    },
+    getTodayDate() {
+        var today = new Date();
+        today.setHours(0, 0, 0, 0);
+        today = moment(today, 'MM-DD-YYYY');
         return today;
     },
     getLastWeekDate() {
