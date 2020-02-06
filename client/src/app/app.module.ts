@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './views/login/login.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { DashboardCategoriesComponent } from './views/dashboard-categories/dashboard-categories.component';
@@ -29,11 +28,12 @@ import { BillService } from 'src/services/bill.service';
 import { DashboardComponent } from './views/dashboard-home/dashboard-home.component';
 import { ChartsModule } from 'ng2-charts';
 import { StatsService } from 'src/services/stats.service';
+import { DashboardExpensesComponent } from './views/dashboard-expenses/dashboard-expenses.component';
+import { ExpenseService } from 'src/services/expense.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     SidebarComponent,
     DashboardCategoriesComponent,
     DashboardCategoryComponent,
@@ -44,7 +44,8 @@ import { StatsService } from 'src/services/stats.service';
     DashboardSellingCartComponent,
     AddDimensionsFormComponent,
     AddUnitsFormComponent,
-    DashboardComponent
+    DashboardComponent,
+    DashboardExpensesComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +66,8 @@ import { StatsService } from 'src/services/stats.service';
     UnitService,
     UnitSharedService,
     BillService,
-    StatsService
+    StatsService,
+    ExpenseService
   ],
   bootstrap: [AppComponent]
 })

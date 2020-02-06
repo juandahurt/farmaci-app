@@ -2,36 +2,44 @@
     <div class="container bg-light text-center py-4">
         <h4 class="text-muted">Menú</h4>
     </div>
-    <button *ngIf="!userInHome" class="btn btn-primary text-light" (click)="homeOnClick()">
+    <button *ngIf="!userAtHome" class="btn btn-primary text-light" (click)="homeOnClick()">
         <fa-icon [icon]="faHome" class="mr-2"></fa-icon>
         Inicio
     </button>
-    <button *ngIf="userInHome" class="btn btn-primary text-light active" (click)="homeOnClick()">
+    <button *ngIf="userAtHome" class="btn btn-primary text-light active" (click)="homeOnClick()">
         <fa-icon [icon]="faHome" class="mr-2"></fa-icon>
         Inicio
     </button>
-    <button *ngIf="!userInProducts" class="btn btn-primary text-light" (click)="productsOnClick()">
+    <button *ngIf="!userAtProducts" class="btn btn-primary text-light" (click)="productsOnClick()">
         <fa-icon [icon]="faCubes" class="mr-2"></fa-icon>
         Productos
     </button>
-    <button *ngIf="userInProducts" class="btn btn-primary text-light active" (click)="productsOnClick()">
+    <button *ngIf="userAtProducts" class="btn btn-primary text-light active" (click)="productsOnClick()">
         <fa-icon [icon]="faCubes" class="mr-2"></fa-icon>
         Productos
     </button>
-    <button *ngIf="!userInCategories" class="btn btn-primary text-light" (click)="categoriesOnClick()">
+    <button *ngIf="!userAtCategories" class="btn btn-primary text-light" (click)="categoriesOnClick()">
         <fa-icon [icon]="faProjectDiagram" class="mr-2"></fa-icon>
         Categorías
     </button>
-    <button *ngIf="userInCategories" class="btn btn-primary text-light active" (click)="categoriesOnClick()">
+    <button *ngIf="userAtCategories" class="btn btn-primary text-light active" (click)="categoriesOnClick()">
         <fa-icon [icon]="faProjectDiagram" class="mr-2"></fa-icon>
         Categorías
     </button>
-    <button *ngIf="!userInSellingCart" class="btn btn-primary text-light" (click)="sellingCartOnClick()">
+    <button *ngIf="!userAtSellingCart" class="btn btn-primary text-light" (click)="sellingCartOnClick()">
         <fa-icon [icon]="faShoppingCart" class="mr-2"></fa-icon>
         Carrito
     </button>
-    <button *ngIf="userInSellingCart" class="btn btn-primary text-light active" (click)="sellingCartOnClick()">
+    <button *ngIf="userAtSellingCart" class="btn btn-primary text-light active" (click)="sellingCartOnClick()">
         <fa-icon [icon]="faShoppingCart" class="mr-2"></fa-icon>
         Carrito
+    </button>
+    <button *ngIf="!userAtExpenses" class="btn btn-primary text-light" (click)="expensesOnClick()">
+        <fa-icon [icon]="faMoneyBill" class="mr-2"></fa-icon>
+        Egresos
+    </button>
+    <button *ngIf="userAtExpenses" class="btn btn-primary text-light active" (click)="expensesOnClick()">
+        <fa-icon [icon]="faMoneyBill" class="mr-2"></fa-icon>
+        Egresos
     </button>
 </nav>

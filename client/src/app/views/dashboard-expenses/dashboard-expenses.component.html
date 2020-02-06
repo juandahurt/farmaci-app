@@ -1,0 +1,51 @@
+<div class="row col-12 pl-0">
+    <app-sidebar class="col-2 position-fixed"></app-sidebar>
+
+    <div class="expenses col-10 pt-4">
+        <!-- Título -->
+        <h2 class="mb-4">Egresos</h2>
+
+        <!-- Loader -->
+        <img class="loader" *ngIf="isLoading" src="assets/icons/loading.gif">
+
+        <!-- Tabla de egresos -->
+        <div class="container">
+            <div class="row">
+                <p *ngIf="!expenses" class="text-muted">No ha registrado ningún egreso</p>
+                <table *ngIf="expenses && !isLoading" class="table shadow-sm table-borderless">
+                    <thead class="text-muted">
+                        <tr class="bg-light">
+                            <th scope="col">Descripción</th>
+                            <th scope="col">Fecha de Registro</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let expense of expenses | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                            <td class="text-muted">{{ expense.description }}</td>
+                            <td class="text-muted">{{ dateToString(expense.createdAt) }}</td>
+                            <td>
+                                <button class="btn btn-light rounded-circle shadow-sm" (click)="deleteOnClick(expense.id)">
+                                    <fa-icon [icon]="faTrashAlt"></fa-icon>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Paginación -->
+        <ngb-pagination
+            *ngIf="expenses && !isLoading"
+            [(page)]="page"
+            [pageSize]="pageSize"
+            [collectionSize]="collectionSize">
+        </ngb-pagination>
+        
+        <!-- Registrar Egreso -->
+        <button class="float btn btn-success shadow" (click)="addOnClick()">
+            <fa-icon [icon]="faPlus"></fa-icon>
+        </button>
+    </div>
+</div>
