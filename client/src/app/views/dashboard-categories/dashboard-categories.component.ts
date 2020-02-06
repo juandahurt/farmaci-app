@@ -44,11 +44,21 @@ export class DashboardCategoriesComponent implements OnInit {
    */
   private searchForm: FormGroup;
   
+  /**
+   * ¿Está cargando la petición?
+   */
+  public isLoading: boolean;
+  
   constructor(
     private categoryService: CategoryService, 
     private router: Router,
     private formBuilder: FormBuilder) {
-    this.setCategories();
+    this.isLoading = true;
+    this.setCategories().then(() => {
+      this.isLoading = false;
+    }).then((err) => {
+      this.isLoading = false;
+    });
     this.searchForm = this.formBuilder.group({
       name: ['', Validators.required]
     });

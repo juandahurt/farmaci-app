@@ -18,7 +18,9 @@
                 </form>
             </div>
         </div>
-        <div *ngIf="!categories">
+        <!-- Loader -->
+        <img class="loader" *ngIf="isLoading" src="assets/icons/loading.gif">
+        <div *ngIf="!categories && !isLoading">
             <span class="text-muted">No ha registrado ninguna categoría...</span>
         </div>
         <!-- Categorías -->

@@ -23,6 +23,8 @@
                 </button>
             </div>
         </div>
+        <!--Loader -->
+        <img class="loader" *ngIf="isLoading" src="assets/icons/loading.gif">
         <!-- Productos pretenecientes a la categoría -->
         <div class="row mt-5">
             <p class="text-muted">Productos pertenecientes a <b>{{category.name}}</b></p>
@@ -44,7 +46,7 @@
                 </tbody>
             </table>
         </div>
-        <div *ngIf="!products" class="row mt-3">
+        <div *ngIf="!products && !isLoading" class="row mt-3">
             <span class="text-muted">Ningún producto pertenece a esta categoría...</span>
         </div>
     </div>

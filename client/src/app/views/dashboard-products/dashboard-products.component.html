@@ -17,9 +17,10 @@
                 </form>
             </div>
         </div>
-        <div *ngIf="!products">
+        <div *ngIf="!products && !isLoading">
             <span class="text-muted">No ha registrado ningún producto...</span>
         </div>
+        <img class="loader" *ngIf="isLoading" src="assets/icons/loading.gif">
         <!-- Tabla de Productos -->
         <div *ngIf="products">
             <table class="table shadow-sm table-borderless table-hover">
