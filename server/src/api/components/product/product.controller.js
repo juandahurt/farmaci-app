@@ -3,6 +3,7 @@ const Product = require('./product.model');
 const Category = require('../category/category.model');
 const sequelizeDB = require('../../../sequelize');
 const Unit = require('../unit/unit.model');
+const Dimension = require('../dimension/dimension.model');
 
 const productController = {
     /**
@@ -128,6 +129,10 @@ const productController = {
             units.forEach(async unit => {
                 await unit.destroy();
             });
+
+            // Elimina las dimensiones del producto
+            let dimension = await Dimension.findOne({where: { product_id: id }});
+            await dimension.destroy();
 
             await Product.destroy({where: { id: id } });
     

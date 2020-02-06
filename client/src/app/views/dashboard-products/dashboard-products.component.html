@@ -17,9 +17,10 @@
                 </form>
             </div>
         </div>
-        <div *ngIf="!products">
+        <div *ngIf="!products && !isLoading">
             <span class="text-muted">No ha registrado ningún producto...</span>
         </div>
+        <img class="loader" *ngIf="isLoading" src="assets/icons/loading.gif">
         <!-- Tabla de Productos -->
         <div *ngIf="products">
             <table class="table shadow-sm table-borderless table-hover">
@@ -31,13 +32,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let product of products" (click)="productOnClick(product.id)">
+                    <tr *ngFor="let product of products | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize" (click)="productOnClick(product.id)">
                         <td class="text-muted">{{ product.id }}</td>
                         <td class="text-muted">{{ product.description }}</td>
                         <td class="text-muted">{{ product.category.name }}</td>
                     </tr>
                 </tbody>
             </table>
+            <ngb-pagination
+            [(page)]="page"
+            [pageSize]="pageSize"
+            [collectionSize]="collectionSize">
+            </ngb-pagination>
         </div>
         <app-add-product-form></app-add-product-form>
     </div>

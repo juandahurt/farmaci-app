@@ -62,6 +62,25 @@ export class DashboardProductsComponent implements OnInit {
    */
   private PRODUCTS: Array<Product>;
 
+  /**
+   * Página actual
+   */
+  public page = 1;
+
+  /**
+   * Tamaño de cada página
+   */
+  public pageSize: number;
+
+  /**
+   * Tamaño de la lista
+   */
+  public collectionSize: number;
+
+  /**
+   * ¿Está cargando la petición?
+   */
+  public isLoading: boolean;
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -71,8 +90,15 @@ export class DashboardProductsComponent implements OnInit {
     this.searchForm = this.formBuilder.group({
       id: ['', Validators.required]
     });
+    this.isLoading = true;
     this.setProducts().then(() => {
       this.products = this.PRODUCTS;  
+      this.collectionSize = this.PRODUCTS.length;
+      this.page = 1;
+      this.pageSize = 10;
+      this.isLoading = false;
+    }).catch((err) => {
+      this.isLoading = false;
     });
   } 
 

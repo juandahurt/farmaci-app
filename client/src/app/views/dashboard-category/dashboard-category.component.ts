@@ -64,10 +64,19 @@ export class DashboardCategoryComponent implements OnInit {
    */
   public isEditable: Boolean;
 
+  /**
+   * ¿Está cargando la petición?
+   */
+  public isLoading: boolean;
+
   constructor(private route: ActivatedRoute, private router: Router ,private categoryService: CategoryService) {
     this.id = this.route.snapshot.paramMap.get('id');
+    this.isLoading = true;
     this.setCategory().then(() => {
       this.name = this.category.name;
+      this.isLoading = false;
+    }).catch((err) => {
+      this.isLoading = false;
     });
   }
 
