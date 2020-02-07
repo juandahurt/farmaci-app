@@ -1,0 +1,70 @@
+<div class="row col-12 pl-0">
+    <app-sidebar class="col-2 position-fixed"></app-sidebar>
+
+    <div class="container col-10 providers pt-4">
+        <div class="row">
+            <!-- Título -->
+            <div class="container">
+                <h2 class="mb-4">Proveedores</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <!-- En caso de no haber proveedores -->
+                <p *ngIf="!providers && !isLoading" class="text-muted">No ha registrado ningún proveedor</p>
+
+                <!-- Loader -->
+                <img class="loader" *ngIf="isLoading" src="assets/icons/loading.gif">
+
+                <!-- Tabla de los proveedores -->
+                <table *ngIf="providers" class="table shadow-sm table-borderless">
+                    <thead class="text-muted">
+                        <tr class="bg-light">
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let provider of providers | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                            <td class="text-muted">{{provider.name}}</td>
+                            <td class="text-muted">
+                                <button class="btn btn-light shadow-sm rounded-circle" (click)="deleteProviderOnClick(provider.id)">
+                                    <fa-icon [icon]="faTrashAlt"></fa-icon>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Paginación -->
+                <ngb-pagination
+                *ngIf="providers"
+                [(page)]="page"
+                [pageSize]="pageSize"
+                [collectionSize]="collectionSize">
+                </ngb-pagination>
+            </div>
+    
+            <div class="col-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header border-0 text-muted text-center">
+                        <h6>Agregar nuevo Proveedor</h6>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <!-- Nombre del proveedor -->
+                                <div class="form-group col-12">
+                                    <input [(ngModel)]="name" name="name"  class="form-control border-0 bg-light shadow-sm rounded-pill" placeholder="Nombre" type="text">
+                                </div>
+                                <div class="mx-auto">
+                                    <button class="btn btn-success rounded-pill" (click)="addProviderOnClick()">Agregar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

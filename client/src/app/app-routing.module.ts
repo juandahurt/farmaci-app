@@ -7,6 +7,7 @@ import { DashboardProductComponent } from './views/dashboard-product/dashboard-p
 import { DashboardSellingCartComponent } from './views/dashboard-selling-cart/dashboard-selling-cart.component';
 import { DashboardComponent } from './views/dashboard-home/dashboard-home.component';
 import { DashboardExpensesComponent } from './views/dashboard-expenses/dashboard-expenses.component';
+import { DashboardProvidersComponent } from './views/dashboard-providers/dashboard-providers.component';
 
 
 const routes: Routes = [
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'products', component: DashboardProductsComponent },
   { path: 'products/:id', component: DashboardProductComponent },
   { path: 'selling-cart', component: DashboardSellingCartComponent },
-  { path: 'expenses', component: DashboardExpensesComponent }
+  { path: 'expenses', component: DashboardExpensesComponent },
+  { path: 'providers', component: DashboardProvidersComponent }
 ];
 
 @NgModule({

@@ -2,6 +2,8 @@
     <div class="container bg-light text-center py-4">
         <h4 class="text-muted">Menú</h4>
     </div>
+
+    <!-- Inicio -->
     <button *ngIf="!userAtHome" class="btn btn-primary text-light" (click)="homeOnClick()">
         <fa-icon [icon]="faHome" class="mr-2"></fa-icon>
         Inicio
@@ -10,6 +12,8 @@
         <fa-icon [icon]="faHome" class="mr-2"></fa-icon>
         Inicio
     </button>
+
+    <!-- Productos -->
     <button *ngIf="!userAtProducts" class="btn btn-primary text-light" (click)="productsOnClick()">
         <fa-icon [icon]="faCubes" class="mr-2"></fa-icon>
         Productos
@@ -18,6 +22,8 @@
         <fa-icon [icon]="faCubes" class="mr-2"></fa-icon>
         Productos
     </button>
+
+    <!-- Categorías -->
     <button *ngIf="!userAtCategories" class="btn btn-primary text-light" (click)="categoriesOnClick()">
         <fa-icon [icon]="faProjectDiagram" class="mr-2"></fa-icon>
         Categorías
@@ -26,6 +32,8 @@
         <fa-icon [icon]="faProjectDiagram" class="mr-2"></fa-icon>
         Categorías
     </button>
+
+    <!-- Carrito -->
     <button *ngIf="!userAtSellingCart" class="btn btn-primary text-light" (click)="sellingCartOnClick()">
         <fa-icon [icon]="faShoppingCart" class="mr-2"></fa-icon>
         Carrito
@@ -34,12 +42,36 @@
         <fa-icon [icon]="faShoppingCart" class="mr-2"></fa-icon>
         Carrito
     </button>
-    <button *ngIf="!userAtExpenses" class="btn btn-primary text-light" (click)="expensesOnClick()">
-        <fa-icon [icon]="faMoneyBill" class="mr-2"></fa-icon>
+
+    <!-- Egresos -->
+    <button *ngIf="userAtExpenses || userAtProviders" type="button" class="btn btn-primary active" (click)="isCollapsed = !isCollapsed"
+            aria-controls="collapseExample">
         Egresos
+        <fa-icon *ngIf="isCollapsed" [icon]="faArrowDown"></fa-icon>
+        <fa-icon *ngIf="!isCollapsed" [icon]="faArrowUp"></fa-icon>
     </button>
-    <button *ngIf="userAtExpenses" class="btn btn-primary text-light active" (click)="expensesOnClick()">
-        <fa-icon [icon]="faMoneyBill" class="mr-2"></fa-icon>
+    <button *ngIf="!userAtExpenses && !userAtProviders" type="button" class="btn btn-primary" (click)="isCollapsed = !isCollapsed"
+            aria-controls="collapseExample">
         Egresos
+        <fa-icon *ngIf="isCollapsed" [icon]="faArrowDown"></fa-icon>
+        <fa-icon *ngIf="!isCollapsed" [icon]="faArrowUp"></fa-icon>
     </button>
+    <div id="collapseExample" [ngbCollapse]="isCollapsed" class="bg-secondary text-center px-0">
+        <button *ngIf="userAtExpenses" class="btn btn-secondary active text-light col-12" (click)="expensesOnClick()">
+            <fa-icon [icon]="faMoneyBill" class="mr-2"></fa-icon>
+            Egresos
+        </button>
+        <button *ngIf="!userAtExpenses" class="btn btn-secondary text-light col-12" (click)="expensesOnClick()">
+            <fa-icon [icon]="faMoneyBill" class="mr-2"></fa-icon>
+            Egresos
+        </button>
+        <button *ngIf="userAtProviders" class="btn btn-secondary active text-light col-12" (click)="providersOnClick()">
+            <fa-icon [icon]="faTruck" class="mr-2"></fa-icon>
+            Proveedores
+        </button>
+        <button *ngIf="!userAtProviders" class="btn btn-secondary text-light col-12" (click)="providersOnClick()">
+            <fa-icon [icon]="faTruck" class="mr-2"></fa-icon>
+            Proveedores
+        </button>
+    </div>
 </nav>

@@ -30,6 +30,8 @@ import { ChartsModule } from 'ng2-charts';
 import { StatsService } from 'src/services/stats.service';
 import { DashboardExpensesComponent } from './views/dashboard-expenses/dashboard-expenses.component';
 import { ExpenseService } from 'src/services/expense.service';
+import { DashboardProvidersComponent } from './views/dashboard-providers/dashboard-providers.component';
+import { ProviderService } from 'src/services/provider.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import { ExpenseService } from 'src/services/expense.service';
     AddDimensionsFormComponent,
     AddUnitsFormComponent,
     DashboardComponent,
-    DashboardExpensesComponent
+    DashboardExpensesComponent,
+    DashboardProvidersComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +70,8 @@ import { ExpenseService } from 'src/services/expense.service';
     UnitSharedService,
     BillService,
     StatsService,
-    ExpenseService
+    ExpenseService,
+    ProviderService
   ],
   bootstrap: [AppComponent]
 })

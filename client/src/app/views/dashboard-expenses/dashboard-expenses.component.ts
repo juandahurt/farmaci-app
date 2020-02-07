@@ -47,6 +47,8 @@ export class DashboardExpensesComponent implements OnInit {
    */
   public isLoading: boolean;
 
+  public desc;
+
   constructor(private expenseService: ExpenseService) {
     this.setExpenses().then(() => {
       this.page = 1;
@@ -90,12 +92,13 @@ export class DashboardExpensesComponent implements OnInit {
       },
       title: 'Agregar Egreso',
       html:
-        '<input type="text" id="description" class="form-control mt-3 bg-light border-0 shadow-sm" placeholder="Descripción">',
+        '<input name="desc" [(ngModel)]="desc" type="text" id="description" class="form-control mt-3 bg-light border-0 shadow-sm" placeholder="Descripción">',
       focusConfirm: false,
       buttonsStyling: false,
       confirmButtonText: 'Agregar',
       preConfirm: () => {
-        return document.getElementById('description').value
+        return 'asf'
+        //return document.getElementById('description').value
       },
     });
 
