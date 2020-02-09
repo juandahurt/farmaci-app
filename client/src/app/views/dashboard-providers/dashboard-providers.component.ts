@@ -91,6 +91,7 @@ export class DashboardProvidersComponent implements OnInit {
       this.providers.push(new Provider().fromJSON(res));
 
       new Notification().showSuccess('Proveedor agregado exitosamente');
+      this.name = '';
     } catch (err) {
       ErrorHandler.showError(err);
     }

@@ -1,4 +1,5 @@
 const Provider = require('./provider.model');
+const ERRORS = require('./provider.errors');
 
 const statsContoller = {
     /**
@@ -9,6 +10,21 @@ const statsContoller = {
     async create(req, res) {
         try {
             let name = req.body._name;
+
+            if (!name) {
+                res.status(500).send({error: ERRORS.INVALID_NAME});
+                return;
+            }
+
+            // Se verifica que el nombre no esté siendo utilizado
+            let found = await Provider.findOne({
+                where: { name: name }
+            });
+
+            if (found) {
+                res.status(500).send({error: ERRORS.NAME_ALREADY_USED});
+                return;
+            }
 
             let provider = await Provider.create({
                 name: name
