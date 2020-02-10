@@ -1,2 +1,2 @@
 # Farmaci-app
-Aplicación que permite gestionar los productos de una farmacia.
+Aplicación que permite gestionar un inventario.
