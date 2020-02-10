@@ -15,14 +15,20 @@
                 <table *ngIf="expenses && !isLoading" class="table shadow-sm table-borderless">
                     <thead class="text-muted">
                         <tr class="bg-light">
+                            <th scope="col">No. Factura</th>
                             <th scope="col">Descripción</th>
-                            <th scope="col">Fecha de Registro</th>
+                            <th scope="col">Valor</th>
+                            <th scope="col">Proveedor</th>
+                            <th scope="col">Fecha Registro</th>
                             <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let expense of expenses | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+                            <td class="text-muted">{{ expense.billId }}</td>
                             <td class="text-muted">{{ expense.description }}</td>
+                            <td class="text-muted">{{ expense.value }}</td>
+                            <td class="text-muted">{{ expense.provider.name }}</td>
                             <td class="text-muted">{{ dateToString(expense.createdAt) }}</td>
                             <td>
                                 <button class="btn btn-light rounded-circle shadow-sm" (click)="deleteOnClick(expense.id)">
@@ -42,10 +48,7 @@
             [pageSize]="pageSize"
             [collectionSize]="collectionSize">
         </ngb-pagination>
-        
-        <!-- Registrar Egreso -->
-        <button class="float btn btn-success shadow" (click)="addOnClick()">
-            <fa-icon [icon]="faPlus"></fa-icon>
-        </button>
+
+        <app-add-expenses-form></app-add-expenses-form>
     </div>
 </div>

@@ -1,5 +1,6 @@
 const ERRORS = require('./expense.errors');
 const Expense = require('./expense.model');
+const Provider = require('../provider/provider.model');
 
 const expenseController = {
     /**
@@ -9,15 +10,28 @@ const expenseController = {
      */
     async create(req, res) {
         try {
+            let bill_id = req.body._billId;
             let description = req.body._description;
+            let value = req.body._value;
+            let provider_id = req.body._provider._id;
+
+            console.log(provider_id);
 
             if (!description) {
                 res.status(422).send({error: ERRORS.INVALID_DESC});
                 return;
             }
 
-            let expense = await Expense.create({
-                description: description
+            if (!value) {
+                res.status(422).send({error: ERRORS.INVALID_VALUE});
+                return;
+            }
+
+            await Expense.create({
+                bill_id: bill_id,
+                description: description,
+                value: value,
+                provider_id: provider_id
             });
 
             res.sendStatus(200);
@@ -32,8 +46,12 @@ const expenseController = {
      */
     async list(req, res) {
         try {
-            let expenses = await Expense.findAll();
+            let expenses = await Expense.findAll({
+                include: [Provider]
+            });
 
+            console.log(expenses);
+            
             res.status(200).send(expenses);
         } catch (err) {
             res.status(500).send({err: err.message});

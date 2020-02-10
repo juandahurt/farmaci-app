@@ -12,7 +12,7 @@ export class Provider extends Object {
     private _name: string;
 
     public initValues(): void {
-        this._id = -1;
+        this._id = null;
         this._name = '';
     }    
     

@@ -3,8 +3,10 @@ import { ExpenseService } from 'src/services/expense.service';
 import Swal from 'sweetalert2';
 import { Expense } from 'src/models/expense';
 import { ErrorHandler } from 'src/helpers/error.helper';
-import { faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { DateHelper } from 'src/helpers/date.helper';
+import { ConfirmForm } from 'src/helpers/confirm-form.helper';
+import { ExpenseSharedService } from 'src/services/expense.shared.service';
 
 @Component({
   selector: 'app-dashboard-expenses',
@@ -12,11 +14,6 @@ import { DateHelper } from 'src/helpers/date.helper';
   styleUrls: ['./dashboard-expenses.component.css']
 })
 export class DashboardExpensesComponent implements OnInit {
-  /**
-   * Icono de agregar egreso
-   */
-  faPlus = faPlus;
-
   /**
    * Icono de eliminar egreso
    */
@@ -47,17 +44,17 @@ export class DashboardExpensesComponent implements OnInit {
    */
   public isLoading: boolean;
 
-  public desc;
-
-  constructor(private expenseService: ExpenseService) {
+  constructor(private expenseService: ExpenseService, private expenseSharedService: ExpenseSharedService) {
     this.setExpenses().then(() => {
       this.page = 1;
       this.pageSize = 8;
-      this.collectionSize = this.expenses.length;
+      this.collectionSize = 0;
+      if (this.expenses != null) { this.collectionSize = this.expenses.length; }
     });
   }
 
   ngOnInit() {
+    this.expenseSharedService.getExpenses().subscribe(value => {  this.expenses = value; });
   }
 
   /**
@@ -82,46 +79,13 @@ export class DashboardExpensesComponent implements OnInit {
   }
 
   /**
-   * Es invocada al dar click el botón Registrar Egreso
-   */
-  public async addOnClick() {
-    const { value: formValue } = await Swal.fire({
-      customClass: {
-        confirmButton: 'btn btn-success',
-        title: 'text-dark mb-3'
-      },
-      title: 'Agregar Egreso',
-      html:
-        '<input name="desc" [(ngModel)]="desc" type="text" id="description" class="form-control mt-3 bg-light border-0 shadow-sm" placeholder="Descripción">',
-      focusConfirm: false,
-      buttonsStyling: false,
-      confirmButtonText: 'Agregar',
-      preConfirm: () => {
-        return 'asf'
-        //return document.getElementById('description').value
-      },
-    });
-
-    try {
-      // Crea el nuevo egreso
-      let expense = new Expense();
-      expense.description = formValue;
-
-      await this.expenseService.create(expense).toPromise();
-    } catch(err) {
-      ErrorHandler.handleError(err, 'Egreso agregado exitosamente');
-    } finally {
-      this.setExpenses();
-    }
-  }
-
-  /**
    * Invocada al dar click en Eliminar Egreso
    * @param id identificador del egreso
    */
   public async deleteOnClick(id: number) {
     try {
-      await this.expenseService.delete(id).toPromise();
+      let res: any = await new ConfirmForm().show('¿Está seguro?', 'El egreso será eliminado de forma permanente');
+      if (res.value) { await this.expenseService.delete(id).toPromise(); }
     } catch(err) {
       ErrorHandler.handleError(err, 'Egreso eliminado exitosamente');
       this.setExpenses();
