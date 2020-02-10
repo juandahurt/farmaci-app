@@ -6,6 +6,8 @@ const dimensionRouter = require('./components/dimension');
 const unitRouter = require('./components/unit');
 const billRouter = require('./components/bill');
 const statsRouter = require('./components/stats');
+const expenseRouter = require('./components/expense');
+const providerRouter = require('./components/provider');
 
 restRouter.use('/category', categoryRouter);
 restRouter.use('/product', productRouter);
@@ -13,5 +15,7 @@ restRouter.use('/dimension', dimensionRouter);
 restRouter.use('/unit', unitRouter);
 restRouter.use('/bill', billRouter);
 restRouter.use('/stats', statsRouter);
+restRouter.use('/expense', expenseRouter);
+restRouter.use('/provider', providerRouter);
 
 module.exports = restRouter;

@@ -1,0 +1,42 @@
+<ng-template #content let-modal>
+    <div class="container text-center pt-3 mb-2">
+        <h3 class="text-dark">Agregar Egreso</h3>
+    </div>
+    <div class="modal-body">
+        <form>
+            <!-- No. Factura -->
+            <div class="input-group">
+                <input [(ngModel)]="expense.billId" name="id" class="rounded-pill form-control border-0 bg-light shadow-sm mb-3" placeholder="No. Factura">
+            </div>
+
+            <!-- Descripción -->
+            <div class="input-group">
+                <input [(ngModel)]="expense.description" name="description" class="rounded-pill form-control border-0 bg-light shadow-sm mb-3" placeholder="Descripción">
+            </div>
+
+            <!-- Valor -->
+            <div class="input-group">
+                <input [(ngModel)]="expense.value" name="value" class="rounded-pill form-control border-0 bg-light shadow-sm mb-3" placeholder="Valor">
+            </div>
+            <hr>
+
+            <!-- Proveedor -->
+            <div class="form-group">
+                <label class="text-muted">Proveedor</label>
+                <select [(ngModel)]="expense.provider.id" name="provider"  class="rounded-pill custom-select bg-light border-0 shadow-sm mb-3">
+                    <option [ngValue]="null" selected>Seleccione un proveedor...</option>
+                    <option *ngFor="let p of providers" [ngValue]="p.id">{{p.name}}</option>
+                </select>
+            </div>
+
+            <div class="text-center">
+                <button class="mx-auto btn btn-success rounded-pill" (click)="addOnClick()">Agregar</button>
+            </div>
+        </form>
+    </div>
+  </ng-template>
+
+<!-- Botón de Agregar Egreso -->
+<button class="btn btn-lg btn-success float shadow" (click)="open(content)">
+    <fa-icon [icon]="faPlus"></fa-icon>
+</button>

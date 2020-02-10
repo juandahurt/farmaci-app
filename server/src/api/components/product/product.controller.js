@@ -132,7 +132,7 @@ const productController = {
 
             // Elimina las dimensiones del producto
             let dimension = await Dimension.findOne({where: { product_id: id }});
-            await dimension.destroy();
+            if (dimension) { await dimension.destroy(); }
 
             await Product.destroy({where: { id: id } });
     

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { faHome, faCubes, faProjectDiagram, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faCubes, faProjectDiagram, faShoppingCart, faMoneyBill, faArrowDown, faArrowUp, faTruck } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sidebar',
@@ -29,46 +29,90 @@ export class SidebarComponent implements OnInit {
   public faShoppingCart = faShoppingCart;
 
   /**
+   * Icono de submenu Egresos cuando isCollapse = true
+   */
+  public faArrowDown = faArrowDown;
+
+  /**
+   * Icono de submenu Egresos cuando isCollapse = false
+   */
+  public faArrowUp = faArrowUp;
+
+  /**
+   * Icono de Egresos
+   */
+  public faMoneyBill = faMoneyBill;
+
+  /**
+   * Icono de Proveedores
+   */
+  public faTruck = faTruck;
+
+  /**
    * url activa
    */
   public url: string;
 
   /**
-   * ¿El usuario se encuentra dentro del inicio?
+   * ¿El usuario se encuentra en el inicio?
    */
-  public userInHome: boolean;
+  public userAtHome: boolean;
 
   /**
-   * ¿El usuario se encuentra dentro de las categorías?
+   * ¿El usuario se encuentra en las categorías?
    */
-  public userInCategories: boolean;
+  public userAtCategories: boolean;
 
   /**
-   * ¿El usuario se encuentra dentro de los productos?
+   * ¿El usuario se encuentra enlos productos?
    */
-  public userInProducts: boolean;
+  public userAtProducts: boolean;
 
   /**
-   * ¿El usuario se encuentra dentro del carrito de ventas?
+   * ¿El usuario se encuentra en el carrito de ventas?
    */
-  public userInSellingCart: boolean;
+  public userAtSellingCart: boolean;
+
+  /** 
+   * ¿El usuario se encuentra en los egresos?
+  */
+  public userAtExpenses;
+
+  /** 
+   * ¿El usuario se encuentra en los proveedores?
+  */
+ public userAtProviders;
+
+  /**
+   * Controla el submenú de los egresos
+   */
+  public isCollapsed = true;
 
   constructor(private router: Router) { 
     this.url = router.url;
     
     switch (this.url) {
+      case "/":
+        this.userAtHome = true;
+        break;
       case "/home":
-        this.userInHome = true;
+        this.userAtHome = true;
         break;
       case "/categories":
-        this.userInCategories = true;
+        this.userAtCategories = true;
         break;
       case "/products":
-        this.userInProducts = true;
+        this.userAtProducts = true;
         break;
       case "/selling-cart":
-        this.userInSellingCart = true;
+        this.userAtSellingCart = true;
         break;
+      case "/expenses":
+        this.userAtExpenses = true;
+        break;
+      case "/providers":
+        this.userAtProviders = true;
+        break; 
     }
   } 
 
@@ -101,5 +145,19 @@ export class SidebarComponent implements OnInit {
    */
   public sellingCartOnClick() {
     this.router.navigateByUrl("selling-cart");
+  }
+
+  /**
+   * Es invocada al dar click en Egresos
+   */
+  public expensesOnClick() {
+    this.router.navigateByUrl("expenses");
+  }
+
+  /**
+   * Es invocada al dar click en Proveedores
+   */
+  public providersOnClick() {
+    this.router.navigateByUrl("providers");
   }
 }
