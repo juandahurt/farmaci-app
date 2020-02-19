@@ -8,6 +8,7 @@ const billRouter = require('./components/bill');
 const statsRouter = require('./components/stats');
 const expenseRouter = require('./components/expense');
 const providerRouter = require('./components/provider');
+const notificationRouter = require('./components/notification');
 
 restRouter.use('/category', categoryRouter);
 restRouter.use('/product', productRouter);
@@ -17,5 +18,6 @@ restRouter.use('/bill', billRouter);
 restRouter.use('/stats', statsRouter);
 restRouter.use('/expense', expenseRouter);
 restRouter.use('/provider', providerRouter);
+restRouter.use('/notification', notificationRouter);
 
 module.exports = restRouter;

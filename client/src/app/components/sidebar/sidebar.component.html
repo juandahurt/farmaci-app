@@ -43,6 +43,16 @@
         Carrito
     </button>
 
+    <!-- Notificaciones -->
+    <button *ngIf="userAtNotifications" class="btn btn-primary active text-light" (click)="notificationsOnClick()">
+        <fa-icon [icon]="faBell" class="mr-2"></fa-icon>
+        Notificaciones
+    </button>
+    <button *ngIf="!userAtNotifications" class="btn btn-primary text-light" (click)="notificationsOnClick()">
+        <fa-icon [icon]="faBell" class="mr-2"></fa-icon>
+        Notificaciones
+    </button>
+
     <!-- Egresos -->
     <button *ngIf="userAtExpenses || userAtProviders" type="button" class="btn btn-primary active" (click)="isCollapsed = !isCollapsed"
             aria-controls="collapseExample">

@@ -34,6 +34,8 @@ import { DashboardProvidersComponent } from './views/dashboard-providers/dashboa
 import { ProviderService } from 'src/services/provider.service';
 import { AddExpensesFormComponent } from './components/add-expenses-form/add-expenses-form.component';
 import { ExpenseSharedService } from 'src/services/expense.shared.service';
+import { DashboardNotificationsComponent } from './views/dashboard-notifications/dashboard-notifications.component';
+import { NotificationService } from 'src/services/notification.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,8 @@ import { ExpenseSharedService } from 'src/services/expense.shared.service';
     DashboardComponent,
     DashboardExpensesComponent,
     DashboardProvidersComponent,
-    AddExpensesFormComponent
+    AddExpensesFormComponent,
+    DashboardNotificationsComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +78,8 @@ import { ExpenseSharedService } from 'src/services/expense.shared.service';
     StatsService,
     ExpenseService,
     ProviderService,
-    ExpenseSharedService
+    ExpenseSharedService,
+    NotificationService
   ],
   bootstrap: [AppComponent]
 })
