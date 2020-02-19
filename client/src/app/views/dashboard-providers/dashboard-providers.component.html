@@ -26,7 +26,7 @@
                         <tr *ngFor="let provider of providers | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
                             <td class="text-muted">{{provider.name}}</td>
                             <td class="text-muted">
-                                <button class="btn btn-light shadow-sm rounded-circle" (click)="deleteProviderOnClick(provider.id)">
+                                <button class="btn btn-light rounded-circle" (click)="deleteProviderOnClick(provider.id)">
                                     <fa-icon [icon]="faTrashAlt"></fa-icon>
                                 </button>
                             </td>

@@ -7,7 +7,7 @@
                 <div class="mx-auto form-group col-6">
                     <div class="input-group-prepend ml-auto">
                         <input formControlName="id" type="text" class="form-control shadow-sm rounded-pill bg-light border-0" placeholder="Buscar...">
-                        <button type="submit" class="btn btn-primary shadow-sm ml-2 rounded-circle">
+                        <button type="submit" class="btn btn-primary ml-2 rounded-circle">
                             <fa-icon [icon]="faSearch"></fa-icon>
                         </button>
                     </div>
@@ -57,10 +57,10 @@
                         <input [(ngModel)]="productToFind.subtotal" name="subtotal" type="text" class="form-control rounded-pill border-0" readonly>
                     </div>
                     <div class="col-1 form-group text-center pt-2">
-                        <button *ngIf="productToFind.product.id == ''" class="shadow-sm btn btn-outline-secondary rounded-circle mt-4" disabled>
+                        <button *ngIf="productToFind.product.id == ''" class="btn btn-outline-secondary rounded-circle mt-4" disabled>
                             <fa-icon [icon]="faArrowDown"></fa-icon>
                         </button>
-                        <button *ngIf="productToFind.product.id != ''" class="shadow-sm btn btn-outline-secondary rounded-circle mt-4" (click)="addProductToCart()">
+                        <button *ngIf="productToFind.product.id != ''" class="btn btn-outline-secondary rounded-circle mt-4" (click)="addProductToCart()">
                             <fa-icon [icon]="faArrowDown"></fa-icon>
                         </button>
                     </div>
@@ -94,7 +94,7 @@
         </div>
     </div>
     <!-- Finalizar Venta -->
-    <button class="float btn btn-success shadow" (click)="checkout()">
+    <button class="float btn btn-success" (click)="checkout()">
         <fa-icon [icon]="faMoneyBill"></fa-icon>
     </button>
 </div>

@@ -2,18 +2,18 @@
     <div class="container product pt-3 pl-3 pr-0">
         <!-- Cabecera con Título y Acciones -->
         <div class="row mb-3">
-            <button class="rounded-circle btn btn-primary shadow-sm ml-2 mr-4" (click)="backOnClick()">
+            <button class="rounded-pill btn btn-primary ml-2 mr-4" (click)="backOnClick()">
                 <fa-icon [icon]="faArrowLeft"></fa-icon>
             </button>
             <h3>{{product.description}}</h3>
             <div class="ml-auto mr-3">
-                <button *ngIf="!isEditable" class="rounded-circle btn btn-light shadow-sm mt-1" (click)="editOnClick()">
+                <button *ngIf="!isEditable" class="rounded-circle btn btn-light mt-1" (click)="editOnClick()">
                     <fa-icon [icon]="faPen"></fa-icon>
                 </button>
                 <button *ngIf="!isEditable" class="rounded-circle btn btn-danger ml-3 mt-1" (click)="deleteOnClick()">
                     <fa-icon [icon]="faTrashAlt"></fa-icon>
                 </button>
-                <button *ngIf="isEditable" class="rounded-circle btn btn-light mt-1 mr-3 shadow-sm" (click)="cancelOnClick()">
+                <button *ngIf="isEditable" class="rounded-circle btn btn-light mt-1 mr-3" (click)="cancelOnClick()">
                     <fa-icon [icon]="faTimes"></fa-icon>
                 </button>
                 <button *ngIf="isEditable" class="rounded-circle btn btn-success mt-1" (click)="updateOnClick()">

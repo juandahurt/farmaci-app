@@ -13,7 +13,7 @@ import { UnitSharedService } from 'src/services/unit.shared.service';
 @Component({
   selector: 'app-add-units-form',
   templateUrl: './add-units-form.component.html',
-  styleUrls: ['./add-units-form.component.css']
+  styleUrls: ['./add-units-form.component.less']
 })
 export class AddUnitsFormComponent implements OnInit {
   /**

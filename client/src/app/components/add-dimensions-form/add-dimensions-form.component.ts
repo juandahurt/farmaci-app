@@ -12,7 +12,7 @@ import { DimensionSharedService } from 'src/services/dimension.shared.service';
 @Component({
   selector: 'app-add-dimensions-form',
   templateUrl: './add-dimensions-form.component.html',
-  styleUrls: ['./add-dimensions-form.component.css']
+  styleUrls: ['./add-dimensions-form.component.less']
 })
 export class AddDimensionsFormComponent implements OnInit {
   /** 

@@ -7,7 +7,7 @@ import { ErrorHandler } from 'src/helpers/error.helper';
 @Component({
   selector: 'app-dashboard-notifications',
   templateUrl: './dashboard-notifications.component.html',
-  styleUrls: ['./dashboard-notifications.component.css']
+  styleUrls: ['./dashboard-notifications.component.less']
 })
 export class DashboardNotificationsComponent implements OnInit {
   /**

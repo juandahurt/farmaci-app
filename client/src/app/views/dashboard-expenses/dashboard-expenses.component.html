@@ -29,7 +29,7 @@
                             <td class="text-muted">{{ expense.provider.name }}</td>
                             <td class="text-muted">{{ dateToString(expense.createdAt) }}</td>
                             <td>
-                                <button class="btn btn-light rounded-circle shadow-sm" (click)="deleteOnClick(expense.id)">
+                                <button class="btn btn-light rounded-circle" (click)="deleteOnClick(expense.id)">
                                     <fa-icon [icon]="faTrashAlt"></fa-icon>
                                 </button>
                             </td>

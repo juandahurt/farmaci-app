@@ -12,7 +12,7 @@ import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
 @Component({
   selector: 'app-dashboard-category',
   templateUrl: './dashboard-category.component.html',
-  styleUrls: ['./dashboard-category.component.css']
+  styleUrls: ['./dashboard-category.component.less']
 })
 export class DashboardCategoryComponent implements OnInit {
   /**
@@ -177,7 +177,10 @@ export class DashboardCategoryComponent implements OnInit {
         
       } catch(err) {
         ErrorHandler.handleError(err, 'Categoría eliminada exitosamente');
-        if (err.status == 200) { this.router.navigateByUrl("categories"); }
+        if (err.status == 200) { 
+          this.router.navigateByUrl(""); 
+          this.sidebarRef.categoriesOnClick();
+        }
       }
     }
   }

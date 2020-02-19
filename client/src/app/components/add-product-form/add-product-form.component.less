@@ -1,0 +1,29 @@
+@import "../../../../node_modules/lesshat/lesshat.less";
+
+.float {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    font-size: 25px;
+}
+
+.btn(@color, @percent: 10%)  {
+  border: 0;
+  background-color: @color;
+  .box-shadow(0px, 6px, 0px, darken(@color, @percent));
+  &:hover { 
+    border: 0;
+    background-color: lighten(@color, 5%) !important;
+    .box-shadow(0px, 4px, 0px, darken(@color, @percent));
+  }
+  &:active { 
+    .box-shadow(inset, 0px, 3px, 0px, darken(@color, @percent)); 
+  }
+}
+
+.btn-success {
+  .btn(#28a745);
+}

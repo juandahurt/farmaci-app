@@ -9,7 +9,7 @@ import { ConfirmForm } from 'src/helpers/confirm-form.helper';
 @Component({
   selector: 'app-dashboard-providers',
   templateUrl: './dashboard-providers.component.html',
-  styleUrls: ['./dashboard-providers.component.css']
+  styleUrls: ['./dashboard-providers.component.less']
 })
 export class DashboardProvidersComponent implements OnInit {
   /**

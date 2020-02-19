@@ -39,7 +39,7 @@ export class NgbdSortableHeader {
 @Component({
   selector: 'app-dashboard-products',
   templateUrl: './dashboard-products.component.html',
-  styleUrls: ['./dashboard-products.component.css']
+  styleUrls: ['./dashboard-products.component.less']
 })
 export class DashboardProductsComponent implements OnInit {
   /**

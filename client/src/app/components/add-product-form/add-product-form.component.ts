@@ -12,7 +12,7 @@ import { Notification } from 'src/helpers/notification.helper';
 @Component({
   selector: 'app-add-product-form',
   templateUrl: './add-product-form.component.html',
-  styleUrls: ['./add-product-form.component.css']
+  styleUrls: ['./add-product-form.component.less']
 })
 export class AddProductFormComponent implements OnInit {
   /**

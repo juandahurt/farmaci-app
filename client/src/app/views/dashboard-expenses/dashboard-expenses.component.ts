@@ -11,7 +11,7 @@ import { ExpenseSharedService } from 'src/services/expense.shared.service';
 @Component({
   selector: 'app-dashboard-expenses',
   templateUrl: './dashboard-expenses.component.html',
-  styleUrls: ['./dashboard-expenses.component.css']
+  styleUrls: ['./dashboard-expenses.component.less']
 })
 export class DashboardExpensesComponent implements OnInit {
   /**

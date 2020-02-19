@@ -11,7 +11,7 @@ import { ExpenseSharedService } from 'src/services/expense.shared.service';
 @Component({
   selector: 'app-add-expenses-form',
   templateUrl: './add-expenses-form.component.html',
-  styleUrls: ['./add-expenses-form.component.css']
+  styleUrls: ['./add-expenses-form.component.less']
 })
 export class AddExpensesFormComponent implements OnInit {
   /**

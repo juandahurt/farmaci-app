@@ -11,7 +11,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-dashboard-categories',
   templateUrl: './dashboard-categories.component.html',
-  styleUrls: ['./dashboard-categories.component.css']
+  styleUrls: ['./dashboard-categories.component.less']
 })
 export class DashboardCategoriesComponent implements OnInit {
   /**

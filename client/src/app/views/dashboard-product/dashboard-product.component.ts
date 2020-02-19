@@ -19,7 +19,7 @@ import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
 @Component({
   selector: 'app-dashboard-product',
   templateUrl: './dashboard-product.component.html',
-  styleUrls: ['./dashboard-product.component.css']
+  styleUrls: ['./dashboard-product.component.less']
 })
 export class DashboardProductComponent implements OnInit {
   /**
@@ -259,6 +259,8 @@ export class DashboardProductComponent implements OnInit {
       if (res.value) { await this.unitService.delete(this.id, unitId).toPromise(); }
     } catch(err) {
       ErrorHandler.handleError(err, 'Unidad eliminada exitosamente');
+      this.router.navigateByUrl("");
+      this.sidebarRef.productsOnClick();
       this.setUnits();
     }
   }

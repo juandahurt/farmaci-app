@@ -6,43 +6,43 @@
         <form>
             <div class="form-group">
                 <div class="input-group">
-                    <input [(ngModel)]="product.id" name="id" class="form-control border-0 bg-light shadow-sm mb-3" placeholder="Identificador">
+                    <input [(ngModel)]="product.id" name="id" class="rounded-pill form-control border-0 bg-light shadow-sm mb-3" placeholder="Identificador">
                 </div>
                 <div class="input-group">
-                    <input [(ngModel)]="product.description" name="description" class="form-control border-0 bg-light shadow-sm mb-3" placeholder="Descripción">
+                    <input [(ngModel)]="product.description" name="description" class="rounded-pill form-control border-0 bg-light shadow-sm mb-3" placeholder="Descripción">
                 </div>
                 <div class="input-group">
-                    <select [(ngModel)]="product.category.id" name="category"  class="custom-select bg-light border-0 shadow-sm mb-3">
+                    <select [(ngModel)]="product.category.id" name="category"  class="rounded-pill custom-select bg-light border-0 shadow-sm mb-3">
                         <option [ngValue]="null" selected>Seleccione una categoría...</option>
                         <option *ngFor="let c of categories" [ngValue]="c.id">{{c.name}}</option>
                     </select>
                 </div>
                 <div class="input-group">
-                    <input class="form-control border-0 bg-light shadow-sm mb-3" [(ngModel)]="product.basePrice" name="basePrice" placeholder="Precio de compra">
+                    <input class="rounded-pill form-control border-0 bg-light shadow-sm mb-3" [(ngModel)]="product.basePrice" name="basePrice" placeholder="Precio de compra">
                 </div>
                 <div class="input-group">
-                    <div class="custom-control custom-switch mr-4 pt-2">
-                        <input (click)="boxesOnClick()" type="checkbox" class="custom-control-input" id="customSwitch1" [(ngModel)]="product.comesInBoxes" name="comesInBoxes">
+                    <div class="rounded-pill custom-control custom-switch mr-4 pt-2">
+                        <input (click)="boxesOnClick()" type="checkbox" class="rounded-pill custom-control-input" id="customSwitch1" [(ngModel)]="product.comesInBoxes" name="comesInBoxes">
                         <label class="custom-control-label" for="customSwitch1">¿Viene por cajas?</label>
                     </div>
-                    <input *ngIf="comesInBoxes" type="text" class="form-control border-0 bg-light shadow-sm mb-3 col-6 ml-auto" [(ngModel)]="product.boxPrice" name="boxPrice" placeholder="Precio">
-                    <input *ngIf="!comesInBoxes" type="text" class="form-control border-0 shadow-sm mb-3 col-6 ml-auto" value="" readonly>
+                    <input *ngIf="comesInBoxes" type="text" class="rounded-pill form-control border-0 bg-light shadow-sm mb-3 col-6 ml-auto" [(ngModel)]="product.boxPrice" name="boxPrice" placeholder="Precio">
+                    <input *ngIf="!comesInBoxes" type="text" class="rounded-pill form-control border-0 shadow-sm mb-3 col-6 ml-auto" value="" readonly>
                 </div>
                 <div class="input-group">
                     <div class="custom-control custom-switch mr-4 pt-2">
-                        <input (click)="othersOnClick()" type="checkbox" class="custom-control-input" id="customSwitch2" [(ngModel)]="product.comesInOthers" name="comesInOthers">
+                        <input (click)="othersOnClick()" type="checkbox" class="rounded-pill custom-control-input" id="customSwitch2" [(ngModel)]="product.comesInOthers" name="comesInOthers">
                         <label class="custom-control-label" for="customSwitch2">¿Viene por sobres?</label>
                     </div>
-                    <input *ngIf="comesInOthers" type="text" class="form-control border-0 bg-light shadow-sm mb-3 col-6 ml-auto" [(ngModel)]="product.otherPrice" name="otherPrice" placeholder="Precio">
-                    <input *ngIf="!comesInOthers" type="text" class="form-control border-0 shadow-sm mb-3 col-6 ml-auto" value="" [(ngModel)]="product.otherPrice" name="otherPrice" readonly>
+                    <input *ngIf="comesInOthers" type="text" class="rounded-pill form-control border-0 bg-light shadow-sm mb-3 col-6 ml-auto" [(ngModel)]="product.otherPrice" name="otherPrice" placeholder="Precio">
+                    <input *ngIf="!comesInOthers" type="text" class="rounded-pill form-control border-0 shadow-sm mb-3 col-6 ml-auto" value="" [(ngModel)]="product.otherPrice" name="otherPrice" readonly>
                 </div>
                 <div class="input-group">
                     <div class="custom-control custom-switch mr-4 pt-2">
-                        <input (click)="unitsOnClick()" type="checkbox" class="custom-control-input" id="customSwitch3" [(ngModel)]="product.comesInUnits" name="comesInUnits">
+                        <input (click)="unitsOnClick()" type="checkbox" class="rounded-pill custom-control-input" id="customSwitch3" [(ngModel)]="product.comesInUnits" name="comesInUnits">
                         <label class="custom-control-label" for="customSwitch3">¿Viene por unidades?</label>
                     </div>
-                    <input *ngIf="comesInUnits" type="text" class="form-control border-0 bg-light shadow-sm mb-3 col-6 ml-auto" placeholder="Precio" [(ngModel)]="product.unitPrice" name="unitPrice">
-                    <input *ngIf="!comesInUnits" type="text" class="form-control border-0 shadow-sm mb-3 col-6 ml-auto" value="" [(ngModel)]="product.unitPrice" name="unitPrice" readonly>
+                    <input *ngIf="comesInUnits" type="text" class="rounded-pill form-control border-0 bg-light shadow-sm mb-3 col-6 ml-auto" placeholder="Precio" [(ngModel)]="product.unitPrice" name="unitPrice">
+                    <input *ngIf="!comesInUnits" type="text" class="rounded-pill form-control border-0 shadow-sm mb-3 col-6 ml-auto" value="" [(ngModel)]="product.unitPrice" name="unitPrice" readonly>
                 </div>
             </div>
             <div class="container text-center">
@@ -52,7 +52,7 @@
     </div>
   </ng-template>
   
-<button class="btn btn-lg btn-success float shadow" (click)="open(content)">
+<button class="btn btn-success float" (click)="open(content)">
     <fa-icon [icon]="faPlus"></fa-icon>
 </button>
   

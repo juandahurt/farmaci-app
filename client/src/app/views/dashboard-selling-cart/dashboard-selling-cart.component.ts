@@ -12,7 +12,7 @@ import { BillService } from 'src/services/bill.service';
 @Component({
   selector: 'app-dashboard-selling-cart',
   templateUrl: './dashboard-selling-cart.component.html',
-  styleUrls: ['./dashboard-selling-cart.component.css']
+  styleUrls: ['./dashboard-selling-cart.component.less']
 })
 export class DashboardSellingCartComponent implements OnInit {
   /**

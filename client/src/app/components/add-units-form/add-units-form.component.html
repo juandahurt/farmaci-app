@@ -30,7 +30,7 @@
                     <label class="">Vencimiento</label >
                     <div class="input-group">
                         <input [(ngModel)]="unit.expiresAt" name="expDate" id="date" class="form-control bg-light rounded-pill shadow-sm border-0" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" readonly>
-                        <button class="btn rounded-circle btn-outline-primary shadow-sm ml-3" (click)="d.toggle()" type="button">
+                        <button class="btn rounded-circle btn-light ml-3" (click)="d.toggle()" type="button">
                             <fa-icon [icon]="faCalendarAlt"></fa-icon>
                         </button>
                     </div>
@@ -38,14 +38,14 @@
                 
             </div>
             <div class="text-center mt-2">
-                <button class="btn btn-light shadow-sm mr-5" (click)="close()">Cancelar</button>
-                <button class="btn btn-success shadow-sm" (click)="addOnClick()">Aceptar</button>
+                <button class="btn btn-light mr-5 rounded-pill" (click)="close()">Cancelar</button>
+                <button class="btn btn-success rounded-pill" (click)="addOnClick()">Aceptar</button>
             </div>
         </form>
     </div>
   </ng-template>
   
-<button class="btn btn-lg btn-success float shadow" (click)="open(content)">
+<button class="btn btn-success float" (click)="open(content)">
     <fa-icon [icon]="faTruckLoading"></fa-icon>
 </button>
   
