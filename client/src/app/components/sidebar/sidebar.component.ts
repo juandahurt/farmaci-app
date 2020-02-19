@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { faHome, faCubes, faProjectDiagram, faShoppingCart, faMoneyBill, faArrowDown, faArrowUp, faTruck } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faCubes, faProjectDiagram, faShoppingCart, faMoneyBill, faArrowDown, faArrowUp, faTruck, faBell } from '@fortawesome/free-solid-svg-icons';
+import { NotificationService } from 'src/services/notification.service';
+import { Notification } from 'src/helpers/notification.helper';
 
 @Component({
   selector: 'app-sidebar',
@@ -49,6 +51,11 @@ export class SidebarComponent implements OnInit {
   public faTruck = faTruck;
 
   /**
+   * Icono de Notificaciones
+   */
+  public faBell = faBell;
+
+  /**
    * url activa
    */
   public url: string;
@@ -74,21 +81,26 @@ export class SidebarComponent implements OnInit {
   public userAtSellingCart: boolean;
 
   /** 
+   * ¿El usuario se encuentra en las notificaciones?
+  */
+ public userAtNotifications: boolean;
+
+  /** 
    * ¿El usuario se encuentra en los egresos?
   */
-  public userAtExpenses;
+  public userAtExpenses: boolean;
 
   /** 
    * ¿El usuario se encuentra en los proveedores?
   */
- public userAtProviders;
+ public userAtProviders: boolean;
 
   /**
    * Controla el submenú de los egresos
    */
   public isCollapsed = true;
 
-  constructor(private router: Router) { 
+  constructor(private router: Router, private notificationService: NotificationService) { 
     this.url = router.url;
     
     switch (this.url) {
@@ -107,6 +119,9 @@ export class SidebarComponent implements OnInit {
       case "/selling-cart":
         this.userAtSellingCart = true;
         break;
+      case "/notifications":
+        this.userAtNotifications = true;
+        break;
       case "/expenses":
         this.userAtExpenses = true;
         break;
@@ -117,6 +132,12 @@ export class SidebarComponent implements OnInit {
   } 
 
   ngOnInit() {
+    this.notificationService.get().toPromise().then((notifications:any) => {
+      if (notifications.length > 0) {
+        //alert(JSON.stringify(notifications));
+        new Notification().showAlert("¡Tienes notificaciones!");
+      }
+    });
   }
 
   /**
@@ -145,6 +166,13 @@ export class SidebarComponent implements OnInit {
    */
   public sellingCartOnClick() {
     this.router.navigateByUrl("selling-cart");
+  }
+
+  /**
+   * Es invocada al dar click en Notificaciones
+   */
+  public notificationsOnClick() {
+    this.router.navigateByUrl("notifications");
   }
 
   /**

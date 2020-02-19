@@ -110,7 +110,7 @@ export class DashboardCategoriesComponent implements OnInit {
       },
       title: 'Agregar Categoría',
       html:
-        '<input type="text" id="name" class="form-control mt-3 bg-light border-0 shadow-sm" placeholder="Nombre">',
+        '<input type="text" id="name" class="rounded-pill form-control mt-3 bg-light border-0 shadow-sm" placeholder="Nombre">',
       focusConfirm: false,
       buttonsStyling: false,
       confirmButtonText: 'Agregar',

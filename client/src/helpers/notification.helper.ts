@@ -6,12 +6,27 @@ export class Notification {
      */
     private toast;
 
+    /**
+     * Contiene la alerta
+     */
+    private alert;
+
     constructor() {
         this.toast = Swal.mixin( {
             toast: true,
             position: 'top',
             showConfirmButton: false,
             timer: 3000
+        });
+        this.alert = Swal.mixin( {
+            customClass: {
+                confirmButton: 'btn btn-primary rounded-pill'
+            },
+            toast: true,
+            position: "bottom",
+            showConfirmButton: false,
+            showCloseButton: true,
+            buttonsStyling: false
         });
     }
 
@@ -35,5 +50,15 @@ export class Notification {
             icon: 'error',
             title: err
         });
+    }
+
+    /**
+     * Alerta al usuario
+     * @param msg Mensaje de la alerta
+     */
+    public showAlert(msg): void {
+        this.alert.fire({
+            title: msg
+        })
     }
 }
