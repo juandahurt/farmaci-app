@@ -69,11 +69,29 @@ export class DashboardCategoryComponent implements OnInit {
    */
   public isLoading: boolean;
 
+  /**
+   * Página actual
+   */
+  public page: number;
+
+  /**
+   * Tamaño de cada página
+   */
+  public pageSize: number;
+
+  /**
+   * Tamaño de la lista
+   */
+  public collectionSize: number;
+
   constructor(private route: ActivatedRoute, private router: Router ,private categoryService: CategoryService) {
     this.id = this.route.snapshot.paramMap.get('id');
     this.isLoading = true;
     this.setCategory().then(() => {
       this.name = this.category.name;
+      this.pageSize = 5;
+      this.collectionSize = this.products.length;
+      this.page = 1;
       this.isLoading = false;
     }).catch((err) => {
       this.isLoading = false;
