@@ -26,13 +26,14 @@ export class DashboardNotificationsComponent implements OnInit {
   public faTimes = faTimes
 
   constructor(private notificationService: NotificationService) { 
-    this.getNotifications();
+    this.getNotifications().then(() => {this.isLoading = false;});
   }
 
   ngOnInit() { }
 
   private async getNotifications() {
     try {
+      this.isLoading = true;
       let res:any = await this.notificationService.get().toPromise();
       if (res.length > 0) {
         this.notifications = new Array<Notification>();
@@ -41,6 +42,7 @@ export class DashboardNotificationsComponent implements OnInit {
         });
       }
     } catch (err) {
+      this.isLoading = false;
       ErrorHandler.showError(err);
     } 
   }
@@ -63,7 +65,12 @@ export class DashboardNotificationsComponent implements OnInit {
   /**
    * Invocada al dar click en Cerrar Todas
    */
-  public closeAllOnClick() {
-    this.notifications = null
+  public async closeAllOnClick() {
+    try {
+      await this.notificationService.deleteAll().toPromise();
+    } catch (err) {
+      if (err.status == 200){ this.notifications = null; }
+      ErrorHandler.showError(err);
+    }
   }
 }

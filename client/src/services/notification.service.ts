@@ -24,4 +24,11 @@ export class NotificationService extends HttpService {
     public delete(id: number) {
         return this.http.delete(`${this.apiUrl}/${id}`, { headers: this.headers });
     }
+
+    /**
+     * Elimina todas las notificaciones
+     */
+    public deleteAll() {
+        return this.http.post(`${this.apiUrl}/all`, { headers: this.headers });
+    }
 }

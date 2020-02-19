@@ -2,7 +2,7 @@ const Product = require('../product/product.model');
 const Notification = require('./notification.model');
 const NotificationInfo = require('../notification-info/notification-info.model');
 const dateHelper = require('../../helpers/date.helper');
-const moment = require('moment');
+const Unit = require('../unit/unit.model');
 
 const notificationController = {
     /**
@@ -21,6 +21,8 @@ const notificationController = {
                 let lastWeek = dateHelper.getLastWeekDate();
                 let lastTimeChecked = new Date(notificationInfo.last_time_checked);
                 
+                // Se verifica que ha pasado una semana desde la ultima vez que 
+                // se revisó 
                 if (lastWeek < lastTimeChecked) {
                     let notifications = await Notification.findAll();
                     res.status(200).send(notifications);
@@ -70,7 +72,24 @@ const notificationController = {
                 }
                 
                 // Vencimiento de unidades
-                
+                let units = await Unit.findAll({
+                    where: {
+                        product_id: product.id
+                    }
+                });
+
+                var expired = false;
+                units.forEach(unit => {
+                    if (unit.expires_at <= new Date()) { expired = true; }
+                });
+                // TODO: Optimizar el recorrido de las unidades
+                if (expired) {
+                    let productDesc = product.description;
+                    let new_notification = await Notification.create({
+                        description: `El producto ${productDesc} tiene unidades vencidas en bodega`
+                    });
+                    notificationsGenerated.push(new_notification);
+                }
             });
 
             await NotificationInfo.create();
@@ -109,17 +128,16 @@ const notificationController = {
      */
     async deleteAll(req, res) {
         try {
-            let id = req.params.id;
-
+            console.log('asdasd');
+            
             await Notification.destroy({
-                where: { },
+                where: {},
                 truncate: true
             });
 
-            await n.destroy();
-
             res.sendStatus(200);
         } catch (err) {
+            console.log(err);
             res.status(500).send({error: err.message});
         }
     },

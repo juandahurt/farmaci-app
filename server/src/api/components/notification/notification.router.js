@@ -16,6 +16,6 @@ notificationRouter.delete('/:id', notificationController.delete);
 /**
  * Ruta que permite eliminar todas las notificaciones
  */
-notificationRouter.delete('/all', notificationController.deleteAll);
+notificationRouter.post('/all', notificationController.deleteAll);
 
 module.exports = notificationRouter;
