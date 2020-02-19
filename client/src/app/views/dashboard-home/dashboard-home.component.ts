@@ -79,6 +79,11 @@ export class DashboardComponent implements OnInit {
    */
   public collectionSize: number;
 
+  /**
+   * ¿El usuario ha hecho una venta?
+   */
+  public userMadeASell: boolean;
+
   constructor(private statsService: StatsService) {
     this.dateNumber = 1;
     this.productsSold = new Array();
@@ -115,8 +120,7 @@ export class DashboardComponent implements OnInit {
     res.productsSoldToday.forEach(productSold => {
       this.productsSold.push(productSold);
     });
-    console.log(this.productsSold);
-    
+    this.userMadeASell = this.productsSold.length > 0;
   }
 
   /**

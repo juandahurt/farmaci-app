@@ -18,8 +18,9 @@
             <div class="row">
                 <!-- Productos vendidos -->
                 <div class="col-6">
-                    <p class="text-muted">Productos vendidos el día de hoy</p>
-                    <table class="table shadow-sm table-borderless">
+                    <p>Productos vendidos el día de hoy</p>
+                    <p *ngIf="!userMadeASell" class="text-muted">No ha vendido ningún producto el día de hoy</p>
+                    <table *ngIf="userMadeASell" class="table shadow-sm table-borderless">
                         <thead class="bg-light">
                             <th scope="col">Producto</th>
                             <th scope="col">Cajas</th>
@@ -35,7 +36,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <ngb-pagination class="mr-auto" [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+                    <ngb-pagination *ngIf="userMadeASell" class="mr-auto" [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
                     </ngb-pagination>
                 </div>
                 <div class="col-6">
