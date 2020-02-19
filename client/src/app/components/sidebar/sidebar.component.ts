@@ -56,85 +56,52 @@ export class SidebarComponent implements OnInit {
   public faBell = faBell;
 
   /**
-   * url activa
-   */
-  public url: string;
-
-  /**
    * ¿El usuario se encuentra en el inicio?
    */
-  public userAtHome: boolean;
+  public static userAtHome = true;
 
   /**
    * ¿El usuario se encuentra en las categorías?
    */
-  public userAtCategories: boolean;
+  public static userAtCategories: boolean;
 
   /**
    * ¿El usuario se encuentra enlos productos?
    */
-  public userAtProducts: boolean;
+  public static userAtProducts: boolean;
 
   /**
    * ¿El usuario se encuentra en el carrito de ventas?
    */
-  public userAtSellingCart: boolean;
+  public static userAtSellingCart: boolean;
 
   /** 
    * ¿El usuario se encuentra en las notificaciones?
   */
- public userAtNotifications: boolean;
+ public static userAtNotifications: boolean;
 
   /** 
    * ¿El usuario se encuentra en los egresos?
   */
-  public userAtExpenses: boolean;
+  public static userAtExpenses: boolean;
 
   /** 
    * ¿El usuario se encuentra en los proveedores?
   */
- public userAtProviders: boolean;
+ public static userAtProviders: boolean;
 
   /**
    * Controla el submenú de los egresos
    */
   public isCollapsed = true;
 
-  constructor(private router: Router, private notificationService: NotificationService) { 
-    this.url = router.url;
-    
-    switch (this.url) {
-      case "/":
-        this.userAtHome = true;
-        break;
-      case "/home":
-        this.userAtHome = true;
-        break;
-      case "/categories":
-        this.userAtCategories = true;
-        break;
-      case "/products":
-        this.userAtProducts = true;
-        break;
-      case "/selling-cart":
-        this.userAtSellingCart = true;
-        break;
-      case "/notifications":
-        this.userAtNotifications = true;
-        break;
-      case "/expenses":
-        this.userAtExpenses = true;
-        break;
-      case "/providers":
-        this.userAtProviders = true;
-        break; 
-    }
-  } 
+  public classRef = SidebarComponent;
+
+  constructor(private notificationService: NotificationService) { } 
 
   ngOnInit() {
     this.notificationService.get().toPromise().then((notifications:any) => {
       if (notifications.length > 0) {
-        //alert(JSON.stringify(notifications));
         new Notification().showAlert("¡Tienes notificaciones!");
       }
     });
@@ -143,49 +110,69 @@ export class SidebarComponent implements OnInit {
   /**
    * Es invocada al dar click en Productos
    */
-  public homeOnClick() {
-    this.router.navigateByUrl("home");
+  public static homeOnClick() {
+    this.setFalse();
+    this.userAtHome = true;
   }
 
   /**
    * Es invocada al dar click en Productos
    */
-  public productsOnClick() {
-    this.router.navigateByUrl("products");
+  public static productsOnClick() {
+    this.setFalse();
+    this.userAtProducts = true;
   }
 
   /**
    * Es invocada al dar click en Categorías
    */
-  public categoriesOnClick() {
-    this.router.navigateByUrl("categories");
+  public static categoriesOnClick() {
+    this.setFalse();
+    this.userAtCategories = true;
   }
 
   /**
    * Es invocada al dar click en Carrito
    */
-  public sellingCartOnClick() {
-    this.router.navigateByUrl("selling-cart");
+  public static sellingCartOnClick() {
+    this.setFalse();
+    this.userAtSellingCart = true;
   }
 
   /**
    * Es invocada al dar click en Notificaciones
    */
-  public notificationsOnClick() {
-    this.router.navigateByUrl("notifications");
+  public static notificationsOnClick() {
+    this.setFalse();
+    this.userAtNotifications = true;
   }
 
   /**
    * Es invocada al dar click en Egresos
    */
-  public expensesOnClick() {
-    this.router.navigateByUrl("expenses");
+  public static expensesOnClick() {
+    this.setFalse();
+    this.userAtExpenses = true;
   }
 
   /**
    * Es invocada al dar click en Proveedores
    */
-  public providersOnClick() {
-    this.router.navigateByUrl("providers");
+  public static providersOnClick() {
+    this.setFalse();
+    this.userAtProviders = true;
+  }
+
+  /**
+   * Coloca false en todas las rutas
+   */
+  public static setFalse() {
+    this.userAtHome = false;
+    this.userAtCategories = false;
+    this.userAtProducts = false;
+    this.userAtSellingCart = false;
+    this.userAtExpenses = false;
+    this.userAtProviders = false;
+    this.userAtNotifications = false;
   }
 }

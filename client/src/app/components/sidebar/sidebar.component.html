@@ -4,82 +4,82 @@
     </div>
 
     <!-- Inicio -->
-    <button *ngIf="!userAtHome" class="btn btn-primary text-light" (click)="homeOnClick()">
+    <button *ngIf="!classRef.userAtHome" class="btn btn-primary text-light" (click)="classRef.homeOnClick()">
         <fa-icon [icon]="faHome" class="mr-2"></fa-icon>
         Inicio
     </button>
-    <button *ngIf="userAtHome" class="btn btn-primary text-light active" (click)="homeOnClick()">
+    <button *ngIf="classRef.userAtHome" class="btn btn-primary text-light active">
         <fa-icon [icon]="faHome" class="mr-2"></fa-icon>
         Inicio
     </button>
 
     <!-- Productos -->
-    <button *ngIf="!userAtProducts" class="btn btn-primary text-light" (click)="productsOnClick()">
+    <button *ngIf="!classRef.userAtProducts" class="btn btn-primary text-light" (click)="classRef.productsOnClick()">
         <fa-icon [icon]="faCubes" class="mr-2"></fa-icon>
         Productos
     </button>
-    <button *ngIf="userAtProducts" class="btn btn-primary text-light active" (click)="productsOnClick()">
+    <button *ngIf="classRef.userAtProducts" class="btn btn-primary text-light active">
         <fa-icon [icon]="faCubes" class="mr-2"></fa-icon>
         Productos
     </button>
 
     <!-- Categorías -->
-    <button *ngIf="!userAtCategories" class="btn btn-primary text-light" (click)="categoriesOnClick()">
+    <button *ngIf="!classRef.userAtCategories" class="btn btn-primary text-light" (click)="classRef.categoriesOnClick()">
         <fa-icon [icon]="faProjectDiagram" class="mr-2"></fa-icon>
         Categorías
     </button>
-    <button *ngIf="userAtCategories" class="btn btn-primary text-light active" (click)="categoriesOnClick()">
+    <button *ngIf="classRef.userAtCategories" class="btn btn-primary text-light active">
         <fa-icon [icon]="faProjectDiagram" class="mr-2"></fa-icon>
         Categorías
     </button>
 
     <!-- Carrito -->
-    <button *ngIf="!userAtSellingCart" class="btn btn-primary text-light" (click)="sellingCartOnClick()">
+    <button *ngIf="!classRef.userAtSellingCart" class="btn btn-primary text-light" (click)="classRef.sellingCartOnClick()">
         <fa-icon [icon]="faShoppingCart" class="mr-2"></fa-icon>
         Carrito
     </button>
-    <button *ngIf="userAtSellingCart" class="btn btn-primary text-light active" (click)="sellingCartOnClick()">
+    <button *ngIf="classRef.userAtSellingCart" class="btn btn-primary text-light active">
         <fa-icon [icon]="faShoppingCart" class="mr-2"></fa-icon>
         Carrito
     </button>
 
     <!-- Notificaciones -->
-    <button *ngIf="userAtNotifications" class="btn btn-primary active text-light" (click)="notificationsOnClick()">
+    <button *ngIf="classRef.userAtNotifications" class="btn btn-primary active text-light">
         <fa-icon [icon]="faBell" class="mr-2"></fa-icon>
         Notificaciones
     </button>
-    <button *ngIf="!userAtNotifications" class="btn btn-primary text-light" (click)="notificationsOnClick()">
+    <button *ngIf="!classRef.userAtNotifications" class="btn btn-primary text-light" (click)="classRef.notificationsOnClick()">
         <fa-icon [icon]="faBell" class="mr-2"></fa-icon>
         Notificaciones
     </button>
 
     <!-- Egresos -->
-    <button *ngIf="userAtExpenses || userAtProviders" type="button" class="btn btn-primary active" (click)="isCollapsed = !isCollapsed"
+    <button *ngIf="classRef.userAtExpenses || classRef.userAtProviders" type="button" class="btn btn-primary active" (click)="isCollapsed = !isCollapsed"
             aria-controls="collapseExample">
         Egresos
         <fa-icon *ngIf="isCollapsed" [icon]="faArrowDown"></fa-icon>
         <fa-icon *ngIf="!isCollapsed" [icon]="faArrowUp"></fa-icon>
     </button>
-    <button *ngIf="!userAtExpenses && !userAtProviders" type="button" class="btn btn-primary" (click)="isCollapsed = !isCollapsed"
+    <button *ngIf="!classRef.userAtExpenses && !classRef.userAtProviders" type="button" class="btn btn-primary" (click)="isCollapsed = !isCollapsed"
             aria-controls="collapseExample">
         Egresos
         <fa-icon *ngIf="isCollapsed" [icon]="faArrowDown"></fa-icon>
         <fa-icon *ngIf="!isCollapsed" [icon]="faArrowUp"></fa-icon>
     </button>
     <div id="collapseExample" [ngbCollapse]="isCollapsed" class="bg-secondary text-center px-0">
-        <button *ngIf="userAtExpenses" class="btn btn-secondary active text-light col-12" (click)="expensesOnClick()">
+        <button *ngIf="classRef.userAtExpenses" class="btn btn-secondary active text-light col-12">
             <fa-icon [icon]="faMoneyBill" class="mr-2"></fa-icon>
             Egresos
         </button>
-        <button *ngIf="!userAtExpenses" class="btn btn-secondary text-light col-12" (click)="expensesOnClick()">
+        <button *ngIf="!classRef.userAtExpenses" class="btn btn-secondary text-light col-12" (click)="classRef.expensesOnClick()">
             <fa-icon [icon]="faMoneyBill" class="mr-2"></fa-icon>
             Egresos
         </button>
-        <button *ngIf="userAtProviders" class="btn btn-secondary active text-light col-12" (click)="providersOnClick()">
+        <button *ngIf="classRef.userAtProviders" class="btn btn-secondary active text-light col-12">
             <fa-icon [icon]="faTruck" class="mr-2"></fa-icon>
             Proveedores
         </button>
-        <button *ngIf="!userAtProviders" class="btn btn-secondary text-light col-12" (click)="providersOnClick()">
+        <button *ngIf="!classRef.userAtProviders" class="btn btn-secondary text-light col-12" (click)="classRef.providersOnClick()">
             <fa-icon [icon]="faTruck" class="mr-2"></fa-icon>
             Proveedores
         </button>

@@ -7,6 +7,7 @@ import { Notification } from 'src/helpers/notification.helper';
 import { ConfirmForm } from 'src/helpers/confirm-form.helper';
 import { ErrorHandler } from 'src/helpers/error.helper';
 import { Product } from 'src/models/product';
+import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-dashboard-category',
@@ -84,6 +85,8 @@ export class DashboardCategoryComponent implements OnInit {
    */
   public collectionSize: number;
 
+  public sidebarRef = SidebarComponent;
+
   constructor(private route: ActivatedRoute, private router: Router ,private categoryService: CategoryService) {
     this.id = this.route.snapshot.paramMap.get('id');
     this.isLoading = true;
@@ -124,7 +127,8 @@ export class DashboardCategoryComponent implements OnInit {
    * Invocada al dar click en Regresar
    */
   public backOnClick() {
-    this.router.navigateByUrl("categories");
+    this.router.navigateByUrl("");
+    this.sidebarRef.categoriesOnClick();
   }
 
   /**

@@ -14,6 +14,7 @@ import { UnitService } from 'src/services/unit.service';
 import { Unit } from 'src/models/unit';
 import { DateHelper } from 'src/helpers/date.helper';
 import { UnitSharedService } from 'src/services/unit.shared.service';
+import { SidebarComponent } from 'src/app/components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-dashboard-product',
@@ -75,6 +76,8 @@ export class DashboardProductComponent implements OnInit {
    * Dimensiones del productos
    */
   public dimension: Dimension;
+
+  public sidebarRef = SidebarComponent;
 
   constructor(
     private productService: ProductService, 
@@ -230,7 +233,8 @@ export class DashboardProductComponent implements OnInit {
    * Invocada al dar click en Regresar
    */
   public backOnClick() {
-    this.router.navigateByUrl("products");
+    this.router.navigateByUrl("");
+    this.sidebarRef.productsOnClick();
   }
 
 

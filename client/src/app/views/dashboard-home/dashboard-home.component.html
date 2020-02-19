@@ -1,8 +1,6 @@
 <div class="row col-12 p-0">
-    <!-- Sidebar -->
-    <app-sidebar class="col-2"></app-sidebar>
-    <div class="container pl-3 col-10">
-        <div class="row ml-3 pt-4 mr-3 mb-3">
+    <div class="container pr-0">
+        <div class="row pt-4 px-3 mb-3">
             <h2>Inicio</h2>
             <div class="ml-auto">
                 <select [(ngModel)]="dateNumber" name="date" class="rounded-pill custom-select bg-light shadow-sm border-0" (change)="dateOnChange()">
@@ -12,9 +10,8 @@
                     <option [ngValue]="3">Último año</option>
                 </select>
             </div>
-            
         </div>
-        <div class="container ">
+        <div class="container px-0">
             <div class="row">
                 <!-- Productos vendidos -->
                 <div class="col-6">

@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets } from 'chart.js';
-import { Label, Color, MultiDataSet } from 'ng2-charts';
+import { Label, Color } from 'ng2-charts';
 import { StatsService } from 'src/services/stats.service';
 import { ProductSold } from 'src/models/product-sold';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-dashboard-home',
   templateUrl: './dashboard-home.component.html',
   styleUrls: ['./dashboard-home.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardHomeComponent implements OnInit {
   /**
    * Productos Vendido el día de hoy
    */

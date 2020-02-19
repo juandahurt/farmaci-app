@@ -54,6 +54,7 @@ export class DashboardNotificationsComponent implements OnInit {
     } catch (err) {
       if (err.status == 200) {
         if (this.notifications.length == 1) { this.notifications = null; }
+        else { this.getNotifications(); }
       }
       ErrorHandler.showError(err);
     }

@@ -25,7 +25,7 @@ import { AddUnitsFormComponent } from './components/add-units-form/add-units-for
 import { UnitService } from 'src/services/unit.service';
 import { UnitSharedService } from 'src/services/unit.shared.service';
 import { BillService } from 'src/services/bill.service';
-import { DashboardComponent } from './views/dashboard-home/dashboard-home.component';
+import { DashboardHomeComponent } from './views/dashboard-home/dashboard-home.component';
 import { ChartsModule } from 'ng2-charts';
 import { StatsService } from 'src/services/stats.service';
 import { DashboardExpensesComponent } from './views/dashboard-expenses/dashboard-expenses.component';
@@ -36,6 +36,7 @@ import { AddExpensesFormComponent } from './components/add-expenses-form/add-exp
 import { ExpenseSharedService } from 'src/services/expense.shared.service';
 import { DashboardNotificationsComponent } from './views/dashboard-notifications/dashboard-notifications.component';
 import { NotificationService } from 'src/services/notification.service';
+import { DashboardComponent } from './views/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -50,11 +51,12 @@ import { NotificationService } from 'src/services/notification.service';
     DashboardSellingCartComponent,
     AddDimensionsFormComponent,
     AddUnitsFormComponent,
-    DashboardComponent,
+    DashboardHomeComponent,
     DashboardExpensesComponent,
     DashboardProvidersComponent,
     AddExpensesFormComponent,
-    DashboardNotificationsComponent
+    DashboardNotificationsComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
