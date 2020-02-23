@@ -128,8 +128,6 @@ const notificationController = {
      */
     async deleteAll(req, res) {
         try {
-            console.log('asdasd');
-            
             await Notification.destroy({
                 where: {},
                 truncate: true
@@ -137,7 +135,6 @@ const notificationController = {
 
             res.sendStatus(200);
         } catch (err) {
-            console.log(err);
             res.status(500).send({error: err.message});
         }
     },

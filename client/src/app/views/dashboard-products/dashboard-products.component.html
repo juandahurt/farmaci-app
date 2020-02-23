@@ -3,7 +3,8 @@
         <!-- Título y buscador -->
         <div class="row pl-3 pt-4 w-100 mb-2">
             <h2 class="float-left">Productos</h2>
-            <div class="ml-auto">
+            <div class="row ml-auto">
+                <app-pdf-stock-generator class="mr-5"></app-pdf-stock-generator>
                 <form class="row" [formGroup]="searchForm" (ngSubmit)="searchProduct()">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">

@@ -37,6 +37,7 @@ import { ExpenseSharedService } from 'src/services/expense.shared.service';
 import { DashboardNotificationsComponent } from './views/dashboard-notifications/dashboard-notifications.component';
 import { NotificationService } from 'src/services/notification.service';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { PdfStockGeneratorComponent } from './components/pdf-stock-generator/pdf-stock-generator.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
     DashboardProvidersComponent,
     AddExpensesFormComponent,
     DashboardNotificationsComponent,
-    DashboardComponent
+    DashboardComponent,
+    PdfStockGeneratorComponent
   ],
   imports: [
     BrowserModule,
