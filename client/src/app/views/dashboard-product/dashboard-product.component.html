@@ -1,4 +1,7 @@
-<div class="row col-12 pl-0">
+<!-- Loader -->
+<img class="loader mx-auto row" *ngIf="productInfoIsLoading" src="assets/icons/loading.gif">
+
+<div *ngIf="!productInfoIsLoading" class="row col-12 pl-0">
     <div class="container product pt-3 pl-3 pr-0">
         <!-- Cabecera con Título y Acciones -->
         <div class="row mb-3">
@@ -22,7 +25,7 @@
             </div>
         </div>
         <!-- Formulario -->
-        <form>
+        <form *ngIf="!productInfoIsLoading">
             <!-- Información del Producto -->
             <div class="mx-0 container shadow-sm mb-4 pt-3 data-container">
                 <h4 class="text-center mb-3">Información del Producto</h4>
@@ -135,8 +138,11 @@
         <app-add-dimensions-form *ngIf="!dimensionsHaveBeenSet && ((product.comesInBoxes && product.comesInOthers) || (product.comesInOthers && product.comesInUnits) || (product.comesInBoxes && product.comesInUnits))">
         </app-add-dimensions-form>
 
+        <!-- Loader -->
+        <img class="loader mx-auto row" *ngIf="unitsIsLoading" src="assets/icons/loading.gif">
+
         <!-- Tabla de Unidades -->
-        <table *ngIf="product.units" class="table shadow-sm table-borderless table-hover">
+        <table *ngIf="product.units  && !unitsIsLoading" class="table shadow-sm table-borderless table-hover">
             <thead class="text-muted">
                 <tr class="bg-light">
                     <th scope="col">Registro</th>

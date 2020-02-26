@@ -77,6 +77,16 @@ export class DashboardProductComponent implements OnInit {
    */
   public dimension: Dimension;
 
+  /**
+   * ¿La petición de la información del producto estña cargando?
+   */
+  public productInfoIsLoading: boolean;
+
+  /**
+   * ¿La petición de las unidades del producto estña cargando?
+   */
+  public unitsIsLoading: boolean;
+
   public sidebarRef = SidebarComponent;
 
   constructor(
@@ -108,10 +118,13 @@ export class DashboardProductComponent implements OnInit {
    */
   private async setProduct() {
     try {
+      this.productInfoIsLoading = true;
       let res = await this.productService.get(this.id).toPromise();
       this.product = new Product().fromJSON(res);
     } catch(err) {
       ErrorHandler.showError(err);
+    } finally {
+      this.productInfoIsLoading = false;
     }
   }
 
@@ -120,6 +133,7 @@ export class DashboardProductComponent implements OnInit {
    */
   private async setUnits() {
     try {
+      this.unitsIsLoading = true;
       let res = await this.unitService.list(this.id).toPromise();
       let units = res as Array<any>;
 
@@ -135,6 +149,8 @@ export class DashboardProductComponent implements OnInit {
       }
     } catch(err) {
       ErrorHandler.showError(err);
+    } finally {
+      this.unitsIsLoading = false;
     }
   }
 
