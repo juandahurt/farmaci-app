@@ -26,7 +26,7 @@ export class DashboardNotificationsComponent implements OnInit {
   public faTimes = faTimes
 
   constructor(private notificationService: NotificationService) { 
-    this.getNotifications().then(() => {this.isLoading = false;});
+    this.getNotifications();
   }
 
   ngOnInit() { }
@@ -44,7 +44,9 @@ export class DashboardNotificationsComponent implements OnInit {
     } catch (err) {
       this.isLoading = false;
       ErrorHandler.showError(err);
-    } 
+    } finally {
+      this.isLoading = false;
+    }
   }
 
   /**
