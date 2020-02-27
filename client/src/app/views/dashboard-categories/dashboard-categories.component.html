@@ -22,15 +22,18 @@
             <span class="text-muted">No ha registrado ninguna categoría...</span>
         </div>
         <!-- Categorías -->
-        <div *ngFor="let category of categories" class="container mb-4 p-0">
-            <div>
-                <div class="btn btn-light rounded-pill btn-light w-100 pt-2 pb-1" (click)="categoryOnClick(category.id)">
-                    <div class="pt-1">
-                        <p class="category-name text-muted">{{category.name}}</p>
+        <div style="overflow: auto; max-height: 100vh;">
+            <div *ngFor="let category of categories" class="container mb-4 p-0">
+                <div>
+                    <div class="btn btn-light rounded-pill btn-light w-100 pt-2 pb-1" (click)="categoryOnClick(category.id)">
+                        <div class="pt-1">
+                            <p class="category-name text-muted">{{category.name}}</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        
         <!-- Registrar Categoría -->
         <button class="float btn btn-success" (click)="addOnClick()">
             <fa-icon [icon]="faPlus"></fa-icon>

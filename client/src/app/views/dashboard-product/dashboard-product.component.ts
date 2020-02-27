@@ -225,7 +225,10 @@ export class DashboardProductComponent implements OnInit {
         await this.productService.delete(this.id).toPromise();
       } catch(err) {
         ErrorHandler.handleError(err, 'Producto eliminado exitosamente');
-        if (err.status == 200) { this.router.navigateByUrl("products"); }
+        if (err.status == 200) { 
+          this.router.navigateByUrl("");
+          this.sidebarRef.productsOnClick();
+        }
       }
     }
   }

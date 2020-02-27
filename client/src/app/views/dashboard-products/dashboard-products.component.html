@@ -41,6 +41,8 @@
             </table>
             <ngb-pagination
             [(page)]="page"
+            [maxSize]="10"
+            [boundaryLinks]="true"
             [pageSize]="pageSize"
             [collectionSize]="collectionSize">
             </ngb-pagination>
