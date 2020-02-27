@@ -8,6 +8,8 @@ import { ErrorHandler } from 'src/helpers/error.helper';
 import { Product } from 'src/models/product';
 import { Unit } from 'src/models/unit';
 import { BillService } from 'src/services/bill.service';
+import { DimensionService } from 'src/services/dimension.service';
+import { Dimension } from 'src/models/dimension';
 
 @Component({
   selector: 'app-dashboard-selling-cart',
@@ -55,7 +57,8 @@ export class DashboardSellingCartComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private productService: ProductService,
-    private billService: BillService
+    private billService: BillService,
+    private dimensionService: DimensionService
     ) {
     this.searchForm = this.formBuilder.group({
       id: ['', Validators.required]
@@ -186,7 +189,40 @@ export class DashboardSellingCartComponent implements OnInit {
    * Añade un producto al carro de venta.
    * Es invocada al dar click en el botón `Agregar Producto`
    */
-  public addProductToCart() {
+  public async addProductToCart() {
+    // Verifica si la cantidad requerida supera las dimensiones del producto
+    let res = await this.dimensionService.get(this.productToFind.product.id).toPromise();
+    if (res) {
+      let dimension = new Dimension().fromJSON(res);
+      let req_quantity = this.productToFind.quantity;
+      let product = this.productToFind.product;
+      
+      if (this.productToFind.unitType == this.UnitRef.UnitType.OTHER) {
+        // Por caja y sobre
+        if (req_quantity >= dimension.others) {
+          new Notification().showError('Esa cantidad de sobres excede o iguala la cantidad que viene por caja');
+          return;
+        }
+      }
+
+      if (this.productToFind.unitType == this.UnitRef.UnitType.UNIT) {
+        // Por [caja] sobre y unidad
+        if (product.comesInOthers) {
+          if (req_quantity >= dimension.units) { 
+            new Notification().showError('Esa cantidad de unidades excede o iguala la cantidad que viene por sobre');
+            return;
+          }
+        }
+        // Por caja y unidad
+        if (!product.comesInOthers) {
+          if (req_quantity >= dimension.units) { 
+            new Notification().showError('Esa cantidad de unidades excede o iguala la cantidad que viene por caja');
+            return;
+          }
+        }
+      }
+    }
+
     this.setUnitaryPrice();
     let notifier = new Notification();
     if (this.productToFind.unitType == null) { 
