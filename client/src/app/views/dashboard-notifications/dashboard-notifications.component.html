@@ -7,12 +7,14 @@
         <img class="loader" *ngIf="isLoading" src="assets/icons/loading.gif">
         <!-- En caso que no hayan notificaciones -->
         <p *ngIf="!notifications && !isLoading" class="text-muted">No hay notificaciones pendientes</p>
-        <div *ngFor="let n of notifications" class="not-contaner container bg-light rounded-pill mb-4 shadow-sm">
-            <div class="row px-4">
-                <p class="not-name text-muted pt-3 pb-1">{{n.description}}</p>
-                <button class="btn ml-auto" (click)="closeOnClick(n.id)">
-                    <fa-icon [icon]="faTimes" class="text-muted hover" style="font-size: 20px;"></fa-icon>
-                </button>
+        <div style="overflow: auto; max-height: 100vh;">
+            <div *ngFor="let n of notifications" class="not-contaner container bg-light rounded-pill mb-4 shadow-sm">
+                <div class="row px-4">
+                    <p class="not-name text-muted pt-3 pb-1">{{n.description}}</p>
+                    <button class="btn ml-auto" (click)="closeOnClick(n.id)">
+                        <fa-icon [icon]="faTimes" class="text-muted hover" style="font-size: 20px;"></fa-icon>
+                    </button>
+                </div>
             </div>
         </div>
     </div>

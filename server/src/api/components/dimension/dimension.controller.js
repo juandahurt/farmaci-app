@@ -1,5 +1,5 @@
 const ERRORS = require('./dimension.errors');
-const Dimension = require('../dimension/dimension.model');
+const Dimension = require('./dimension.model');
 const Product = require('../product/product.model');
 const sequelizeDB = require('../../../sequelize');
 
