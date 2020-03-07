@@ -2,10 +2,12 @@ const { app, BrowserWindow } = require("electron");
 const path = require("path");
 const url = require("url");
 
-let win;
+require(path.join(__dirname, '../server/src/server'));  // Para que se ejecute el servidor
 
+let win;
+// Una vez ejecutado el servidor, se ejecuta el cliente
 function createWindow() {
-  win = new BrowserWindow({ width: 800, height: 600 });
+  win = new BrowserWindow({ width: 1150, height: 900 });
 
   // load the dist folder from Angular
   win.loadURL(

@@ -9,6 +9,5 @@ export class AppComponent {
   title = 'farmaci-app';
 
   constructor() {
-    // TODO: Alerta de notificaciones
   }
 }

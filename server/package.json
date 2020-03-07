@@ -1,15 +1,11 @@
 {
-    "name": "nodejs-template",
+    "name": "farmaciapp-back",
     "version": "1.0.0",
-    "description": "template for a nodejs app",
+    "description": "backend for farmaciapp",
     "author": "Juan David Hurtado",
     "license": "MIT",
     "main": "src/server.js",
     "keywords": [],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/juandahurt/nodejs-template"
-    },
     "engines": {
         "node": "10.15.1",
         "npm": "6.4.1"
