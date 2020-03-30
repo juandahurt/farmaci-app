@@ -50,7 +50,7 @@ export class DashboardProductsComponent implements OnInit {
   /**
    * Formulario de buúsqueda
    */
-  private searchForm: FormGroup;
+  public searchForm: FormGroup;
 
   /**
    * Productos registrados ordernados

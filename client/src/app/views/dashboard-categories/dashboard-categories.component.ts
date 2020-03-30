@@ -42,7 +42,7 @@ export class DashboardCategoriesComponent implements OnInit {
   /**
    * Formulario de búsqueda
    */
-  private searchForm: FormGroup;
+  public searchForm: FormGroup;
   
   /**
    * ¿Está cargando la petición?

@@ -52,7 +52,7 @@ export class AddDimensionsFormComponent implements OnInit {
    * Abre el formulario
    * @param content Contenido del formulario
    */
-  private open(content: any) {
+  public open(content: any) {
     this.modalService.open(content, { centered: true });
     this.getProduct().then(() => {
       this.dimension = new Dimension();
@@ -62,7 +62,7 @@ export class AddDimensionsFormComponent implements OnInit {
   /**
    * Cierra el formulario
    */
-  private close() {
+  public close() {
     this.modalService.dismissAll(null);
   }
 

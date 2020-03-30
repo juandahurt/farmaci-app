@@ -29,7 +29,7 @@
                 <div class="form-group col-12">
                     <label class="">Vencimiento</label >
                     <div class="input-group">
-                        <input [(ngModel)]="unit.expiresAt" name="expDate" id="date" class="form-control bg-light rounded-pill shadow-sm border-0" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker" readonly>
+                        <input [(ngModel)]="unit.expiresAt" name="expDate" id="date" class="form-control bg-light rounded-pill shadow-sm border-0" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #d="ngbDatepicker" readonly>
                         <button class="btn rounded-circle btn-light ml-3" (click)="d.toggle()" type="button">
                             <fa-icon [icon]="faCalendarAlt"></fa-icon>
                         </button>

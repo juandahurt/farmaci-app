@@ -18,12 +18,12 @@ export class AddProductFormComponent implements OnInit {
   /**
    * Icono de Agregar producto
    */
-  private faPlus = faPlus;
+  public faPlus = faPlus;
 
   /**
    * Categorías registradas
    */
-  private categories: Array<Category>;
+  public categories: Array<Category>;
 
   /**
    * Controla el switch de cajas
@@ -62,11 +62,11 @@ export class AddProductFormComponent implements OnInit {
    * Abre el formulario
    * @param content Contenido del formulario
    */
-  private open(content: any) {
+  public open(content: any) {
     this.modalService.open(content, { centered: true });
   }
 
-  private close() {
+  public close() {
     this.modalService.dismissAll(null);
   }
 
@@ -95,28 +95,28 @@ export class AddProductFormComponent implements OnInit {
   /**
    * Es Invocada al dar click en el switch de Cajas
    */
-  private boxesOnClick() {
+  public boxesOnClick() {
     this.comesInBoxes = !this.comesInBoxes;
   }
 
   /**
    * Es Invocada al dar click en el switch de Unidades
    */
-  private unitsOnClick() {
+  public unitsOnClick() {
     this.comesInUnits = !this.comesInUnits;
   }
 
   /**
    * Es Invocada al dar click en el switch de Sobres
    */
-  private othersOnClick() {
+  public othersOnClick() {
     this.comesInOthers = !this.comesInOthers;
   }
 
   /**
    * Invocada al dar click en Agregar Producto
    */
-  private async addOnClick() {
+  public async addOnClick() {
     try {
       let res = await this.productService.create(this.product).toPromise();
       let product = new Product().fromJSON(res);
