@@ -1,3 +1,3 @@
 export default {
-    apiUrl: 'https://farmaciapp-api.herokuapp.com/'
+    apiUrl: 'https://farmaciapp-api.herokuapp.com/api/'
 }
